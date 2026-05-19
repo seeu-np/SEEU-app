@@ -15,16 +15,18 @@
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
 }
-body { font-family: var(--font-body); background: #e8e8e8; display: flex; justify-content: center; align-items: flex-start; padding: 1rem 0; -webkit-user-select: none; user-select: none; overflow-x: hidden; min-height: 100dvh; }
+body { font-family: var(--font-body); background: #e8e8e8; display: flex; justify-content: center; align-items: flex-start; padding: 2rem 0; -webkit-user-select: none; user-select: none; overflow-x: hidden; min-height: 100dvh; }
 input, select, textarea { -webkit-user-select: text !important; user-select: text !important; }
 
 /* ── 앱 쉘 ── */
 .phone-frame { 
-  width: 100%;
-  max-width: 480px;
-  height: 100dvh;
+  width: 390px;
+  max-width: 390px;
+  height: 780px;
   background: var(--white);
-  border-radius: 0;
+  border-radius: 32px;
+  border: 2px solid rgba(0,0,0,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   overflow: hidden;
   position: relative;
   font-family: var(--font-body);
@@ -33,16 +35,10 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
 }
 @media (max-width: 480px) {
   body { padding: 0; background: var(--white); overflow-x: hidden; }
-  .phone-frame { width: 100vw; max-width: 100vw; height: 100dvh; border-radius: 0; border: none; }
+  .phone-frame { width: 100vw; max-width: 100vw; height: 100dvh; border-radius: 0; border: none; box-shadow: none; }
 }
-/* 데스크탑에서는 폰 모양으로 */
 @media (min-width: 481px) {
   body { padding: 2rem 0; background: #e8e8e8; }
-  .phone-frame { border-radius: 32px; border: 2px solid rgba(0,0,0,0.1); height: 780px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
-}
-@media (max-width: 400px) {
-  body { padding: 0; background: var(--white); }
-  .phone-frame { width: 100vw; height: 100vh; border-radius: 0; border: none; }
 }
 .tab-screen { display: none; height: 100%; flex-direction: column; overflow: hidden; position: absolute; inset: 0; background: var(--white); width: 100%; box-sizing: border-box; opacity: 0; transition: opacity 0.15s ease; }
 .tab-screen.active { display: flex; opacity: 1; }
@@ -403,6 +399,13 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
 .auth-error { color: #E74C3C; font-size: 11px; margin-bottom: 8px; text-align: center; }
 
 .auth-nav-label { font-size:10px; font-weight:500; color:var(--navy); }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #1B2B4B !important;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('_2gLuB5vGdiGAcqK');</script>
@@ -971,43 +974,12 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
     <div class="main-scroll">
       <!-- 로그인 전 화면 -->
       <div id="authSection">
-        <div class="auth-wrap">
-          <div class="auth-title" id="authTitle">Welcome Back</div>
-          <div class="auth-sub" id="authSubtitle">Login to your SEE U account</div>
-          <div id="authError" class="auth-error" style="display:none;"></div>
-
-          <!-- 로그인 폼 -->
-          <div id="loginForm">
-            <input type="email" class="auth-input" id="loginEmail" placeholder="Email address" autocomplete="off">
-            <input type="password" class="auth-input" id="loginPassword" placeholder="Password" autocomplete="off">
-            <button class="auth-btn" onclick="doLogin()">Login</button>
-            <div class="auth-toggle">Don't have an account? <span onclick="showSignup()">Sign Up</span></div>
-          </div>
-
-          <!-- 회원가입 폼 -->
-          <div id="signupForm" style="display:none;">
-            <div class="auth-section-title">Account Type</div>
-            <div class="auth-type-row">
-              <button class="auth-type-btn active" id="typePersonal" onclick="selectType('personal')">👤 Personal</button>
-              <button class="auth-type-btn" id="typeRetail" onclick="selectType('retail')">🏪 Retail Business</button>
-            </div>
-            <div class="auth-section-title">Personal Details</div>
-            <input type="text" class="auth-input" id="signupName" placeholder="Full name" autocomplete="off">
-            <input type="email" class="auth-input" id="signupEmail" placeholder="Email address" autocomplete="off">
-            <input type="tel" class="auth-input" id="signupPhone" placeholder="Phone number" autocomplete="off">
-            <input type="text" class="auth-input" id="signupAddress" placeholder="Delivery address" autocomplete="off">
-            <div id="businessFields" style="display:none;">
-              <div class="auth-section-title">Business Details</div>
-              <input type="text" class="auth-input" id="signupBizName" placeholder="Legal business name" autocomplete="off">
-              <input type="text" class="auth-input" id="signupTradingName" placeholder="Trading name" autocomplete="off">
-              <input type="text" class="auth-input" id="signupBizNum" placeholder="Business number (NZBN)" autocomplete="off">
-              <input type="text" class="auth-input" id="signupBizAddress" placeholder="Business address" autocomplete="off">
-            </div>
-            <div class="auth-section-title">Password</div>
-            <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password">
-            <button class="auth-btn" onclick="doSignup()">Create Account</button>
-            <div class="auth-toggle">Already have an account? <span onclick="showLogin()">Login</span></div>
-          </div>
+        <div class="auth-wrap" style="text-align:center;padding-top:60px;">
+          <div style="font-size:48px;margin-bottom:16px;">👤</div>
+          <div class="auth-title">Welcome to SEE U</div>
+          <div class="auth-sub" style="margin-bottom:32px;">Login or create an account to see prices and place orders</div>
+          <button class="auth-btn" onclick="openAuthModal('login')">Login</button>
+          <button class="auth-btn secondary" style="margin-top:10px;" onclick="openAuthModal('signup')">Create Account</button>
         </div>
       </div>
 
@@ -1041,6 +1013,52 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
       <div class="nav-item active"><div class="nav-icon">👤</div><div class="nav-label" style="color:#8B6914;">My Page</div></div>
     </div>
   </div>
+
+<!-- 로그인/회원가입 모달 -->
+<div id="authModal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.6);justify-content:center;align-items:flex-end;">
+  <div style="background:white;border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:24px 20px 40px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:#1B2B4B;" id="modalTitle">Welcome Back</div>
+      <div onclick="closeAuthModal()" style="font-size:22px;cursor:pointer;color:#999;">✕</div>
+    </div>
+    <div id="modalError" style="display:none;color:#E74C3C;font-size:12px;margin-bottom:12px;text-align:center;"></div>
+
+    <!-- 로그인 폼 -->
+    <div id="modalLoginForm">
+      <input type="text" id="modalEmail" placeholder="Email address" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="email"
+        style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:12px;outline:none;font-family:'DM Sans',sans-serif;">
+      <input type="password" id="modalPassword" placeholder="Password" autocomplete="new-password"
+        style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:20px;outline:none;font-family:'DM Sans',sans-serif;">
+      <button onclick="doModalLogin()" style="width:100%;background:#1B2B4B;color:#C9A84C;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Login</button>
+      <div style="text-align:center;margin-top:16px;font-size:13px;color:#999;">Don't have an account? <span onclick="switchModal('signup')" style="color:#1B2B4B;font-weight:600;cursor:pointer;">Sign Up</span></div>
+    </div>
+
+    <!-- 회원가입 폼 -->
+    <div id="modalSignupForm" style="display:none;">
+      <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;">ACCOUNT TYPE</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button id="modalTypePersonal" onclick="selectModalType('personal')" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:#1B2B4B;color:#C9A84C;border:2px solid #1B2B4B;font-family:'DM Sans',sans-serif;">👤 Personal</button>
+        <button id="modalTypeRetail" onclick="selectModalType('retail')" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:white;color:#666;border:2px solid rgba(0,0,0,0.12);font-family:'DM Sans',sans-serif;">🏪 Retail Business</button>
+      </div>
+      <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;">PERSONAL DETAILS</div>
+      <input type="text" id="modalName" placeholder="Full name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      <input type="text" id="modalSignupEmail" placeholder="Email address" autocomplete="off" inputmode="email" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      <input type="text" id="modalPhone" placeholder="Phone number" autocomplete="off" inputmode="tel" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      <input type="text" id="modalAddress" placeholder="Delivery address" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      <div id="modalBizFields" style="display:none;">
+        <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;margin-top:6px;">BUSINESS DETAILS</div>
+        <input type="text" id="modalBizName" placeholder="Legal business name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+        <input type="text" id="modalTradingName" placeholder="Trading name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+        <input type="text" id="modalBizNum" placeholder="Business number (NZBN)" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+        <input type="text" id="modalBizAddress" placeholder="Business address" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      </div>
+      <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;margin-top:6px;">PASSWORD</div>
+      <input type="password" id="modalSignupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:20px;outline:none;font-family:'DM Sans',sans-serif;">
+      <button onclick="doModalSignup()" style="width:100%;background:#1B2B4B;color:#C9A84C;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Create Account</button>
+      <div style="text-align:center;margin-top:16px;font-size:13px;color:#999;">Already have an account? <span onclick="switchModal('login')" style="color:#1B2B4B;font-weight:600;cursor:pointer;">Login</span></div>
+    </div>
+  </div>
+</div>
 
 <div class="adm-overlay" id="admLoginBox">
   <div class="adm-modal">
@@ -3128,38 +3146,48 @@ function savePromoModal() {
 /* ===== AUTH / LOGIN ===== */
 var authMode = 'personal';
 
-function showSignup() {
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('signupForm').style.display = 'block';
-  document.getElementById('authTitle').textContent = 'Create Account';
-  document.getElementById('authSubtitle').textContent = 'Join SEE U today';
-  document.getElementById('authError').style.display = 'none';
+function showSignup() { openAuthModal('signup'); }
+function showLogin() { openAuthModal('login'); }
+function selectType(type) { selectModalType(type); }
+
+function openAuthModal(mode) {
+  var modal = document.getElementById('authModal');
+  modal.style.display = 'flex';
+  switchModal(mode);
 }
 
-function showLogin() {
-  document.getElementById('signupForm').style.display = 'none';
-  document.getElementById('loginForm').style.display = 'block';
-  document.getElementById('authTitle').textContent = 'Welcome Back';
-  document.getElementById('authSubtitle').textContent = 'Login to your SEE U account';
-  document.getElementById('authError').style.display = 'none';
+function closeAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+  document.getElementById('modalError').style.display = 'none';
 }
 
-function selectType(type) {
+function switchModal(mode) {
+  document.getElementById('modalLoginForm').style.display = mode === 'login' ? 'block' : 'none';
+  document.getElementById('modalSignupForm').style.display = mode === 'signup' ? 'block' : 'none';
+  document.getElementById('modalTitle').textContent = mode === 'login' ? 'Welcome Back' : 'Create Account';
+  document.getElementById('modalError').style.display = 'none';
+}
+
+function selectModalType(type) {
   authMode = type;
-  document.getElementById('typePersonal').className = 'auth-type-btn' + (type === 'personal' ? ' active' : '');
-  document.getElementById('typeRetail').className = 'auth-type-btn' + (type === 'retail' ? ' active' : '');
-  document.getElementById('businessFields').style.display = type === 'retail' ? 'block' : 'none';
+  document.getElementById('modalTypePersonal').style.background = type === 'personal' ? '#1B2B4B' : 'white';
+  document.getElementById('modalTypePersonal').style.color = type === 'personal' ? '#C9A84C' : '#666';
+  document.getElementById('modalTypePersonal').style.borderColor = type === 'personal' ? '#1B2B4B' : 'rgba(0,0,0,0.12)';
+  document.getElementById('modalTypeRetail').style.background = type === 'retail' ? '#1B2B4B' : 'white';
+  document.getElementById('modalTypeRetail').style.color = type === 'retail' ? '#C9A84C' : '#666';
+  document.getElementById('modalTypeRetail').style.borderColor = type === 'retail' ? '#1B2B4B' : 'rgba(0,0,0,0.12)';
+  document.getElementById('modalBizFields').style.display = type === 'retail' ? 'block' : 'none';
 }
 
 function showAuthError(msg) {
-  var el = document.getElementById('authError');
+  var el = document.getElementById('modalError');
   el.textContent = msg;
   el.style.display = 'block';
 }
 
-async function doLogin() {
-  var email = document.getElementById('loginEmail').value.trim();
-  var password = document.getElementById('loginPassword').value;
+async function doModalLogin() {
+  var email = document.getElementById('modalEmail').value.trim();
+  var password = document.getElementById('modalPassword').value;
   if (!email || !password) { showAuthError('Please enter email and password'); return; }
   try {
     var res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
@@ -3171,59 +3199,61 @@ async function doLogin() {
     if (data.access_token) {
       currentUser = data;
       await loadUserProfile(data.user.id);
+      closeAuthModal();
       renderMyPage();
       updateAuthNav();
       showToast('Welcome back!');
     } else {
-      showAuthError(data.error_description || 'Login failed');
+      showAuthError('Invalid email or password');
     }
-  } catch(e) { showAuthError('Connection error'); }
+  } catch(e) {
+    showAuthError('Connection error. Please try again.');
+  }
 }
 
-async function doSignup() {
-  var name = document.getElementById('signupName').value.trim();
-  var email = document.getElementById('signupEmail').value.trim();
-  var phone = document.getElementById('signupPhone').value.trim();
-  var address = document.getElementById('signupAddress').value.trim();
-  var password = document.getElementById('signupPassword').value;
-  if (!name || !email || !password) { showAuthError('Please fill in required fields'); return; }
+async function doModalSignup() {
+  var name = document.getElementById('modalName').value.trim();
+  var email = document.getElementById('modalSignupEmail').value.trim();
+  var phone = document.getElementById('modalPhone').value.trim();
+  var address = document.getElementById('modalAddress').value.trim();
+  var password = document.getElementById('modalSignupPassword').value;
+  if (!name || !email || !password) { showAuthError('Please fill in all required fields'); return; }
   if (password.length < 6) { showAuthError('Password must be at least 6 characters'); return; }
   try {
-    // 1. Supabase Auth 가입
     var res = await fetch(SUPABASE_URL + '/auth/v1/signup', {
       method: 'POST',
       headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, password: password })
     });
     var data = await res.json();
-    if (data.id || data.user) {
-      var userId = (data.user || data).id;
-      // 2. 프로필 저장
-      var profile = {
-        id: userId, name: name, email: email, phone: phone,
-        address: address, type: authMode, status: 'pending',
-        created_at: new Date().toISOString()
-      };
+    if (data.user && data.user.id) {
+      var profile = { id: data.user.id, name: name, email: email, phone: phone, address: address, type: authMode, status: 'pending' };
       if (authMode === 'retail') {
-        profile.biz_name = document.getElementById('signupBizName').value.trim();
-        profile.trading_name = document.getElementById('signupTradingName').value.trim();
-        profile.biz_number = document.getElementById('signupBizNum').value.trim();
-        profile.biz_address = document.getElementById('signupBizAddress').value.trim();
+        profile.biz_name = document.getElementById('modalBizName').value.trim();
+        profile.trading_name = document.getElementById('modalTradingName').value.trim();
+        profile.biz_number = document.getElementById('modalBizNum').value.trim();
+        profile.biz_address = document.getElementById('modalBizAddress').value.trim();
       }
       await fetch(SUPABASE_URL + '/rest/v1/profiles', {
         method: 'POST',
         headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
         body: JSON.stringify(profile)
       });
-      // 3. 대표님께 이메일 알림
       await sendSignupNotification(profile);
-      showToast('Account created! Please verify your email.');
-      showLogin();
+      closeAuthModal();
+      showToast('Account created! Awaiting approval.');
     } else {
       showAuthError(data.msg || data.error_description || 'Signup failed');
     }
-  } catch(e) { showAuthError('Connection error'); }
+  } catch(e) {
+    showAuthError('Connection error. Please try again.');
+  }
 }
+
+
+
+async function doLogin() { doModalLogin(); }
+async function doSignup() { doModalSignup(); }
 
 async function sendSignupNotification(profile) {
   try {
@@ -3326,7 +3356,11 @@ function renderMyPage() {
 
 
 function handleAuthNav() {
-  switchTab('mypage');
+  if (currentUser && currentUserProfile) {
+    switchTab('mypage');
+  } else {
+    openAuthModal('login');
+  }
 }
 
 function updateAuthNav() {
