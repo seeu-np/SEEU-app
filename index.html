@@ -978,8 +978,8 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
 
           <!-- 로그인 폼 -->
           <div id="loginForm">
-            <input type="email" class="auth-input" id="loginEmail" placeholder="Email address">
-            <input type="password" class="auth-input" id="loginPassword" placeholder="Password">
+            <input type="email" class="auth-input" id="loginEmail" placeholder="Email address" autocomplete="off">
+            <input type="password" class="auth-input" id="loginPassword" placeholder="Password" autocomplete="off">
             <button class="auth-btn" onclick="doLogin()">Login</button>
             <div class="auth-toggle">Don't have an account? <span onclick="showSignup()">Sign Up</span></div>
           </div>
@@ -992,19 +992,19 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
               <button class="auth-type-btn" id="typeRetail" onclick="selectType('retail')">🏪 Retail Business</button>
             </div>
             <div class="auth-section-title">Personal Details</div>
-            <input type="text" class="auth-input" id="signupName" placeholder="Full name">
-            <input type="email" class="auth-input" id="signupEmail" placeholder="Email address">
-            <input type="tel" class="auth-input" id="signupPhone" placeholder="Phone number">
-            <input type="text" class="auth-input" id="signupAddress" placeholder="Delivery address">
+            <input type="text" class="auth-input" id="signupName" placeholder="Full name" autocomplete="off">
+            <input type="email" class="auth-input" id="signupEmail" placeholder="Email address" autocomplete="off">
+            <input type="tel" class="auth-input" id="signupPhone" placeholder="Phone number" autocomplete="off">
+            <input type="text" class="auth-input" id="signupAddress" placeholder="Delivery address" autocomplete="off">
             <div id="businessFields" style="display:none;">
               <div class="auth-section-title">Business Details</div>
-              <input type="text" class="auth-input" id="signupBizName" placeholder="Legal business name">
-              <input type="text" class="auth-input" id="signupTradingName" placeholder="Trading name">
-              <input type="text" class="auth-input" id="signupBizNum" placeholder="Business number (NZBN)">
-              <input type="text" class="auth-input" id="signupBizAddress" placeholder="Business address">
+              <input type="text" class="auth-input" id="signupBizName" placeholder="Legal business name" autocomplete="off">
+              <input type="text" class="auth-input" id="signupTradingName" placeholder="Trading name" autocomplete="off">
+              <input type="text" class="auth-input" id="signupBizNum" placeholder="Business number (NZBN)" autocomplete="off">
+              <input type="text" class="auth-input" id="signupBizAddress" placeholder="Business address" autocomplete="off">
             </div>
             <div class="auth-section-title">Password</div>
-            <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 6 characters)">
+            <input type="password" class="auth-input" id="signupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password">
             <button class="auth-btn" onclick="doSignup()">Create Account</button>
             <div class="auth-toggle">Already have an account? <span onclick="showLogin()">Login</span></div>
           </div>
