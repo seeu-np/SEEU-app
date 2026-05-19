@@ -404,6 +404,8 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
 
 .auth-nav-label { font-size:10px; font-weight:500; color:var(--navy); }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('_2gLuB5vGdiGAcqK');</script>
 </head>
 <body>
 <div class="phone-frame" style="display:flex;flex-direction:column;">
@@ -3224,9 +3226,42 @@ async function doSignup() {
 }
 
 async function sendSignupNotification(profile) {
-  // Supabase Edge Function으로 이메일 발송 (나중에 설정)
-  // 지금은 콘솔 로그
-  console.log('New signup:', profile.name, profile.email, profile.type);
+  try {
+    var baseUrl = 'https://seeu-np.github.io/SEEU-app/approve.html';
+    var personalLink = baseUrl + '?id=' + profile.id + '&type=personal&token=seeu2024admin';
+    var retailLink  = baseUrl + '?id=' + profile.id + '&type=retail&token=seeu2024admin';
+
+    var memberType = profile.type === 'retail' ? 'Retail (Wholesale) Application' : 'Personal';
+    var details = '👤 Name: ' + profile.name +
+      '\n📧 Email: ' + profile.email +
+      '\n📞 Phone: ' + (profile.phone || '-') +
+      '\n🏠 Address: ' + (profile.address || '-') +
+      '\n📋 Applied as: ' + memberType;
+
+    if (profile.type === 'retail') {
+      details += '\n\n── Business Details ──' +
+        '\nBusiness Name: ' + (profile.biz_name || '-') +
+        '\nTrading Name: ' + (profile.trading_name || '-') +
+        '\nNZBN: ' + (profile.biz_number || '-') +
+        '\nBusiness Address: ' + (profile.biz_address || '-');
+    }
+
+    details += '\n\n── APPROVE THIS MEMBER ──' +
+      '\n✅ Approve as PERSONAL (retail price):' +
+      '\n' + personalLink +
+      '\n\n🏪 Approve as RETAIL (wholesale price):' +
+      '\n' + retailLink;
+
+    await emailjs.send('service_twfkcwm', 'fegrpl6', {
+      name: profile.name,
+      email: profile.email,
+      message: details,
+      title: 'New Member signup - Action Required'
+    });
+    console.log('Signup notification sent');
+  } catch(e) {
+    console.log('Email notification failed:', e);
+  }
 }
 
 async function loadUserProfile(userId) {
