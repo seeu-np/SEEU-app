@@ -59,6 +59,8 @@ input, select, textarea { -webkit-user-select: text !important; user-select: tex
 .search-input { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(201,168,76,0.3); border-radius: 12px; padding: 9px 14px 9px 36px; color: white; font-size: 13px; font-family: var(--font-body); outline: none; }
 .search-input::placeholder { color: rgba(255,255,255,0.4); }
 .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: 0.5; }
+.icon-btn { background: transparent; transition: background 0.2s, color 0.2s; }
+.icon-btn:active { background: var(--gold) !important; color: var(--navy) !important; }
 .search-wrap { position: relative; width: 100%; overflow: hidden; }
 .nav-tabs { display: flex; background: var(--cream); border-bottom: 1px solid rgba(201,168,76,0.2); padding: 0; flex-shrink: 0; width: 100%; box-sizing: border-box; border-radius: 0 0 16px 16px; }
 .nav-tabs::-webkit-scrollbar { display: none; }
@@ -435,25 +437,27 @@ input:-webkit-autofill:focus {
       <div style="flex:1;display:flex;justify-content:center;align-items:center;">
         <div class="logo-badge" style="font-size:22px;padding:8px 16px;letter-spacing:3px;">SEE U</div>
       </div>
-      <div style="flex:1;display:flex;justify-content:flex-end;align-items:flex-end;gap:8px;">
-        <div onclick="showMembershipBarcode()" style="cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid var(--gold);border-radius:10px;padding:5px 8px;display:flex;align-items:center;color:var(--gold);font-size:15px;" title="Membership Barcode">
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;gap:5px;">
+        <div class="icon-btn" onclick="showMembershipBarcode()" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;padding:5px 10px;color:var(--gold);font-size:14px;display:flex;align-items:center;" title="Membership Barcode">
           🎫
         </div>
-        <div onclick="switchTab('orders')" style="cursor:pointer;background:rgba(201,168,76,0.15);border:1px solid var(--gold);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:4px;">
-          <span style="font-size:13px;">🛒</span>
-          <span style="color:var(--gold);font-size:11px;font-weight:500;" id="cart-count">0</span>
+        <div class="icon-btn" onclick="switchTab('orders')" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;padding:5px 10px;color:var(--gold);font-size:14px;display:flex;align-items:center;gap:4px;">
+          <span>🛒</span>
+          <span style="font-size:11px;font-weight:bold;" id="cart-count">0</span>
+        </div>
+        <div class="icon-btn" onclick="openScanner()" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;padding:5px 10px;color:var(--gold);font-size:14px;display:flex;align-items:center;" title="Scan Barcode">
+          📷
         </div>
       </div>
     </div>
     <!-- 서치바 + 화살표 -->
     <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
-      <button onclick="tabGoBack()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8249;</button>
+      <button onclick="tabGoBack()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 12px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8249;</button>
       <div id="sharedSearchWrap" class="search-bar" style="flex:1;">
         <span style="font-size:12px;opacity:0.5;">🔍</span>
         <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()" style="background:transparent;border:none;outline:none;color:white;font-size:12px;width:100%;font-family:var(--font-body);">
       </div>
-      <button onclick="openScanner()" style="background:var(--gold);border:none;border-radius:10px;padding:7px 10px;color:var(--navy);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;" title="Scan Barcode">📷</button>
-      <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
+      <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 12px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
     </div>
     <!-- 로그인 상태 -->
     <div style="padding:8px 0 10px;text-align:center;">
