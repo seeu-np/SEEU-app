@@ -416,6 +416,10 @@ input:-webkit-autofill:focus {
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('_2gLuB5vGdiGAcqK');</script>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
 </head>
 <body>
 <div class="phone-frame" style="display:flex;flex-direction:column;">
@@ -431,8 +435,8 @@ input:-webkit-autofill:focus {
       <div style="flex:1;display:flex;justify-content:center;align-items:center;">
         <div class="logo-badge" style="font-size:22px;padding:8px 16px;letter-spacing:3px;">SEE U</div>
       </div>
-      <div style="display:flex;align-items:flex-end;gap:8px;">
-        <div onclick="alert('[멤버십 바코드] 계산대에 이 바코드를 보여주세요! (포스기 연동 준비완료)')" style="cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid var(--gold);border-radius:10px;padding:5px 8px;display:flex;align-items:center;color:var(--gold);font-size:15px;" title="Membership Barcode">
+      <div style="flex:1;display:flex;justify-content:flex-end;align-items:flex-end;gap:8px;">
+        <div onclick="showMembershipBarcode()" style="cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid var(--gold);border-radius:10px;padding:5px 8px;display:flex;align-items:center;color:var(--gold);font-size:15px;" title="Membership Barcode">
           🎫
         </div>
         <div onclick="switchTab('orders')" style="cursor:pointer;background:rgba(201,168,76,0.15);border:1px solid var(--gold);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:4px;">
@@ -448,7 +452,7 @@ input:-webkit-autofill:focus {
         <span style="font-size:12px;opacity:0.5;">🔍</span>
         <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()" style="background:transparent;border:none;outline:none;color:white;font-size:12px;width:100%;font-family:var(--font-body);">
       </div>
-      <button onclick="alert('[바코드 스캐너] 카메라가 켜지고 상품을 스캔하여 장바구니에 담을 수 있습니다!')" style="background:var(--gold);border:none;border-radius:10px;padding:7px 10px;color:var(--navy);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;" title="Scan Barcode">📷</button>
+      <button onclick="openScanner()" style="background:var(--gold);border:none;border-radius:10px;padding:7px 10px;color:var(--navy);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;" title="Scan Barcode">📷</button>
       <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
     </div>
     <!-- 로그인 상태 -->
@@ -687,7 +691,7 @@ input:-webkit-autofill:focus {
         <div class="how-to-box" id="howToBox"></div>
         <div class="recipe-section-title" style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
           <div>Ingredients <span style="font-size:11px;color:#999;font-weight:400;margin-left:4px;">(tap to shop)</span></div>
-          <button onclick="alert('모든 레시피 재료가 장바구니에 담겼습니다!')" style="background:var(--gold); color:var(--navy); border:none; padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; font-family:var(--font-body);">+ Add All to Cart</button>
+          <button onclick="addAllIngredientsToCart()" style="background:var(--gold); color:var(--navy); border:none; padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; font-family:var(--font-body);">+ Add All to Cart</button>
         </div>
         <div class="ingredients-list" id="ingredientsList"></div>
       </div>
@@ -3492,6 +3496,26 @@ function recipeCardClick(ci, ri) {
 }
 
 </script>
+
+<!-- SCANNER OVERLAY -->
+<div class="overlay" id="scannerOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; flex-direction:column;">
+  <div style="padding:20px; text-align:right;">
+    <button onclick="closeScanner()" style="background:var(--gold); border:none; padding:10px 20px; border-radius:10px; font-weight:bold; color:var(--navy);">Close X</button>
+  </div>
+  <div id="reader" style="width:100%; flex:1; background:white;"></div>
+  <div style="padding:20px; text-align:center; color:white; font-size:16px;">Scan product barcode here</div>
+</div>
+
+<!-- MEMBERSHIP OVERLAY -->
+<div class="overlay" id="membershipOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
+  <div style="background:var(--white); padding:30px; border-radius:20px; text-align:center; width:90%; max-width:400px;">
+    <h3 style="color:var(--navy); margin-bottom:20px; font-family:var(--font-display);">SEE U Membership</h3>
+    <svg id="barcode"></svg>
+    <p style="margin-top:20px; font-size:14px; color:#666;">Scan at the counter</p>
+    <button onclick="closeMembershipBarcode()" style="margin-top:20px; background:var(--gold); color:var(--navy); border:none; padding:10px 20px; border-radius:10px; font-weight:bold; width:100%;">Close</button>
+  </div>
+</div>
+
 </body>
 </html
   
