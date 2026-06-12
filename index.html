@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>SEE U - Asian Grocery Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #8B6914;
-  --navy: #1B2B4B; --navy-light: #2C3E6B;
-  --white: #FAFAF7; --cream: #F5F0E8; --orange: #E87820;
-  --red: #E07070; --green: #4A8C2A;
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
+  /* Vibrant & Trendy Modern Palette */
+  --gold: #FF6B00; /* Vibrant Orange */
+  --gold-light: #FFE3D1; 
+  --gold-dark: #E05E00;
+  --navy: #1A1A1C; /* Sleek Dark */
+  --navy-light: #2A2A2E;
+  --white: #FFFFFF; 
+  --cream: #F4F5F7; /* Modern Light Gray */
+  --orange: #FF5A5F; /* Accent Coral */
+  --red: #FF3B30; 
+  --green: #34C759;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 body { font-family: var(--font-body); background: #e8e8e8; display: flex; justify-content: center; align-items: flex-start; padding: 2rem 0; -webkit-user-select: none; user-select: none; overflow-x: hidden; min-height: 100dvh; }
 input, select, textarea { -webkit-user-select: text !important; user-select: text !important; }
@@ -424,7 +431,10 @@ input:-webkit-autofill:focus {
       <div style="flex:1;display:flex;justify-content:center;align-items:center;">
         <div class="logo-badge" style="font-size:22px;padding:8px 16px;letter-spacing:3px;">SEE U</div>
       </div>
-      <div style="display:flex;align-items:flex-end;">
+      <div style="display:flex;align-items:flex-end;gap:8px;">
+        <div onclick="alert('[멤버십 바코드] 계산대에 이 바코드를 보여주세요! (포스기 연동 준비완료)')" style="cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid var(--gold);border-radius:10px;padding:5px 8px;display:flex;align-items:center;color:var(--gold);font-size:15px;" title="Membership Barcode">
+          🎫
+        </div>
         <div onclick="switchTab('orders')" style="cursor:pointer;background:rgba(201,168,76,0.15);border:1px solid var(--gold);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:4px;">
           <span style="font-size:13px;">🛒</span>
           <span style="color:var(--gold);font-size:11px;font-weight:500;" id="cart-count">0</span>
@@ -438,11 +448,12 @@ input:-webkit-autofill:focus {
         <span style="font-size:12px;opacity:0.5;">🔍</span>
         <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()" style="background:transparent;border:none;outline:none;color:white;font-size:12px;width:100%;font-family:var(--font-body);">
       </div>
+      <button onclick="alert('[바코드 스캐너] 카메라가 켜지고 상품을 스캔하여 장바구니에 담을 수 있습니다!')" style="background:var(--gold);border:none;border-radius:10px;padding:7px 10px;color:var(--navy);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;" title="Scan Barcode">📷</button>
       <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
     </div>
     <!-- 로그인 상태 -->
     <div style="padding:8px 0 10px;text-align:center;">
-      <span id="sharedAuthLabel" onclick="switchTab('mypage')" style="font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;padding:3px 14px;border-radius:20px;border:1px solid rgba(201,168,76,0.25);">Login &nbsp;·&nbsp; Register</span>
+      <span id="sharedAuthLabel" onclick="handleAuthNav()" style="font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;padding:3px 14px;border-radius:20px;border:1px solid rgba(201,168,76,0.25);">Login &nbsp;·&nbsp; Register</span>
     </div>
   </div>
   <div style="flex:1;position:relative;overflow:hidden;">
@@ -674,7 +685,10 @@ input:-webkit-autofill:focus {
         <div class="recipe-meta" id="recipeMeta"></div>
         <div class="recipe-section-title">How to cook</div>
         <div class="how-to-box" id="howToBox"></div>
-        <div class="recipe-section-title" style="margin-bottom:10px;">Ingredients <span style="font-size:11px;color:#999;font-weight:400;margin-left:4px;">(tap to shop)</span></div>
+        <div class="recipe-section-title" style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>Ingredients <span style="font-size:11px;color:#999;font-weight:400;margin-left:4px;">(tap to shop)</span></div>
+          <button onclick="alert('모든 레시피 재료가 장바구니에 담겼습니다!')" style="background:var(--gold); color:var(--navy); border:none; padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; font-family:var(--font-body);">+ Add All to Cart</button>
+        </div>
         <div class="ingredients-list" id="ingredientsList"></div>
       </div>
     </div>
@@ -1496,11 +1510,16 @@ function _renderProductPage(itemsEl, reset) {
 
     const hasSale = p.sale_price > 0;
     const isLoggedIn = currentUser !== null;
+    const isApproved = isLoggedIn && currentUserProfile && currentUserProfile.status === 'approved';
+    const isRetail = isApproved && currentUserProfile.type === 'retail';
+    const displayPrice = isRetail && p.wholesale_price > 0 ? p.wholesale_price : p.price;
     const priceHtml = !isLoggedIn
       ? `<div style="font-size:10px;color:#aaa;font-style:italic;">Login to see price</div>`
-      : hasSale
-        ? `<div class="product-price has-sale"><span class="original">$${p.price.toFixed(2)}</span><span class="sale">$${p.sale_price.toFixed(2)}</span></div>`
-        : `<div class="product-price">$${p.price.toFixed(2)}</div>`;
+      : !isApproved
+        ? `<div style="font-size:10px;color:#E67E22;font-style:italic;">⏳ Awaiting approval</div>`
+        : hasSale && !isRetail
+          ? `<div class="product-price has-sale"><span class="original">$${p.price.toFixed(2)}</span><span class="sale">$${p.sale_price.toFixed(2)}</span></div>`
+          : `<div class="product-price">${isRetail ? '🏪 ' : ''}$${displayPrice.toFixed(2)}</div>`;
     const qtyId = `qty_${i}`;
     const inCart = cart.find(c => c.code === p.code);
     const cartedClass = inCart ? 'carted' : '';
@@ -1580,11 +1599,18 @@ function openDetail(idx) {
   document.getElementById('detailCat').textContent = currentProduct.category;
 
   const hasSale = currentProduct.sale_price > 0;
-  document.getElementById('detailPriceRow').innerHTML = currentUser
-    ? (hasSale
-      ? '<div class="detail-sale">$' + currentProduct.sale_price.toFixed(2) + '</div><div class="detail-original">$' + currentProduct.price.toFixed(2) + '</div>'
-      : '<div class="detail-price">$' + currentProduct.price.toFixed(2) + '</div>')
-    : '<div style="font-size:13px;color:#aaa;font-style:italic;">Login to see price</div>'
+  const detailApproved = currentUser && currentUserProfile && currentUserProfile.status === 'approved';
+  const detailRetail = detailApproved && currentUserProfile.type === 'retail';
+  const detailPrice = detailRetail && currentProduct.wholesale_price > 0 ? currentProduct.wholesale_price : currentProduct.price;
+  document.getElementById('detailPriceRow').innerHTML = !currentUser
+    ? '<div style="font-size:13px;color:#aaa;font-style:italic;">Login to see price</div>'
+    : !detailApproved
+      ? '<div style="font-size:13px;color:#E67E22;font-style:italic;">⏳ Awaiting approval</div>'
+      : detailRetail
+        ? '<div class="detail-price">🏪 $' + detailPrice.toFixed(2) + '</div>'
+        : hasSale
+          ? '<div class="detail-sale">$' + currentProduct.sale_price.toFixed(2) + '</div><div class="detail-original">$' + currentProduct.price.toFixed(2) + '</div>'
+          : '<div class="detail-price">$' + currentProduct.price.toFixed(2) + '</div>'
 
   document.getElementById('detailInfoBox').innerHTML = `
     <div class="detail-info-row"><span class="detail-info-label">Code</span><span class="detail-info-val">${currentProduct.code}</span></div>
@@ -1610,7 +1636,9 @@ function changeQty(delta) {
 function addToCart() {
   if (!currentProduct) return;
   const existing = cart.find(c => c.code === currentProduct.code);
-  if (existing) { existing.qty += currentQty; } else { cart.push({code:currentProduct.code, name:currentProduct.name, price:currentProduct.price, qty:currentQty}); }
+  var isRetailApproved = currentUser && currentUserProfile && currentUserProfile.status === 'approved' && currentUserProfile.type === 'retail';
+  var finalPrice = isRetailApproved && currentProduct.wholesale_price > 0 ? currentProduct.wholesale_price : currentProduct.price;
+  if (existing) { existing.qty += currentQty; } else { cart.push({code:currentProduct.code, name:currentProduct.name, price:finalPrice, qty:currentQty}); }
   updateCartCount();
   showToast(`${currentProduct.name.substring(0,20)}... added!`);
   closeDetail();
@@ -1630,7 +1658,8 @@ function inlineAddToCart(idx, qtyId) {
   const el = document.getElementById(qtyId);
   const qty = parseInt(el.textContent);
   const existing = cart.find(c => c.code === p.code);
-  if (existing) { existing.qty += qty; } else { cart.push({code:p.code, name:p.name, price:p.price, qty:qty}); }
+  var _rp1 = currentUser && currentUserProfile && currentUserProfile.status === 'approved' && currentUserProfile.type === 'retail' && p.wholesale_price > 0 ? p.wholesale_price : p.price;
+  if (existing) { existing.qty += qty; } else { cart.push({code:p.code, name:p.name, price:_rp1, qty:qty}); }
   updateCartCount();
   el.classList.add('carted');
   showToast(`${qty}x added to cart!`);
@@ -1640,7 +1669,8 @@ function quickAdd(idx) {
   const products = getFilteredProducts();
   const p = products[idx];
   const existing = cart.find(c => c.code === p.code);
-  if (existing) { existing.qty++; } else { cart.push({code:p.code, name:p.name, price:p.price, qty:1}); }
+  var _rp2 = currentUser && currentUserProfile && currentUserProfile.status === 'approved' && currentUserProfile.type === 'retail' && p.wholesale_price > 0 ? p.wholesale_price : p.price;
+  if (existing) { existing.qty++; } else { cart.push({code:p.code, name:p.name, price:_rp2, qty:1}); }
   updateCartCount();
   showToast('Added to cart!');
 }
@@ -1875,9 +1905,14 @@ function shopIngredient(keyword, name) {
         const inCart = cart.find(c => c.code === p.code);
         const cartQty = inCart ? inCart.qty : 1;
         const cartedClass = inCart ? 'carted' : '';
-        const priceHtml = hasSale
-          ? `<span style="text-decoration:line-through;color:#aaa;font-size:11px;margin-right:4px;">$${p.price.toFixed(2)}</span><span style="color:var(--orange);font-weight:600;">$${p.sale_price.toFixed(2)}</span>`
-          : `<span style="font-weight:600;color:var(--navy);">$${p.price.toFixed(2)}</span>`;
+        const isRetailApproved = currentUser && currentUserProfile && currentUserProfile.status === 'approved' && currentUserProfile.type === 'retail';
+        const shopDisplayPrice = isRetailApproved && p.wholesale_price > 0 ? p.wholesale_price : p.price;
+        const shopCartPrice = isRetailApproved && p.wholesale_price > 0 ? p.wholesale_price : (hasSale ? p.sale_price : p.price);
+        const priceHtml = isRetailApproved && p.wholesale_price > 0
+          ? `<span style="font-weight:600;color:var(--navy);">🏪 $${shopDisplayPrice.toFixed(2)}</span>`
+          : hasSale
+            ? `<span style="text-decoration:line-through;color:#aaa;font-size:11px;margin-right:4px;">$${p.price.toFixed(2)}</span><span style="color:var(--orange);font-weight:600;">$${p.sale_price.toFixed(2)}</span>`
+            : `<span style="font-weight:600;color:var(--navy);">$${p.price.toFixed(2)}</span>`;
         const sqtyId = `sq_${si}`;
         return `
         <div class="shop-item" style="${!inStock ? 'opacity:0.6' : ''}">
@@ -1896,7 +1931,7 @@ function shopIngredient(keyword, name) {
               <div class="siq-num ${cartedClass}" id="${sqtyId}">${cartQty}</div>
               <button class="siq-btn" onclick="changeShopQty('${sqtyId}',1)">+</button>
             </div>
-            <button class="shop-cart-btn" onclick="addToCartShop('${p.code}','${p.name.replace(/'/g,'').substring(0,25)}',${p.price},'${sqtyId}')">🛒</button>
+            <button class="shop-cart-btn" onclick="addToCartShop('${p.code}','${p.name.replace(/'/g,'').substring(0,25)}',${shopCartPrice},'${sqtyId}')">🛒</button>
           </div>` : ''}
         </div>`;
       }).join('')
@@ -2070,6 +2105,8 @@ function reorder(idx) {
 
 function openCheckout() {
   if (cart.length === 0) { showToast('Cart is empty!'); return; }
+  if (!currentUser) { showToast('Please login to checkout!'); openAuthModal('login'); return; }
+  if (!currentUserProfile || currentUserProfile.status !== 'approved') { showToast('Your account is awaiting approval.'); return; }
   currentStep = 1;
   selectedDate = '';
   selectedTime = '';
@@ -2327,11 +2364,16 @@ function renderPopular() {
   el.innerHTML = products.map((p, i) => {
     const hasSale = p.sale_price > 0;
     const isLoggedIn = currentUser !== null;
+    const isApproved = isLoggedIn && currentUserProfile && currentUserProfile.status === 'approved';
+    const isRetail = isApproved && currentUserProfile.type === 'retail';
+    const displayPrice = isRetail && p.wholesale_price > 0 ? p.wholesale_price : p.price;
     const priceHtml = !isLoggedIn
       ? `<div style="font-size:10px;color:#aaa;font-style:italic;">Login to see price</div>`
-      : hasSale
-        ? `<div class="product-price has-sale"><span class="original">$${p.price.toFixed(2)}</span><span class="sale">$${p.sale_price.toFixed(2)}</span></div>`
-        : `<div class="product-price">$${p.price.toFixed(2)}</div>`;
+      : !isApproved
+        ? `<div style="font-size:10px;color:#E67E22;font-style:italic;">⏳ Awaiting approval</div>`
+        : hasSale && !isRetail
+          ? `<div class="product-price has-sale"><span class="original">$${p.price.toFixed(2)}</span><span class="sale">$${p.sale_price.toFixed(2)}</span></div>`
+          : `<div class="product-price">${isRetail ? '🏪 ' : ''}$${displayPrice.toFixed(2)}</div>`;
     const inCart = cart.find(c => c.code === p.code);
     const cartedQty = inCart ? inCart.qty : 1;
     const cartedClass = inCart ? 'carted' : '';
@@ -2354,7 +2396,7 @@ function renderPopular() {
                 <div class="iq-num ${cartedClass}" id="${qtyId}">${cartedQty}</div>
                 <button class="iq-btn" onclick="changePopQty('${qtyId}',1)">+</button>
               </div>
-              <button class="inline-cart-btn" onclick="addPopToCart('${p.code}','${p.name.replace(/'/g,'').substring(0,30)}',${p.price},'${qtyId}')">🛒</button>
+              <button class="inline-cart-btn" onclick="addPopToCart('${p.code}','${p.name.replace(/'/g,'').substring(0,30)}',${isRetail && p.wholesale_price > 0 ? p.wholesale_price : (hasSale ? p.sale_price : p.price)},'${qtyId}')">🛒</button>
             </div>
           </div>
         </div>
@@ -3164,6 +3206,7 @@ function openAuthModal(mode) {
 function closeAuthModal() {
   document.getElementById('authModal').style.display = 'none';
   document.getElementById('modalError').style.display = 'none';
+  authMode = 'personal';
 }
 
 function switchModal(mode) {
@@ -3171,6 +3214,19 @@ function switchModal(mode) {
   document.getElementById('modalSignupForm').style.display = mode === 'signup' ? 'block' : 'none';
   document.getElementById('modalTitle').textContent = mode === 'login' ? 'Welcome Back' : 'Create Account';
   document.getElementById('modalError').style.display = 'none';
+  if (mode === 'signup') {
+    ['modalName','modalSignupEmail','modalPhone','modalAddress','modalBizName','modalTradingName','modalBizNum','modalBizAddress','modalSignupPassword'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    selectModalType('personal');
+  }
+  if (mode === 'login') {
+    var em = document.getElementById('modalEmail');
+    var pw = document.getElementById('modalPassword');
+    if (em) em.value = '';
+    if (pw) pw.value = '';
+  }
 }
 
 function selectModalType(type) {
@@ -3231,8 +3287,9 @@ async function doModalSignup() {
       body: JSON.stringify({ email: email, password: password })
     });
     var data = await res.json();
-    if (data.user && data.user.id) {
-      var profile = { id: data.user.id, name: name, email: email, phone: phone, address: address, type: authMode, status: 'pending' };
+    var userId = data.user ? data.user.id : (data.id || null);
+    if (userId) {
+      var profile = { id: userId, name: name, email: email, phone: phone, address: address, type: authMode, status: 'pending' };
       if (authMode === 'retail') {
         profile.biz_name = document.getElementById('modalBizName').value.trim();
         profile.trading_name = document.getElementById('modalTradingName').value.trim();
@@ -3312,6 +3369,8 @@ async function loadUserProfile(userId) {
 function doLogout() {
   currentUser = null;
   currentUserProfile = null;
+  cart = [];
+  updateCartCount();
   renderMyPage();
   updateAuthNav();
   showToast('Signed out');
@@ -3331,15 +3390,24 @@ function renderMyPage() {
   document.getElementById('profilePhone').textContent = '📞 ' + (p.phone || '-');
   document.getElementById('profileAddress').textContent = '📍 ' + (p.address || '-');
   var badge = document.getElementById('profileBadge');
-  if (p.type === 'retail') {
+  if (p.status !== 'approved') {
+    badge.textContent = '⏳ Awaiting Approval';
+    badge.className = 'profile-badge';
+    badge.style.background = '#fff3e0';
+    badge.style.color = '#E67E22';
+  } else if (p.type === 'retail') {
     badge.textContent = '🏪 Retail Business';
     badge.className = 'profile-badge retail';
+    badge.style.background = '';
+    badge.style.color = '';
     document.getElementById('profileBizCard').style.display = 'block';
     document.getElementById('profileBizName').textContent = p.biz_name || '-';
     document.getElementById('profileBizNum').textContent = 'NZBN: ' + (p.biz_number || '-');
   } else {
     badge.textContent = '👤 Personal';
     badge.className = 'profile-badge';
+    badge.style.background = '';
+    badge.style.color = '';
   }
 }
 
