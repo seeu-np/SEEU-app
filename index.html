@@ -426,65 +426,72 @@ input:-webkit-autofill:focus {
 <body>
 <div class="phone-frame" style="display:flex;flex-direction:column;">
   <!-- 공통 헤더 (모든 탭 위에 고정) -->
-  <div id="sharedHeader" style="background:var(--navy);padding:16px 20px 10px;flex-shrink:0;z-index:10; display:grid; grid-template-columns: 1fr auto auto; grid-template-rows: auto auto; gap:10px 12px; align-items:end;">
+  <div id="sharedHeader" style="background:var(--navy);padding:16px 20px 0px;flex-shrink:0;z-index:10; display:flex; flex-direction:column; gap:12px;">
 
-    <!-- Left Top: Motto -->
-    <div style="grid-column: 1 / 2; grid-row: 1 / 2; display:flex;flex-direction:column;gap:0; justify-content:flex-end;">
-      <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">S</span><span style="color:rgba(255,255,255,0.65);">avour Asia</span></div>
-      <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">E</span><span style="color:rgba(255,255,255,0.65);">very Bite</span></div>
-      <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">E</span><span style="color:rgba(255,255,255,0.65);">very Day</span></div>
-      <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">U</span><span style="color:rgba(255,255,255,0.65);">ltimate Joy</span></div>
-    </div>
-
-    <!-- Left Bottom: Search Bar -->
-    <div style="grid-column: 1 / 2; grid-row: 2 / 3; display:flex;align-items:center;gap:6px;width:100%;">
-      <button onclick="tabGoBack()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8249;</button>
-      <div id="sharedSearchWrap" class="search-bar" style="flex:1;">
-        <span style="font-size:12px;opacity:0.5;">🔍</span>
-        <input type="text" placeholder="Search..." id="searchInput" oninput="filterProducts()" style="background:transparent;border:none;outline:none;color:white;font-size:12px;width:100%;font-family:var(--font-body);">
+    <!-- ROW 1: Motto | Logo | Icons (Barcode over Cart) -->
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      
+      <!-- Left: Motto -->
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">S</span><span style="color:rgba(255,255,255,0.65);">avour Asia</span></div>
+        <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">E</span><span style="color:rgba(255,255,255,0.65);">very Bite</span></div>
+        <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">E</span><span style="color:rgba(255,255,255,0.65);">very Day</span></div>
+        <div style="font-size:9px;font-weight:500;line-height:1.2;white-space:nowrap;"><span style="color:var(--gold);font-size:10px;font-weight:700;">U</span><span style="color:rgba(255,255,255,0.65);">ltimate Joy</span></div>
       </div>
-      <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:7px 10px;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
-    </div>
 
-    <!-- Center: Giant Logo -->
-    <div style="grid-column: 2 / 3; grid-row: 1 / 3; height:100%;">
-      <div class="logo-badge" style="height:100%; font-size:26px; letter-spacing:1px; display:flex; align-items:center; justify-content:center; border-radius:12px; padding:0 22px; box-sizing:border-box;">
+      <!-- Center: Logo -->
+      <div class="logo-badge" style="font-size:24px; letter-spacing:1px; display:flex; align-items:center; justify-content:center; border-radius:12px; padding:6px 16px;">
         S
-        <span style="display:inline-flex; gap:4px; margin:0 5px;">
-          <span style="display:flex; flex-direction:column; justify-content:space-between; height:18px; width:14px; margin-top:2px;">
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
+        <span style="display:inline-flex; gap:3px; margin:0 4px;">
+          <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
           </span>
-          <span style="display:flex; flex-direction:column; justify-content:space-between; height:18px; width:14px; margin-top:2px;">
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
-            <div style="height:4px; background:currentColor; width:100%; border-radius:1px;"></div>
+          <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
           </span>
         </span>
         U
       </div>
-    </div>
 
-    <!-- Right Top: Barcode & Cart -->
-    <div style="grid-column: 3 / 4; grid-row: 1 / 2; display:flex; flex-direction:column; gap:6px; justify-content:flex-end; align-items:center;">
-      <div class="icon-btn" onclick="showMembershipBarcode()" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;width:38px;height:28px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:14px;box-sizing:border-box;" title="Membership Barcode">🎫</div>
-      <div class="icon-btn" onclick="switchTab('orders')" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;width:38px;height:28px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:14px;box-sizing:border-box;position:relative;">
-        🛒
-        <span style="position:absolute;top:-4px;right:-4px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:bold;border-radius:50%;width:14px;height:14px;display:flex;justify-content:center;align-items:center;" id="cart-count">0</span>
+      <!-- Right: Barcode & Cart (Stacked) -->
+      <div style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+        <div class="icon-btn" onclick="showMembershipBarcode()" style="cursor:pointer;border:1px solid var(--gold);border-radius:6px;width:32px;height:22px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:12px;box-sizing:border-box;" title="Membership Barcode">🎫</div>
+        <div class="icon-btn" onclick="switchTab('orders')" style="cursor:pointer;border:1px solid var(--gold);border-radius:6px;width:32px;height:22px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:12px;box-sizing:border-box;position:relative;">
+          🛒
+          <span style="position:absolute;top:-4px;right:-4px;background:var(--gold);color:var(--navy);font-size:9px;font-weight:bold;border-radius:50%;width:12px;height:12px;display:flex;justify-content:center;align-items:center;" id="cart-count">0</span>
+        </div>
       </div>
+
     </div>
 
-    <!-- Right Bottom: Camera -->
-    <div style="grid-column: 3 / 4; grid-row: 2 / 3; align-self:end; justify-self:center;">
-      <div class="icon-btn" onclick="openScanner()" style="cursor:pointer;border:1px solid var(--gold);border-radius:8px;width:38px;height:28px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:14px;box-sizing:border-box;" title="Scan Barcode">📷</div>
+    <!-- ROW 2: Search Bar | Camera -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+      
+      <!-- Search Bar + Nav Buttons -->
+      <div style="display:flex;align-items:center;gap:6px;flex:1;">
+        <button onclick="tabGoBack()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:5px 8px;color:rgba(255,255,255,0.7);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;">&#8249;</button>
+        <div id="sharedSearchWrap" class="search-bar" style="flex:1;">
+          <span style="font-size:12px;opacity:0.5;">🔍</span>
+          <input type="text" placeholder="Search..." id="searchInput" oninput="filterProducts()" style="background:transparent;border:none;outline:none;color:white;font-size:12px;width:100%;font-family:var(--font-body);">
+        </div>
+        <button onclick="tabGoForward()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:5px 8px;color:rgba(255,255,255,0.7);font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;">&#8250;</button>
+      </div>
+
+      <!-- Camera Icon -->
+      <div class="icon-btn" onclick="openScanner()" style="cursor:pointer;border:1px solid var(--gold);border-radius:6px;width:32px;height:28px;display:flex;justify-content:center;align-items:center;color:var(--gold);font-size:14px;box-sizing:border-box;flex-shrink:0;" title="Scan Barcode">📷</div>
+
     </div>
 
-  </div>
     <!-- 로그인 상태 -->
     <div style="padding:8px 0 10px;text-align:center;">
       <span id="sharedAuthLabel" onclick="handleAuthNav()" style="font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;padding:3px 14px;border-radius:20px;border:1px solid rgba(201,168,76,0.25);">Login &nbsp;·&nbsp; Register</span>
     </div>
+
+  </div>
   <div style="flex:1;position:relative;overflow:hidden;">
   <div class="tab-screen active" id="tab-home">    <!-- HEADER -->
     <div class="nav-tabs">
