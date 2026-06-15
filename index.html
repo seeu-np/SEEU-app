@@ -1086,22 +1086,23 @@ input:-webkit-autofill:focus {
       <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;">ACCOUNT TYPE</div>
       <div style="display:flex;gap:8px;margin-bottom:16px;">
         <button id="modalTypePersonal" onclick="selectModalType('personal')" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:#1B2B4B;color:#C9A84C;border:2px solid #1B2B4B;font-family:'DM Sans',sans-serif;">👤 Personal</button>
-        <button id="modalTypeRetail" onclick="selectModalType('retail')" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:white;color:#666;border:2px solid rgba(0,0,0,0.12);font-family:'DM Sans',sans-serif;">🏪 Retail Business</button>
+        <button id="modalTypeRetail" onclick="selectModalType('retail')" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:white;color:#666;border:2px solid rgba(0,0,0,0.12);font-family:'DM Sans',sans-serif;">🏪 Business</button>
       </div>
       <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;">PERSONAL DETAILS</div>
-      <input type="text" id="modalName" placeholder="Full name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-      <input type="text" id="modalSignupEmail" placeholder="Email address" autocomplete="off" inputmode="email" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-      <input type="text" id="modalPhone" placeholder="Phone number" autocomplete="off" inputmode="tel" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-      <input type="text" id="modalAddress" placeholder="Delivery address" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+      <div style="position:relative;"><input type="text" id="modalName" placeholder="Full name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+      <div style="position:relative;"><input type="text" id="modalSignupEmail" placeholder="Email address" autocomplete="off" inputmode="email" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+      <div style="position:relative;"><input type="text" id="modalPhone" placeholder="Phone number" autocomplete="off" inputmode="tel" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+      <div style="position:relative;"><input type="text" id="modalAddress" placeholder="Delivery address" readonly autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;background:#f5f5f5;color:#999;cursor:not-allowed;"></div>
       <div id="modalBizFields" style="display:none;">
         <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;margin-top:6px;">BUSINESS DETAILS</div>
-        <input type="text" id="modalBizName" placeholder="Legal business name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-        <input type="text" id="modalTradingName" placeholder="Trading name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-        <input type="text" id="modalBizNum" placeholder="Business number (NZBN)" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
-        <input type="text" id="modalBizAddress" placeholder="Business address" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;">
+        <div style="position:relative;"><input type="text" id="modalBizName" placeholder="Legal business name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+        <div style="position:relative;"><input type="text" id="modalTradingName" placeholder="Trading name" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+        <div style="position:relative;"><input type="text" id="modalBizNum" placeholder="Business number (NZBN)" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+        <div style="position:relative;"><input type="text" id="modalGstNum" placeholder="GST Number" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
+        <div style="position:relative;"><input type="text" id="modalBizAddress" placeholder="Business address" autocomplete="off" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;outline:none;font-family:'DM Sans',sans-serif;"></div>
       </div>
       <div style="font-size:12px;font-weight:600;color:#888;letter-spacing:1px;margin-bottom:8px;margin-top:6px;">PASSWORD</div>
-      <input type="password" id="modalSignupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:20px;outline:none;font-family:'DM Sans',sans-serif;">
+      <div style="position:relative;"><input type="password" id="modalSignupPassword" placeholder="Password (min 6 characters)" autocomplete="new-password" style="width:100%;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:20px;outline:none;font-family:'DM Sans',sans-serif;"><span style="position:absolute;top:13px;right:16px;color:#E74C3C;font-size:14px;font-weight:bold;">*</span></div>
       <button onclick="doModalSignup()" style="width:100%;background:#1B2B4B;color:#C9A84C;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Create Account</button>
       <div style="text-align:center;margin-top:16px;font-size:13px;color:#999;">Already have an account? <span onclick="switchModal('login')" style="color:#1B2B4B;font-weight:600;cursor:pointer;">Login</span></div>
     </div>
@@ -3244,7 +3245,7 @@ function switchModal(mode) {
   document.getElementById('modalTitle').textContent = mode === 'login' ? 'Welcome Back' : 'Create Account';
   document.getElementById('modalError').style.display = 'none';
   if (mode === 'signup') {
-    ['modalName','modalSignupEmail','modalPhone','modalAddress','modalBizName','modalTradingName','modalBizNum','modalBizAddress','modalSignupPassword'].forEach(function(id) {
+    ['modalName','modalSignupEmail','modalPhone','modalAddress','modalBizName','modalTradingName','modalBizNum','modalGstNum','modalBizAddress','modalSignupPassword'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.value = '';
     });
@@ -3307,8 +3308,18 @@ async function doModalSignup() {
   var phone = document.getElementById('modalPhone').value.trim();
   var address = document.getElementById('modalAddress').value.trim();
   var password = document.getElementById('modalSignupPassword').value;
-  if (!name || !email || !password) { showAuthError('Please fill in all required fields'); return; }
+  
+  if (!name || !email || !phone || !password) { showAuthError('Please fill in all required personal fields'); return; }
   if (password.length < 6) { showAuthError('Password must be at least 6 characters'); return; }
+  
+  var gst_num = '';
+  if (authMode === 'retail') {
+    var bizName = document.getElementById('modalBizName').value.trim();
+    var tradingName = document.getElementById('modalTradingName').value.trim();
+    var bizNum = document.getElementById('modalBizNum').value.trim();
+    gst_num = document.getElementById('modalGstNum').value.trim();
+    if (!bizName || !tradingName || !bizNum || !gst_num) { showAuthError('Please fill in all required business fields'); return; }
+  }
   try {
     var res = await fetch(SUPABASE_URL + '/auth/v1/signup', {
       method: 'POST',
@@ -3323,6 +3334,7 @@ async function doModalSignup() {
         profile.biz_name = document.getElementById('modalBizName').value.trim();
         profile.trading_name = document.getElementById('modalTradingName').value.trim();
         profile.biz_number = document.getElementById('modalBizNum').value.trim();
+        profile.gst_number = document.getElementById('modalGstNum').value.trim();
         profile.biz_address = document.getElementById('modalBizAddress').value.trim();
       }
       await fetch(SUPABASE_URL + '/rest/v1/profiles', {
