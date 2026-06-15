@@ -442,18 +442,31 @@ input:-webkit-autofill:focus {
       <!-- Center: Logo + Login/Register -->
       <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; width:140px;">
         <div style="flex:1; background:var(--gold); color:var(--navy); font-family:var(--font-display); font-size:24px; font-weight:700; letter-spacing:4px; display:flex; align-items:center; justify-content:center; border-radius:10px;">
-          SEE U
+          S
+          <span style="display:inline-flex; gap:3px; margin:0 4px;">
+            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            </span>
+            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+              <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
+            </span>
+          </span>
+          U
         </div>
         <div style="margin-top:6px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:12px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; color:rgba(255,255,255,0.8); cursor:pointer;" onclick="switchTab('auth')">
           Login &middot; Register
         </div>
       </div>
 
-      <!-- Right: 3 Buttons -->
-      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; width:48px;">
-        <div class="icon-btn" onclick="alert('바코드 스캐너 기능 (상품 검색용)')" style="flex:1; margin-bottom:4px; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer;" title="Camera Scanner">📷</div>
-        <div class="icon-btn" onclick="showMembershipBarcode()" style="flex:1; margin-bottom:4px; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer;" title="Membership Barcode">🎫</div>
-        <div class="icon-btn" onclick="switchTab('orders')" style="flex:1; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer; position:relative;">
+      <!-- Right: 3 Buttons perfectly matching height, width matches Left to center the Logo -->
+      <div style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; height:100%; width:90px;">
+        <div class="icon-btn" onclick="alert('바코드 스캐너 기능 (상품 검색용)')" style="flex:1; width:48px; margin-bottom:4px; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer;" title="Camera Scanner">📷</div>
+        <div class="icon-btn" onclick="showMembershipBarcode()" style="flex:1; width:48px; margin-bottom:4px; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer;" title="Membership Barcode">🎫</div>
+        <div class="icon-btn" onclick="switchTab('orders')" style="flex:1; width:48px; border:1px solid var(--gold); border-radius:8px; display:flex; justify-content:center; align-items:center; color:var(--gold); font-size:12px; cursor:pointer; position:relative;">
           🛒
           <span style="position:absolute;top:-4px;right:-4px;background:var(--gold);color:var(--navy);font-size:9px;font-weight:bold;border-radius:50%;width:14px;height:14px;display:flex;justify-content:center;align-items:center;" id="cart-count">0</span>
         </div>
