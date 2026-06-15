@@ -455,18 +455,18 @@ input:-webkit-autofill:focus {
         <div style="flex:1; background:var(--gold); color:var(--navy); font-family:var(--font-display); font-size:24px; font-weight:700; display:flex; align-items:center; justify-content:center; border-radius:10px;">
           S
           <span style="display:inline-flex; gap:4px; margin-left:4px;">
-            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:-2px;">
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
             </span>
-            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:2px;">
+            <span style="display:flex; flex-direction:column; justify-content:space-between; height:16px; width:12px; margin-top:-2px;">
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
               <div style="height:3px; background:currentColor; width:100%; border-radius:1px;"></div>
             </span>
           </span>
-          <span style="margin-left:14px;">U</span>
+          <span style="margin-left:10px;">U</span>
         </div>
         <div id="sharedAuthLabel" style="margin-top:6px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:12px; height:20px; display:flex; align-items:center; justify-content:center; font-size:10px; color:rgba(255,255,255,0.8); cursor:pointer;" onclick="handleAuthNav()">
           Login &middot; Register
@@ -2610,8 +2610,8 @@ if (days[dayMap[aboutToday]] !== undefined) {
     var isd = false, sx = 0, ss = 0;
     wrap.style.cursor = 'grab';
     wrap.addEventListener('mousedown', function(e){ isd=true; sx=e.pageX; ss=popSlidePos; popPaused=true; wrap.style.cursor='grabbing'; });
-    wrap.addEventListener('mouseleave', function(){ isd=false; wrap.style.cursor='grab'; setTimeout(function(){ popPaused=false; },2000); });
-    wrap.addEventListener('mouseup', function(){ isd=false; wrap.style.cursor='grab'; setTimeout(function(){ popPaused=false; },2000); });
+    wrap.addEventListener('mouseleave', function(){ isd=false; wrap.style.cursor='grab'; setTimeout(function(){ popPaused=false; },500); });
+    wrap.addEventListener('mouseup', function(){ isd=false; wrap.style.cursor='grab'; setTimeout(function(){ popPaused=false; },500); });
     wrap.addEventListener('mousemove', function(e){
       if(!isd) return;
       popSlidePos = Math.max(0, ss + sx - e.pageX);
@@ -2622,7 +2622,7 @@ if (days[dayMap[aboutToday]] !== undefined) {
       popSlidePos = Math.max(0, ss + sx - e.touches[0].pageX);
       track.style.transform = 'translateX(-' + popSlidePos + 'px)';
     },{passive:true});
-    wrap.addEventListener('touchend',function(e){setTimeout(function(){homeIsPaused=false;},2000);},{passive:true});
+    wrap.addEventListener('touchend',function(e){setTimeout(function(){popPaused=false;},500);},{passive:true});
 
     startPopSlide(pops.length);
   }
@@ -2879,9 +2879,9 @@ if (days[dayMap[aboutToday]] !== undefined) {
     let isd=false,sx=0,ss=0;
     let touchStartX=0, touchMoved=0;
     wrap.addEventListener('mousedown',e=>{isd=true;sx=e.pageX;ss=cardScrollPos;homeIsPaused=true;wrap.style.cursor='grabbing';});
-    wrap.addEventListener('mouseleave',()=>{isd=false;wrap.style.cursor='grab';setTimeout(()=>homeIsPaused=false,2000);});
+    wrap.addEventListener('mouseleave',()=>{isd=false;wrap.style.cursor='grab';setTimeout(()=>homeIsPaused=false,500);});
 ;
-    wrap.addEventListener('mouseup',e=>{isd=false;wrap.style.cursor='grab';setTimeout(()=>homeIsPaused=false,2000);});
+    wrap.addEventListener('mouseup',e=>{isd=false;wrap.style.cursor='grab';setTimeout(()=>homeIsPaused=false,500);});
     wrap.addEventListener('mousemove',e=>{
       if(!isd)return;
       cardScrollPos=Math.max(0,Math.min(totalW-1,ss+sx-e.pageX));
@@ -2899,7 +2899,7 @@ if (days[dayMap[aboutToday]] !== undefined) {
       if(t)t.style.transform=`translateX(-${cardScrollPos}px)`;
       updateCountryFromScroll(cardScrollPos, allCards);
     },{passive:true});
-    wrap.addEventListener('touchend',function(e){setTimeout(function(){homeIsPaused=false;},2000);},{passive:true});
+    wrap.addEventListener('touchend',function(e){setTimeout(function(){homeIsPaused=false;},500);},{passive:true});
   }
 
   window.openHomeRecipe = function(country, recipeIdx) {
