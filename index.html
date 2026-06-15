@@ -3601,6 +3601,14 @@ if (isIos() && !isInStandaloneMode()) {
     document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
     document.getElementById('pwaInstallBtn').style.display = 'none';
     document.getElementById('pwaBanner').style.display = 'flex';
+  } else {
+    setTimeout(() => {
+      if (document.getElementById('pwaBanner').style.display === 'none') {
+        document.getElementById('pwaBannerText').innerHTML = "To install app: Tap the 3 dots menu (⋮) and select <b>Add to Home screen</b>";
+        document.getElementById('pwaInstallBtn').style.display = 'none';
+        document.getElementById('pwaBanner').style.display = 'flex';
+      }
+    }, 1500);
   }
 }
 </script>
