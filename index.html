@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#FF6B00">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="https://ui-avatars.com/api/?name=S+U&background=FF6B00&color=fff&size=192">
 <title>SEE U - Asian Grocery Store</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -416,11 +419,187 @@ input:-webkit-autofill:focus {
   -webkit-text-fill-color: #1B2B4B !important;
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init('_2gLuB5vGdiGAcqK');</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+/* ===== PWA / ADD TO HOME SCREEN ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log("SW Registered")).catch(e=>console.log("SW Error",e));
+}
 
-<script src="https://unpkg.com/html5-qrcode"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show banner on Android Chrome/Samsung Internet
+  document.getElementById('pwaBanner').style.display = 'flex';
+  
+  document.getElementById('pwaInstallBtn').onclick = async () => {
+    document.getElementById('pwaBanner').style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+});
+
+// Detect iOS for manual instructions
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+};
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+if (isIos() && !isInStandaloneMode()) {
+  document.getElementById('pwaBannerText').innerHTML = "To install app: Tap Share icon below and select <b>Add to Home Screen</b>";
+  document.getElementById('pwaInstallBtn').style.display = 'none';
+  document.getElementById('pwaBanner').style.display = 'flex';
+} else if (!isIos() && !isInStandaloneMode()) {
+  // If Android but beforeinstallprompt didn't fire (e.g., in-app browser like Kakao or Google App)
+  // We can check if it's an in-app browser and advise them.
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("KAKAOTALK") > -1) || (ua.indexOf("GSA") > -1)) {
+    document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    document.getElementById('pwaBanner').style.display = 'flex';
+  }
+}
+
+</script>
+<script>emailjs.init('_2gLuB5vGdiGAcqK');
+/* ===== PWA / ADD TO HOME SCREEN ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log("SW Registered")).catch(e=>console.log("SW Error",e));
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show banner on Android Chrome/Samsung Internet
+  document.getElementById('pwaBanner').style.display = 'flex';
+  
+  document.getElementById('pwaInstallBtn').onclick = async () => {
+    document.getElementById('pwaBanner').style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+});
+
+// Detect iOS for manual instructions
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+};
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+if (isIos() && !isInStandaloneMode()) {
+  document.getElementById('pwaBannerText').innerHTML = "To install app: Tap Share icon below and select <b>Add to Home Screen</b>";
+  document.getElementById('pwaInstallBtn').style.display = 'none';
+  document.getElementById('pwaBanner').style.display = 'flex';
+} else if (!isIos() && !isInStandaloneMode()) {
+  // If Android but beforeinstallprompt didn't fire (e.g., in-app browser like Kakao or Google App)
+  // We can check if it's an in-app browser and advise them.
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("KAKAOTALK") > -1) || (ua.indexOf("GSA") > -1)) {
+    document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    document.getElementById('pwaBanner').style.display = 'flex';
+  }
+}
+
+</script>
+
+<script src="https://unpkg.com/html5-qrcode">
+/* ===== PWA / ADD TO HOME SCREEN ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log("SW Registered")).catch(e=>console.log("SW Error",e));
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show banner on Android Chrome/Samsung Internet
+  document.getElementById('pwaBanner').style.display = 'flex';
+  
+  document.getElementById('pwaInstallBtn').onclick = async () => {
+    document.getElementById('pwaBanner').style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+});
+
+// Detect iOS for manual instructions
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+};
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+if (isIos() && !isInStandaloneMode()) {
+  document.getElementById('pwaBannerText').innerHTML = "To install app: Tap Share icon below and select <b>Add to Home Screen</b>";
+  document.getElementById('pwaInstallBtn').style.display = 'none';
+  document.getElementById('pwaBanner').style.display = 'flex';
+} else if (!isIos() && !isInStandaloneMode()) {
+  // If Android but beforeinstallprompt didn't fire (e.g., in-app browser like Kakao or Google App)
+  // We can check if it's an in-app browser and advise them.
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("KAKAOTALK") > -1) || (ua.indexOf("GSA") > -1)) {
+    document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    document.getElementById('pwaBanner').style.display = 'flex';
+  }
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js">
+/* ===== PWA / ADD TO HOME SCREEN ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log("SW Registered")).catch(e=>console.log("SW Error",e));
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show banner on Android Chrome/Samsung Internet
+  document.getElementById('pwaBanner').style.display = 'flex';
+  
+  document.getElementById('pwaInstallBtn').onclick = async () => {
+    document.getElementById('pwaBanner').style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+});
+
+// Detect iOS for manual instructions
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+};
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+if (isIos() && !isInStandaloneMode()) {
+  document.getElementById('pwaBannerText').innerHTML = "To install app: Tap Share icon below and select <b>Add to Home Screen</b>";
+  document.getElementById('pwaInstallBtn').style.display = 'none';
+  document.getElementById('pwaBanner').style.display = 'flex';
+} else if (!isIos() && !isInStandaloneMode()) {
+  // If Android but beforeinstallprompt didn't fire (e.g., in-app browser like Kakao or Google App)
+  // We can check if it's an in-app browser and advise them.
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("KAKAOTALK") > -1) || (ua.indexOf("GSA") > -1)) {
+    document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    document.getElementById('pwaBanner').style.display = 'flex';
+  }
+}
+
+</script>
 
 </head>
 <body>
@@ -3530,6 +3709,50 @@ function recipeCardClick(ci, ri) {
   console.log('recipeCardClick ci='+ci+' ri='+ri);
   if (window.COUNTRY_NAMES) currentCountry = window.COUNTRY_NAMES[ci];
   if (typeof openRecipe === 'function') openRecipe(ri);
+}
+
+
+/* ===== PWA / ADD TO HOME SCREEN ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(()=>console.log("SW Registered")).catch(e=>console.log("SW Error",e));
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show banner on Android Chrome/Samsung Internet
+  document.getElementById('pwaBanner').style.display = 'flex';
+  
+  document.getElementById('pwaInstallBtn').onclick = async () => {
+    document.getElementById('pwaBanner').style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+});
+
+// Detect iOS for manual instructions
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+};
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+if (isIos() && !isInStandaloneMode()) {
+  document.getElementById('pwaBannerText').innerHTML = "To install app: Tap Share icon below and select <b>Add to Home Screen</b>";
+  document.getElementById('pwaInstallBtn').style.display = 'none';
+  document.getElementById('pwaBanner').style.display = 'flex';
+} else if (!isIos() && !isInStandaloneMode()) {
+  // If Android but beforeinstallprompt didn't fire (e.g., in-app browser like Kakao or Google App)
+  // We can check if it's an in-app browser and advise them.
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("KAKAOTALK") > -1) || (ua.indexOf("GSA") > -1)) {
+    document.getElementById('pwaBannerText').innerHTML = "For the best app experience, please open this link in Chrome browser.";
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    document.getElementById('pwaBanner').style.display = 'flex';
+  }
 }
 
 </script>
