@@ -1,4 +1,4 @@
-const CACHE_NAME = 'seeu-again-cache-v6';
+const CACHE_NAME = 'seeu-again-cache-v8';
 const ASSETS = [
   './',
   './index.html',

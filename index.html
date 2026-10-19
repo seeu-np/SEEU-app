@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SEE U Again | Customer Rewards & Member Card</title>
+    <title>SEE U+ | Member Rewards & Digital Card</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ff4500">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SEE U Again">
+    <meta name="apple-mobile-web-app-title" content="SEE U+">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -706,7 +706,7 @@
                 <div class="signup-logo-box">
                     <img src="icon-192.png" alt="SEE U Logo">
                 </div>
-                <h3 class="signup-title">Join SEE U Club</h3>
+                <h3 class="signup-title">Join SEE U+</h3>
                 <p class="signup-subtitle">Earn 1% cashback on every purchase & unlock weekly member specials</p>
                 <div id="signupError" class="form-error"></div>
                 <div class="form-group">
@@ -745,18 +745,46 @@
                 </div>
             </div>
 
-            <!-- Step 3: Success -->
+            <!-- Step 3: Success & Direct Install Flow -->
             <div id="stepSignupSuccess" style="display: none;" class="success-box">
                 <i class="fas fa-check-circle success-icon"></i>
-                <h3 class="signup-title" style="color: #10b981;">Card Activated!</h3>
-                <p class="signup-subtitle">Welcome to SEE U Club, <strong id="lblSuccessMemberName" style="color:#fff;"></strong></p>
-                <div class="success-card-preview">
-                    <div style="font-size: 12px; color: #94a3b8;">Assigned Member Barcode:</div>
-                    <div style="font-size: 20px; font-weight: 800; color: #ff6b35; margin-top: 4px; letter-spacing: 1px;" id="lblSuccessMemberCode">SUA-8839201</div>
-                    <div style="font-size: 11px; color: #10b981; margin-top: 8px;"><i class="fas fa-check"></i> Automatically linked to DPOS system</div>
+                <h3 class="signup-title" style="color: #10b981;">SEE U+ Card Activated!</h3>
+                <p class="signup-subtitle">Welcome, <strong id="lblSuccessMemberName" style="color:#fff;"></strong>! Your member barcode is ready:</p>
+                <div class="success-card-preview" style="margin: 12px 0 16px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Your SEE U+ Member Code</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">SUA-8839201</div>
+                    <div style="font-size: 11px; color: #10b981; margin-top: 6px;"><i class="fas fa-check-circle"></i> Linked to POS checkout</div>
                 </div>
-                <button id="btnCompleteAndInstall" class="btn-primary-action">
-                    <i class="fas fa-arrow-right"></i> View My Card & Add to Phone
+
+                <!-- Prompt to Install App Directly -->
+                <div id="installPromptBox" style="background: rgba(255, 69, 0, 0.12); border: 1.5px solid #ff4500; border-radius: 14px; padding: 14px; margin-bottom: 14px; text-align: left;">
+                    <div style="font-size: 14px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                        <span>📲</span> <span>Add App Icon to Home Screen</span>
+                    </div>
+                    <p style="font-size: 12px; color: #cbd5e1; margin-top: 4px; line-height: 1.4;">
+                        Install SEE U+ to your phone screen so your digital card is ready with 1 tap at checkout:
+                    </p>
+                    
+                    <!-- Android One-Tap Button -->
+                    <div id="boxAndroidInstall" style="margin-top: 10px;">
+                        <button id="btnDirectInstallApp" class="btn-primary-action" style="margin-top: 0; padding: 11px; font-size: 14px;">
+                            <i class="fas fa-download"></i> Install App to Phone Screen
+                        </button>
+                    </div>
+
+                    <!-- iOS Step-by-Step Instructions -->
+                    <div id="boxIOSInstall" style="display: none; margin-top: 10px; background: rgba(15, 23, 42, 0.8); border-radius: 10px; padding: 10px; border: 1px solid rgba(255,255,255,0.08);">
+                        <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 6px;">iPhone / Safari:</div>
+                        <ol style="padding-left: 18px; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
+                            <li>Tap <strong>Share</strong> <i class="fas fa-arrow-up-from-bracket" style="color:#38bdf8;"></i> at bottom of Safari.</li>
+                            <li>Scroll &amp; tap <strong>Add to Home Screen</strong> <i class="far fa-plus-square"></i>.</li>
+                            <li>Tap <strong>Add</strong> at top right.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <button id="btnCompleteAndInstall" class="btn-modal-ok" style="background: #334155; font-size: 13px; padding: 10px 16px;">
+                    View My Member Card &rarr;
                 </button>
             </div>
         </div>
@@ -971,9 +999,9 @@
             currentVerificationCode = '' + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('lblSentEmail').innerText = email;
 
-            // Trigger REAL email dispatch directly from seeu.1np@gmail.com
+            // Trigger REAL email dispatch directly from seeuplus.admin@gmail.com
             try {
-                fetch('https://script.google.com/macros/s/AKfycbz4BAyh_gcleiaS95dsNsKe5EcqDo34ws-zh3xQ7Uq6dpDqaPS2ZFwZeDNEnqnC5a5x6Q/exec', {
+                fetch('https://script.google.com/macros/s/AKfycbw9vE0VHjZht71FRDBwMb71OvhxmG7cDioYFdMdsS4wMiRo0eQyVNtLGhzDn6Z4SQb9bw/exec', {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
@@ -1040,11 +1068,27 @@
             showProfilePill();
             updateUI();
 
-            // Show Step 3 (Success)
+            // Show Step 3 (Success & Direct Install Step)
             document.getElementById('stepVerification').style.display = 'none';
             document.getElementById('stepSignupSuccess').style.display = 'block';
             document.getElementById('lblSuccessMemberName').innerText = name;
             document.getElementById('lblSuccessMemberCode').innerText = newCode;
+
+            // Handle device detection for install prompt
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const boxAndroid = document.getElementById('boxAndroidInstall');
+            const boxIOS = document.getElementById('boxIOSInstall');
+            const promptBox = document.getElementById('installPromptBox');
+
+            if (isStandalone) {
+                if (promptBox) promptBox.style.display = 'none';
+            } else if (isIOS) {
+                if (boxAndroid) boxAndroid.style.display = 'none';
+                if (boxIOS) boxIOS.style.display = 'block';
+            } else {
+                if (boxAndroid) boxAndroid.style.display = 'block';
+                if (boxIOS) boxIOS.style.display = 'none';
+            }
         }
 
         // Relay registration data to DPOS integration queue
@@ -1276,12 +1320,39 @@
                 });
             }
 
-            // Step 3: Complete & Show Install
+            // Step 3: Direct Install Button
+            const btnDirectInstall = document.getElementById('btnDirectInstallApp');
+            if (btnDirectInstall) {
+                btnDirectInstall.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const choice = await deferredPrompt.userChoice;
+                        deferredPrompt = null;
+                        if (choice.outcome === 'accepted') {
+                            const pBox = document.getElementById('installPromptBox');
+                            if (pBox) {
+                                pBox.innerHTML = '<div style="color:#10b981;font-weight:bold;text-align:center;padding:12px;"><i class="fas fa-check-circle" style="font-size:26px;display:block;margin-bottom:6px;"></i>SEE U+ App successfully added to your home screen!</div>';
+                            }
+                        }
+                    } else {
+                        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                        if (isIOS) {
+                            const bA = document.getElementById('boxAndroidInstall');
+                            const bI = document.getElementById('boxIOSInstall');
+                            if (bA) bA.style.display = 'none';
+                            if (bI) bI.style.display = 'block';
+                        } else {
+                            document.getElementById('installModal').style.display = 'flex';
+                        }
+                    }
+                });
+            }
+
+            // Step 3: View Card & Finish
             const btnComplete = document.getElementById('btnCompleteAndInstall');
             if (btnComplete) {
                 btnComplete.addEventListener('click', () => {
                     document.getElementById('signupModal').style.display = 'none';
-                    document.getElementById('installModal').style.display = 'flex';
                 });
             }
 
