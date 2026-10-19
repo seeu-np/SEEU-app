@@ -57,33 +57,57 @@
             align-items: center;
             position: relative;
         }
-        .main-logo-card {
-            background: #ffffff;
-            border-radius: 22px;
-            padding: 12px 18px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 20px rgba(255, 69, 0, 0.3);
-            display: inline-flex;
-            justify-content: center;
+        .app-brand-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #ff4500 0%, #dc2626 100%);
+            color: #ffffff;
+            padding: 22px 16px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .brand-title {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            justify-content: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            line-height: 1;
+            padding-left: 12px;
         }
-        .app-main-logo {
-            height: 90px;
-            width: auto;
-            object-fit: contain;
-            display: block;
+        .brand-plus {
+            color: #fbbf24;
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1;
+            margin-left: 4px;
+            position: relative;
+            top: -8px;
         }
-        .brand-title-text {
-            display: none;
-        }
-        .brand-slogan {
-            font-size: 11.5px;
+        .card-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 800;
-            color: var(--gold);
-            letter-spacing: 0.2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-top: 6px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .brand-slogan {
+            font-size: 10px;
+            font-weight: 800;
+            color: #fbbf24;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
             white-space: nowrap;
         }
         .profile-pill {
@@ -252,7 +276,7 @@
             border: 1.5px solid #ff4500;
             border-radius: 14px;
             padding: 14px 16px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
@@ -617,10 +641,11 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <div class="main-logo-card">
-                <img src="icon-192.png" alt="SEE U Logo" class="app-main-logo">
+            <div class="app-brand-banner">
+                <div class="brand-title">SEE U<span class="brand-plus">+</span></div>
+                <div class="card-badge">Membership Card</div>
+                <div class="brand-slogan">Come Again, Save Again, SEE U Again.</div>
             </div>
-            <div class="brand-slogan">Come Again, Save Again, SEE U Again.</div>
             <div class="profile-pill" id="btnMemberProfile" style="display: none;">
                 <i class="fas fa-user-check"></i> <span id="lblProfilePillName">Member</span>
             </div>
@@ -638,7 +663,7 @@
                 <div class="card-top">
                     <div class="member-info">
                         <div class="member-name" id="lblMemberName">VIP Member</div>
-                        <div class="member-code" id="lblMemberCode">SUA-8839201</div>
+                        <div class="member-code" id="lblMemberCode">AJE-8839201</div>
                     </div>
                     <div class="card-chip"></div>
                 </div>
@@ -665,7 +690,7 @@
                 <!-- Digital Barcode Box -->
                 <div class="barcode-box">
                     <div id="barcodeContainer"></div>
-                    <div class="barcode-text" id="lblBarcodeText">SUA-8839201</div>
+                    <div class="barcode-text" id="lblBarcodeText">AJE-8839201</div>
                 </div>
 
                 <div class="scan-hint">
@@ -934,6 +959,11 @@
                 const stored = localStorage.getItem(STATE_KEY);
                 if (stored && isReg) {
                     memberState = Object.assign(memberState, JSON.parse(stored));
+                    // Auto-migrate existing SUA codes to AJE
+                    if (memberState.code && memberState.code.startsWith('SUA')) {
+                        memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+                        try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+                    }
                     showProfilePill();
                     updateUI();
                 } else {
@@ -1045,8 +1075,8 @@
                 return;
             }
 
-            // Successful verification: generate unique SUA barcode
-            const newCode = 'SUA' + Math.floor(1000000 + Math.random() * 9000000);
+            // Successful verification: generate unique AJE barcode
+            const newCode = 'AJE' + Math.floor(1000000 + Math.random() * 9000000);
             const name = document.getElementById('txtCustName').value.trim();
             const email = document.getElementById('txtCustEmail').value.trim();
             const mobile = document.getElementById('txtCustMobile').value.trim();
@@ -1126,9 +1156,13 @@
         }
 
         function updateUI() {
+            if (memberState.code && memberState.code.startsWith('SUA')) {
+                memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+                try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+            }
             if (!memberState.code) {
                 // Temporary preview before registration
-                memberState.code = 'SUA' + Math.floor(1000000 + Math.random() * 9000000);
+                memberState.code = 'AJE' + Math.floor(1000000 + Math.random() * 9000000);
                 memberState.name = 'VIP Member';
             }
 
@@ -1271,13 +1305,25 @@
 
         // PWA Install Logic
         let deferredPrompt = null;
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || ('standalone' in window.navigator && window.navigator.standalone);
+        function isAppInstalled() {
+            return window.matchMedia('(display-mode: standalone)').matches || 
+                   ('standalone' in window.navigator && window.navigator.standalone) ||
+                   localStorage.getItem('seeu_app_installed') === 'true';
+        }
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            if (!isAppInstalled()) {
+                const banner = document.getElementById('installBanner');
+                if (banner) banner.style.display = 'flex';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            localStorage.setItem('seeu_app_installed', 'true');
             const banner = document.getElementById('installBanner');
-            if (banner) banner.style.display = 'flex';
+            if (banner) banner.style.display = 'none';
         });
 
         function setupModals() {
@@ -1329,6 +1375,9 @@
                         const choice = await deferredPrompt.userChoice;
                         deferredPrompt = null;
                         if (choice.outcome === 'accepted') {
+                            localStorage.setItem('seeu_app_installed', 'true');
+                            const banner = document.getElementById('installBanner');
+                            if (banner) banner.style.display = 'none';
                             const pBox = document.getElementById('installPromptBox');
                             if (pBox) {
                                 pBox.innerHTML = '<div style="color:#10b981;font-weight:bold;text-align:center;padding:12px;"><i class="fas fa-check-circle" style="font-size:26px;display:block;margin-bottom:6px;"></i>SEE U+ App successfully added to your home screen!</div>';
@@ -1407,6 +1456,7 @@
             if (closeBannerBtn && banner) {
                 closeBannerBtn.addEventListener('click', () => {
                     banner.style.display = 'none';
+                    localStorage.setItem('seeu_app_installed', 'true');
                 });
             }
 
@@ -1417,6 +1467,7 @@
                         const choice = await deferredPrompt.userChoice;
                         deferredPrompt = null;
                         if (choice.outcome === 'accepted') {
+                            localStorage.setItem('seeu_app_installed', 'true');
                             if (banner) banner.style.display = 'none';
                         }
                     } else {
@@ -1431,6 +1482,11 @@
             renderWeeklySpecials();
             initTabs();
             setupModals();
+
+            if (isAppInstalled()) {
+                const banner = document.getElementById('installBanner');
+                if (banner) banner.style.display = 'none';
+            }
 
             // Service worker registration
             if ('serviceWorker' in navigator) {
