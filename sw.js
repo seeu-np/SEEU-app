@@ -1,17 +1,17 @@
-const CACHE_NAME = 'seeu-again-cache-v1';
+const CACHE_NAME = 'seeu-again-cache-v2';
 const ASSETS = [
   './',
   './index.html',
-  './style.css',
-  './app.js',
-  './manifest.json'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (e) => {
@@ -22,12 +22,18 @@ self.addEventListener('activate', (e) => {
           if (k !== CACHE_NAME) return caches.delete(k);
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
+// Network-first strategy for HTML to ensure updates reflect immediately on phone scan
 self.addEventListener('fetch', (e) => {
+  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request))
+    );
+    return;
+  }
   e.respondWith(
     caches.match(e.request).then((res) => res || fetch(e.request))
   );

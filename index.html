@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SEE U Again | Customer Rewards & Member Card</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0284c7">
+    <meta name="theme-color" content="#ff4500">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="SEE U Again">
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
+            --primary: #ff4500;
+            --primary-dark: #dc3200;
             --accent: #f97316;
             --accent-hover: #ea580c;
             --success: #10b981;
@@ -60,7 +60,7 @@
             background: #ffffff;
             border-radius: 22px;
             padding: 12px 18px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 20px rgba(2,132,199,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 20px rgba(255, 69, 0, 0.3);
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -73,18 +73,16 @@
             display: block;
         }
         .brand-title-text {
-            font-size: 28px;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: -0.5px;
+            display: none;
         }
         .brand-slogan {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--gold);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
-            margin-top: 4px;
+            margin-top: 6px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .nav-tabs {
             display: flex;
@@ -113,14 +111,14 @@
         .nav-tab-btn.active {
             background: var(--primary);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.35);
         }
         .member-card {
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            border: 1.5px solid rgba(56, 189, 248, 0.3);
+            border: 1.5px solid rgba(255, 69, 0, 0.35);
             border-radius: 20px;
             padding: 22px 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(2, 132, 199, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -138,7 +136,7 @@
         .member-info .member-code {
             font-size: 13px;
             font-weight: 700;
-            color: #38bdf8;
+            color: #ff6a33;
             margin-top: 2px;
             letter-spacing: 0.5px;
         }
@@ -229,14 +227,14 @@
         }
         .install-banner {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1.5px solid #0284c7;
+            border: 1.5px solid #ff4500;
             border-radius: 14px;
             padding: 14px 16px;
             display: none;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+            box-shadow: 0 4px 14px rgba(255, 69, 0, 0.25);
             position: relative;
         }
         .install-text h4 {
@@ -250,7 +248,7 @@
             margin-top: 2px;
         }
         .btn-install {
-            background: #0284c7;
+            background: #ff4500;
             color: #ffffff;
             border: none;
             padding: 9px 16px;
@@ -259,6 +257,107 @@
             font-weight: 800;
             cursor: pointer;
             white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-install:active {
+            transform: scale(0.96);
+        }
+                /* Install Guide Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+        .modal-card {
+            background: #1e293b;
+            border: 2px solid #ff4500;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal-header h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .modal-subtitle {
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+        .guide-box {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .guide-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ff6b35;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .guide-steps {
+            padding-left: 20px;
+            font-size: 12px;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .guide-steps li {
+            margin-bottom: 4px;
+        }
+        .modal-footer {
+            margin-top: 16px;
+            text-align: center;
+        }
+        .btn-modal-ok {
+            background: #ff4500;
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.4);
         }
         .close-install {
             position: absolute;
@@ -332,7 +431,7 @@
         .deal-price {
             font-size: 16px;
             font-weight: 900;
-            color: #38bdf8;
+            color: #ff4500;
         }
         .deal-save {
             font-size: 11px;
@@ -347,9 +446,8 @@
         <!-- Header -->
         <header class="app-header">
             <div class="main-logo-card">
-                <img src="data:image/png;base64,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" alt="SEE U Logo" class="app-main-logo">
+                <img src="icon-192.png" alt="SEE U Logo" class="app-main-logo">
             </div>
-            <div class="brand-title-text">SEE U Again</div>
             <div class="brand-slogan">Come Again, Save Again, SEE U Again.</div>
         </header>
 
@@ -404,10 +502,10 @@
             <div class="install-banner" id="installBanner" style="margin-top: 14px;">
                 <button class="close-install" id="btnCloseInstall">&times;</button>
                 <div class="install-text">
-                    <h4>Add to Home Screen</h4>
+                    <h4>Save App to Phone Screen</h4>
                     <p>Open rewards in 1 tap without downloading</p>
                 </div>
-                <button class="btn-install" id="btnInstallApp"><i class="fas fa-plus"></i> Add Card</button>
+                <button class="btn-install" id="btnInstallApp"><i class="fas fa-arrow-down-to-bracket"></i> Add App to Phone</button>
             </div>
         </div>
 
@@ -502,31 +600,38 @@
             document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
         }
 
-        // Clean English-Only Weekly Specials
-        const weeklySpecials = [
-            { name: "SHIN RAMYUN 120G (5PK)", desc: "Korean Spicy Gourmet Noodles", price: "$7.99", save: "SAVE $1.50" },
-            { name: "CJ COOKED WHITE RICE 210G", desc: "Instant Hetbahn Rice Bowl", price: "$2.20", save: "SAVE $0.60" },
-            { name: "CHONGGA MAT KIMCHI 1KG", desc: "Traditional Fresh Korean Kimchi", price: "$13.99", save: "SAVE $2.00" },
-            { name: "LOTTE CHOCO PIE 336G (12PK)", desc: "Sweet Chocolate Marshmallow Snack", price: "$4.50", save: "SAVE $1.00" },
-            { name: "SAMYANG BULDARK SPICY NOODLES", desc: "Hot Chicken Flavor Ramen 5pk", price: "$8.50", save: "SAVE $1.30" },
-            { name: "BINGGRAE BANANA MILK 200ML", desc: "Korea's Famous Flavored Milk Drink", price: "$1.99", save: "SAVE $0.50" }
-        ];
+        // Real DPOS Promotions Pool (50 items extracted live from DPOS database)
+        const dposPromoPool = [{"price":"$64.99","save":"WAS $79.99","name":"JG Napa Cabbage Kimchi Whole 5kg 포기김치","desc":"Special Deal • Save $15.00"},{"price":"$4.99","save":"WAS $18.79","name":"Tender Meaty Hotdog - Cocktail 500g","desc":"Special Deal • Save $13.80"},{"price":"$9.99","save":"WAS $21.99","name":"LKK Gluten Free Soy Sauce 1.9L","desc":"Special Deal • Save $12.00"},{"price":"$4.99","save":"WAS $14.99","name":"CJ Korean Rice Syrup 1.2kg 조청 쌀엿","desc":"Special Deal • Save $10.00"},{"price":"$39.99","save":"WAS $49.99","name":"Naju Premium Rice SAECHUNGMU 10kg 새청무","desc":"Special Deal • Save $10.00"},{"price":"$44.99","save":"WAS $54.99","name":"FRTN Everyday Jasmine Rice 20kg","desc":"Special Deal • Save $10.00"},{"price":"$39.99","save":"WAS $49.99","name":"FRTN Long Grain Rice 20kg","desc":"Special Deal • Save $10.00"},{"price":"$44.99","save":"WAS $54.99","name":"Arawana Short Grain Sushi Rice 20kg","desc":"Special Deal • Save $10.00"},{"price":"$17.99","save":"WAS $24.99","name":"CJO Doenjang Fermented Soy Bean Paste 2.8kg","desc":"Special Deal • Save $7.00"},{"price":"$28.99","save":"WAS $34.99","name":"SMA Pork Flat Meat 1kg 편육","desc":"Special Deal • Save $6.00"},{"price":"$1.99","save":"WAS $7.99","name":"CB Rokete Bongo Chilli Sauce 250ml","desc":"Special Deal • Save $6.00"},{"price":"$1.99","save":"WAS $7.89","name":"MLH Mung Bean Starch 500g","desc":"Special Deal • Save $5.90"},{"price":"$1.99","save":"WAS $7.79","name":"AROY-D Rambutan with Pineapple 565g","desc":"Special Deal • Save $5.80"},{"price":"$2.99","save":"WAS $8.79","name":"DP Dried Mushroom 100g","desc":"Special Deal • Save $5.80"},{"price":"$1.99","save":"WAS $7.79","name":"DW Soup Stock Tuna Dashi 300g 참치다시","desc":"Special Deal • Save $5.80"},{"price":"$1.99","save":"WAS $7.69","name":"Cock Rambutan with Pineapple in Syrup 565g","desc":"Special Deal • Save $5.70"},{"price":"$11.99","save":"WAS $17.59","name":"Nishin Wild Yellow Croaker 600/800g","desc":"Special Deal • Save $5.60"},{"price":"$16.99","save":"WAS $21.99","name":"Hawke\u0027s Bay Eggs Colony Size 7 Eggs 30pk","desc":"Special Deal • Save $5.00"},{"price":"$16.99","save":"WAS $21.99","name":"WOODLAND Free Range Eggs Size 7, 1Tray 20pk","desc":"Special Deal • Save $5.00"},{"price":"$16.99","save":"WAS $21.99","name":"NEG SPCA Certified Cage Free Size 7 Eggs 30pk","desc":"Special Deal • Save $5.00"},{"price":"$1.99","save":"WAS $6.99","name":"Check Frozen Split Broad Beans 454g","desc":"Special Deal • Save $5.00"},{"price":"$29.99","save":"WAS $34.99","name":"RYO Hair Loss Expert Care Shampoo Sensitive Scalp 400ml 민감","desc":"Special Deal • Save $5.00"},{"price":"$49.99","save":"WAS $54.99","name":"HMR Chilli Powder Coarse 2.5kg 고춧가루 김치용","desc":"Special Deal • Save $5.00"},{"price":"$4.99","save":"WAS $9.99","name":"Hinode Sukiyaki Sauce 400ml","desc":"Special Deal • Save $5.00"},{"price":"$44.99","save":"WAS $49.99","name":"Doree 100% Pure Sesame Oil 2L","desc":"Special Deal • Save $5.00"},{"price":"$9.99","save":"WAS $14.99","name":"TFC Roasted EEL (UNAGI KABAYAKI) 125g","desc":"Special Deal • Save $5.00"},{"price":"$24.99","save":"WAS $29.89","name":"No.1 Sweet Chilli Sauce 4.5L","desc":"Special Deal • Save $4.90"},{"price":"$2.99","save":"WAS $7.79","name":"CT Red Beans (Adzuki bean) 500g","desc":"Special Deal • Save $4.80"},{"price":"$1.99","save":"WAS $6.79","name":"Master Hee\u0027s Roasted Seaweed Flakes w Shrimp Furikake 50g","desc":"Special Deal • Save $4.80"},{"price":"$8.99","save":"WAS $13.70","name":"LP Hot Pot Soup Base 580g","desc":"Special Deal • Save $4.71"},{"price":"$1.99","save":"WAS $6.49","name":"PXY Black Sesame Paste 500g","desc":"Special Deal • Save $4.50"},{"price":"$22.99","save":"WAS $27.29","name":"Healthy Boy Thin Soy Sauce Yellow label 4.5L","desc":"Special Deal • Save $4.30"},{"price":"$2.99","save":"WAS $6.99","name":"NJ Herbal Candy Super Mint 60g","desc":"Special Deal • Save $4.00"},{"price":"$17.99","save":"WAS $21.99","name":"WG Mozzarella \u0026 Sausage Corn Dogs 5 x 80g","desc":"Special Deal • Save $4.00"},{"price":"$7.99","save":"WAS $11.99","name":"CJO JG Napa Cabbage Kimchi Cut 600g 맛김치","desc":"Special Deal • Save $4.00"},{"price":"$14.99","save":"WAS $18.99","name":"Jinju Fish Sausage 320g 비엔나 소세지","desc":"Special Deal • Save $4.00"},{"price":"$17.99","save":"WAS $21.99","name":"WY All Mozzarella Cheese Corn Dog 5 x 80g 모짜렐라 핫도그","desc":"Special Deal • Save $4.00"},{"price":"$17.99","save":"WAS $21.99","name":"WY Potato All Mozzarella Corn Dog 4 x 90g 감자 모짜렐라 핫도그","desc":"Special Deal • Save $4.00"},{"price":"$4.99","save":"WAS $8.99","name":"MG Roasted Seaweed Snack Original 12 x 2.5g","desc":"Special Deal • Save $4.00"},{"price":"$55.99","save":"WAS $59.99","name":"FRTN Aromatic Basmati Rice 20kg","desc":"Special Deal • Save $4.00"},{"price":"$24.99","save":"WAS $28.99","name":"JFN Kimchi Dumpling Real Meat 600g 김치고기만두","desc":"Special Deal • Save $4.00"},{"price":"$18.99","save":"WAS $22.99","name":"NEG SPCA Certified Free Range Size 7 Eggs 30pk","desc":"Special Deal • Save $4.00"},{"price":"$8.99","save":"WAS $12.99","name":"Okazu Enoki Mushroom 500g","desc":"Special Deal • Save $4.00"},{"price":"$9.99","save":"WAS $13.99","name":"Okazu Seafood Mushroom 500g","desc":"Special Deal • Save $4.00"},{"price":"$37.99","save":"WAS $41.99","name":"Check Roasted Seaweed Sushi Nori 100sheets 280g","desc":"Special Deal • Save $4.00"},{"price":"$7.99","save":"WAS $11.99","name":"KS Pork \u0026 Chive Dumplings Made in NZ 336g","desc":"Special Deal • Save $4.00"},{"price":"$8.99","save":"WAS $12.99","name":"KS Har Gow (Prawn Dumplings) Made in NZ 240g","desc":"Special Deal • Save $4.00"},{"price":"$7.99","save":"WAS $11.99","name":"KS Chicken \u0026 Corn Dumplings Made in NZ 336g","desc":"Special Deal • Save $4.00"},{"price":"$2.99","save":"WAS $6.79","name":"Sempio Naturally Brewed Soy Sauce 501 500ml 양조간장 501","desc":"Special Deal • Save $3.80"},{"price":"$4.99","save":"WAS $8.79","name":"SY Carbo Buldak Sauce 200g 까르보불닭소스","desc":"Special Deal • Save $3.80"}];
 
+        // 10 Items per week - rotates every 7 days automatically
         function renderWeeklySpecials() {
             const list = document.getElementById('dealsList');
             if (!list) return;
-            list.innerHTML = weeklySpecials.map(d => `
-                <div class="deal-item">
-                    <div>
-                        <div class="deal-name">${d.name}</div>
-                        <div class="deal-desc">${d.desc}</div>
-                    </div>
-                    <div class="deal-pricing">
-                        <div class="deal-price">${d.price}</div>
-                        <div class="deal-save">${d.save}</div>
-                    </div>
-                </div>
-            `).join('');
+
+            // Epoch anchor: 2026-10-19
+            const epoch = new Date('2026-10-19T00:00:00Z').getTime();
+            const now = Date.now();
+            const weeksPassed = Math.floor((now - epoch) / (7 * 24 * 60 * 60 * 1000));
+            const batchIndex = ((weeksPassed % 5) + 5) % 5; // 5 batches of 10 items
+            const currentBatch = dposPromoPool.slice(batchIndex * 10, batchIndex * 10 + 10);
+
+            const badge = document.querySelector('.specials-badge');
+            if (badge) {
+                badge.innerText = 'Week ' + (batchIndex + 1) + ' \u2022 10 Items';
+            }
+
+            list.innerHTML = currentBatch.map(function(d) {
+                return '<div class="deal-item">' +
+                    '<div style="flex: 1; padding-right: 10px;">' +
+                        '<div class="deal-name">' + d.name + '</div>' +
+                        '<div class="deal-desc">' + d.desc + '</div>' +
+                    '</div>' +
+                    '<div class="deal-pricing">' +
+                        '<div class="deal-price">' + d.price + '</div>' +
+                        '<div class="deal-save">' + d.save + '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
         }
 
         function initTabs() {
@@ -602,5 +707,40 @@
             }
         });
     </script>
+    <!-- Install Guide Modal -->
+    <div id="installModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Save App to Phone</h3>
+                <button class="modal-close-btn" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Save SEE U Again to your phone home screen for 1-tap checkout rewards:</p>
+                
+                <!-- iOS Instructions -->
+                <div class="guide-box ios-guide">
+                    <div class="guide-title"><i class="fab fa-apple"></i> iPhone / iPad (Safari)</div>
+                    <ol class="guide-steps">
+                        <li>Tap the <strong>Share</strong> button <i class="fas fa-arrow-up-from-bracket" style="color: #38bdf8;"></i> at bottom of Safari.</li>
+                        <li>Scroll down and tap <strong>Add to Home Screen</strong> <i class="far fa-plus-square"></i>.</li>
+                        <li>Tap <strong>Add</strong> in top right corner.</li>
+                    </ol>
+                </div>
+
+                <!-- Android Instructions -->
+                <div class="guide-box android-guide" style="margin-top: 12px;">
+                    <div class="guide-title"><i class="fab fa-android"></i> Android (Chrome)</div>
+                    <ol class="guide-steps">
+                        <li>Tap the <strong>Menu (3 dots)</strong> <i class="fas fa-ellipsis-vertical" style="color: #38bdf8;"></i> at top right.</li>
+                        <li>Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+                        <li>Tap <strong>Install</strong> to complete.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-ok" id="btnModalOk">Got it!</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
