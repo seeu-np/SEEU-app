@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="SEE U Again">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -542,6 +542,10 @@
         .btn-primary-action:active {
             transform: scale(0.97);
         }
+        .btn-primary-action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
         .form-error {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid #ef4444;
@@ -557,12 +561,12 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin: 16px 0;
+            margin: 20px 0;
         }
         .code-digit {
-            width: 48px;
-            height: 56px;
-            font-size: 24px;
+            width: 52px;
+            height: 60px;
+            font-size: 26px;
             font-weight: 800;
             text-align: center;
             background: #0f172a;
@@ -574,22 +578,6 @@
         .code-digit:focus {
             border-color: #38bdf8;
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
-        }
-        .quick-verify-badge {
-            background: rgba(251, 191, 36, 0.12);
-            border: 1px dashed #fbbf24;
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            font-size: 12px;
-            color: #fde68a;
-            cursor: pointer;
-            margin-bottom: 14px;
-            transition: all 0.2s;
-        }
-        .quick-verify-badge:active {
-            background: rgba(251, 191, 36, 0.22);
-            transform: scale(0.98);
         }
         .success-box {
             text-align: center;
@@ -730,7 +718,7 @@
                     <input type="email" id="txtCustEmail" class="form-input" placeholder="e.g. david@gmail.com" autocomplete="email">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="txtCustMobile">Mobile Number (Optional)</label>
+                    <label class="form-label" for="txtCustMobile">Phone Number *</label>
                     <input type="tel" id="txtCustMobile" class="form-input" placeholder="e.g. 021 123 4567" autocomplete="tel">
                 </div>
                 <button id="btnSendVerification" class="btn-primary-action">
@@ -741,16 +729,13 @@
             <!-- Step 2: Verification Code -->
             <div id="stepVerification" style="display: none;">
                 <h3 class="signup-title">Verify Email</h3>
-                <p class="signup-subtitle">We sent a 4-digit code to <strong id="lblSentEmail" style="color:#38bdf8;"></strong></p>
+                <p class="signup-subtitle">We sent a 4-digit code to <strong id="lblSentEmail" style="color:#38bdf8;"></strong>.<br>Please enter the code from your email to activate:</p>
                 <div id="verifyError" class="form-error"></div>
                 <div class="code-input-group">
                     <input type="text" maxlength="1" class="code-digit" id="code1" inputmode="numeric">
                     <input type="text" maxlength="1" class="code-digit" id="code2" inputmode="numeric">
                     <input type="text" maxlength="1" class="code-digit" id="code3" inputmode="numeric">
                     <input type="text" maxlength="1" class="code-digit" id="code4" inputmode="numeric">
-                </div>
-                <div class="quick-verify-badge" id="btnQuickVerify">
-                    <i class="fas fa-bolt"></i> Fast Verify: Tap code <strong>[ <span id="lblQuickDigitCode"></span> ]</strong> to auto-fill
                 </div>
                 <button id="btnConfirmCode" class="btn-primary-action">
                     <i class="fas fa-check-circle"></i> Verify & Activate Card
@@ -957,9 +942,10 @@
             }
         }
 
-        function sendVerification() {
+        async function sendVerification() {
             const name = document.getElementById('txtCustName').value.trim();
             const email = document.getElementById('txtCustEmail').value.trim();
+            const mobile = document.getElementById('txtCustMobile').value.trim();
             const errEl = document.getElementById('signupError');
             errEl.style.display = 'none';
 
@@ -972,11 +958,35 @@
                 showError('signupError', 'Please enter a valid email address.');
                 return;
             }
+            if (!mobile || mobile.length < 7) {
+                showError('signupError', 'Please enter your phone number.');
+                return;
+            }
+
+            const btnSend = document.getElementById('btnSendVerification');
+            btnSend.disabled = true;
+            btnSend.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Code...';
 
             // Generate 4-digit code
             currentVerificationCode = '' + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('lblSentEmail').innerText = email;
-            document.getElementById('lblQuickDigitCode').innerText = currentVerificationCode;
+
+            // Trigger REAL email dispatch directly from seeu.1np@gmail.com
+            try {
+                fetch('https://script.google.com/macros/s/AKfycbz4BAyh_gcleiaS95dsNsKe5EcqDo34ws-zh3xQ7Uq6dpDqaPS2ZFwZeDNEnqnC5a5x6Q/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        code: currentVerificationCode
+                    })
+                }).catch(function(e) {});
+            } catch(e) {}
+
+            btnSend.disabled = false;
+            btnSend.innerHTML = '<i class="fas fa-paper-plane"></i> Send Verification Code';
 
             // Clear inputs
             ['code1','code2','code3','code4'].forEach(id => {
@@ -995,15 +1005,6 @@
             }, 200);
         }
 
-        function autoFillCode() {
-            if (!currentVerificationCode || currentVerificationCode.length !== 4) return;
-            document.getElementById('code1').value = currentVerificationCode[0];
-            document.getElementById('code2').value = currentVerificationCode[1];
-            document.getElementById('code3').value = currentVerificationCode[2];
-            document.getElementById('code4').value = currentVerificationCode[3];
-            document.getElementById('verifyError').style.display = 'none';
-        }
-
         function verifyAndActivate() {
             const c1 = document.getElementById('code1').value.trim();
             const c2 = document.getElementById('code2').value.trim();
@@ -1012,7 +1013,7 @@
             const entered = c1 + c2 + c3 + c4;
 
             if (entered !== currentVerificationCode) {
-                showError('verifyError', 'Incorrect verification code. Tap the fast verify code or re-enter.');
+                showError('verifyError', 'Incorrect verification code. Please check your email inbox.');
                 return;
             }
 
@@ -1254,12 +1255,6 @@
                 }
             });
 
-            // Fast verify auto-fill button
-            const btnQuick = document.getElementById('btnQuickVerify');
-            if (btnQuick) {
-                btnQuick.addEventListener('click', autoFillCode);
-            }
-
             // Step 1: Send Verification
             const btnSend = document.getElementById('btnSendVerification');
             if (btnSend) {
@@ -1286,7 +1281,6 @@
             if (btnComplete) {
                 btnComplete.addEventListener('click', () => {
                     document.getElementById('signupModal').style.display = 'none';
-                    // Show Install Modal
                     document.getElementById('installModal').style.display = 'flex';
                 });
             }
@@ -1297,7 +1291,7 @@
                 btnProfile.addEventListener('click', () => {
                     document.getElementById('profName').innerText = memberState.name || '-';
                     document.getElementById('profEmail').innerText = memberState.email || '-';
-                    document.getElementById('profMobile').innerText = memberState.mobile || 'Not provided';
+                    document.getElementById('profMobile').innerText = memberState.mobile || '-';
                     document.getElementById('profCode').innerText = memberState.code || '-';
                     document.getElementById('profBalance').innerText = '$' + (memberState.balance || 0).toFixed(2);
                     document.getElementById('profileModal').style.display = 'flex';
@@ -1355,7 +1349,6 @@
                             if (banner) banner.style.display = 'none';
                         }
                     } else {
-                        // Open Visual Install Guide Modal
                         document.getElementById('installModal').style.display = 'flex';
                     }
                 });
