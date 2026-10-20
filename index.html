@@ -33,6 +33,17 @@
             -webkit-tap-highlight-color: transparent;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box !important;
+        }
         body {
             background: #090d16;
             color: var(--text-main);
@@ -42,12 +53,14 @@
             padding-bottom: 40px;
         }
         .app-container {
-            width: 100%;
-            max-width: 480px;
+            width: 100% !important;
+            max-width: 480px !important;
             display: flex;
             flex-direction: column;
-            padding: 16px;
+            padding: 16px !important;
             gap: 16px;
+            overflow-x: hidden !important;
+            margin: 0 auto !important;
         }
         .app-header {
             text-align: center;
@@ -246,23 +259,25 @@
             color: #fbbf24;
         }
         .barcode-box {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 16px 14px 10px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: #ffffff !important;
+            border-radius: 14px !important;
+            padding: 12px 12px 8px !important;
+            text-align: center !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+            cursor: pointer !important;
+            overflow: hidden !important;
+            max-width: 100% !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
         .barcode-box:active {
-            transform: scale(0.98);
+            transform: scale(0.98) !important;
         }
-        .barcode-svg {
-            width: 100%;
-            max-width: 280px;
-            height: 72px;
-            margin: 0 auto;
-            display: block;
+        .barcode-svg, #svgBarcodeActive {
+            width: 100% !important;
+            max-width: 240px !important;
+            height: 55px !important;
+            margin: 0 auto !important;
+            display: block !important;
         }
         .barcode-svg {
             width: 100%;
@@ -750,6 +765,111 @@
             align-items: center;
             gap: 8px;
         }
+        /* Activity Tab Styling */
+        .activity-balance-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1.5px solid rgba(255, 69, 0, 0.35);
+            border-radius: 18px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            margin-bottom: 18px;
+        }
+        .activity-balance-label {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #94a3b8;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .activity-balance-amount {
+            font-size: 34px;
+            font-weight: 900;
+            color: #38bdf8;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            text-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+            margin-bottom: 6px;
+        }
+        .activity-balance-sub {
+            font-size: 11.5px;
+            color: #10b981;
+            font-weight: 600;
+        }
+        .activity-transactions-box {
+            text-align: left;
+        }
+        .transactions-header-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #f1f5f9;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+        }
+        .tx-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        }
+        .tx-card-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tx-left {
+            display: flex;
+            flex-direction: column;
+        }
+        .tx-invoice-no {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #f8fafc;
+            letter-spacing: 0.3px;
+        }
+        .tx-date {
+            font-size: 11.5px;
+            color: #94a3b8;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+        .tx-points-badge {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 900;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35);
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+        }
+        .tx-toggle-items {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+            color: #ff6b35;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .tx-items-list {
+            display: none;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+        .tx-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            color: #cbd5e1;
+        }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js">    function openBarcodeModal() {
         document.getElementById('modalMemberName').innerText = memberState.name || 'SEE U+ Member';
@@ -763,7 +883,7 @@
                     width: 2.5,
                     height: 85,
                     displayValue: false,
-                    margin: 10,
+                    margin: 0,
                     background: "#ffffff"
                 });
             } catch(e) {
@@ -952,10 +1072,85 @@
             }
             try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
             updateUI();
-            renderPurchaseHistory();
+            renderActivityTab();
 
             if (notify && data.earnedToday > 0) {
                 showLoyaltyCelebration(data.earnedToday, data.balance);
+            }
+        }
+        function renderActivityTab() {
+            var balEl = document.getElementById('activityBalanceAmt');
+            if (balEl) {
+                balEl.innerText = '$' + (memberState.balance || 0).toFixed(2);
+            }
+
+            var listEl = document.getElementById('activityTransactionsList');
+            if (!listEl) return;
+
+            var purchases = memberState.purchases || [];
+            if (purchases.length === 0) {
+                listEl.innerHTML = `
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 14px; padding: 30px 20px; text-align: center; color: #94a3b8; font-size: 13px;">
+                        <i class="fas fa-receipt" style="font-size: 28px; color: #64748b; margin-bottom: 10px; display: block;"></i>
+                        No transactions yet.<br/>Your receipts and earned points will appear here automatically!
+                    </div>
+                `;
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < purchases.length; i++) {
+                var p = purchases[i];
+                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
+                var itemsCount = p.items ? p.items.length : 0;
+                var itemsHtml = '';
+                if (p.items && p.items.length > 0) {
+                    for (var j = 0; j < p.items.length; j++) {
+                        var it = p.items[j];
+                        itemsHtml += `
+                            <div class="tx-item-row">
+                                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:8px;">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
+                                <span style="font-weight:700; color:#f1f5f9;">$${parseFloat(it.total).toFixed(2)}</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                html += `
+                    <div class="tx-card">
+                        <div class="tx-card-main">
+                            <div class="tx-left">
+                                <span class="tx-invoice-no">Invoice #${p.receiptNo || 'Receipt'}</span>
+                                <span class="tx-date">${dateStr}</span>
+                            </div>
+                            <div class="tx-points-badge">
+                                +${parseFloat(p.earned).toFixed(2)} pts
+                            </div>
+                        </div>
+                        ${itemsCount > 0 ? `
+                            <div class="tx-toggle-items" onclick="toggleTxItems(${i})">
+                                <span id="txToggleTxt_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="tx-items-list" id="txItemsList_${i}">
+                                ${itemsHtml}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            listEl.innerHTML = html;
+        }
+
+        function toggleTxItems(idx) {
+            var el = document.getElementById('txItemsList_' + idx);
+            var txt = document.getElementById('txToggleTxt_' + idx);
+            if (!el) return;
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
+            } else {
+                el.style.display = 'block';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
             }
         }
 </script>`n</head>
@@ -977,6 +1172,7 @@
         <div class="nav-tabs">
             <button class="nav-tab-btn active" data-tab="card"><i class="fas fa-id-card"></i> My Card</button>
             <button class="nav-tab-btn" data-tab="deals"><i class="fas fa-tags"></i> Weekly Specials</button>
+            <button class="nav-tab-btn" data-tab="activity"><i class="fas fa-history"></i> Activity</button>
         </div>
 
         <!-- Section: Member Card -->
@@ -1019,24 +1215,7 @@
                     <i class="fas fa-camera"></i> Show this barcode to cashier at checkout
                 </div>
 
-                <!-- Live Purchase & Points History Section -->
-                <div class="purchase-history-box" id="purchaseHistoryBox" style="margin-top: 18px; text-align: left;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <h4 style="font-size: 15px; font-weight: 800; color: #f1f5f9; display: flex; align-items: center; gap: 7px; margin: 0;">
-                            <i class="fas fa-receipt" style="color: #ff6b35;"></i> Purchase & Points History
-                        </h4>
-                        <span id="lblHistoryCount" style="font-size: 11px; font-weight: 700; color: #94a3b8; background: rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 12px;">0 receipts</span>
-                    </div>
-                    <div id="purchaseListContainer">
-                        <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
-                            <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
-                            Your live purchases and earned points will appear here automatically after checkout!
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Install to Home Screen Banner -->
+                <!-- Install to Home Screen Banner -->
             <div class="install-banner" id="installBanner" style="margin-top: 14px;">
                 <button class="close-install" id="btnCloseInstall">&times;</button>
                 <div class="install-text">
@@ -1058,6 +1237,24 @@
                     <!-- Categorized specials rendered dynamically -->
                 </div>
             </div>
+        <!-- Section: Activity (New Tab) -->
+        <div id="tabActivitySection" style="display: none;">
+            <!-- Top Box: Available Rewards Balance -->
+            <div class="activity-balance-card">
+                <div class="activity-balance-label">AVAILABLE REWARDS</div>
+                <div class="activity-balance-amount" id="activityBalanceAmt">$0.00</div>
+                <div class="activity-balance-sub">Can be used anytime at checkout (Min $1.00)</div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="activity-transactions-box">
+                <div class="transactions-header-title">Transactions</div>
+                <div id="activityTransactionsList">
+                    <!-- Dynamic receipts list -->
+                </div>
+            </div>
+        </div>
+        </div>
         </div>
     </div>
 
@@ -1507,17 +1704,17 @@
             document.getElementById('lblMemberName').innerText = memberState.name;
             document.getElementById('lblMemberCode').innerText = memberState.code;
             document.getElementById('lblBarcodeText').innerText = memberState.code;
-            document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2);
+            document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2); if(document.getElementById('activityBalanceAmt')) { document.getElementById('activityBalanceAmt').innerText = '$' + memberState.balance.toFixed(2); }
             if (typeof JsBarcode !== 'undefined') {
                 document.getElementById('barcodeContainer').innerHTML = '<svg id="svgBarcodeActive"></svg>';
                 try {
                     JsBarcode("#svgBarcodeActive", memberState.code, {
                         format: "CODE128",
                         lineColor: "#000000",
-                        width: 2.2,
-                        height: 70,
+                        width: 1.8,
+                        height: 55,
                         displayValue: false,
-                        margin: 10,
+                        margin: 0,
                         background: "#ffffff"
                     });
                 } catch(e) {
@@ -1647,39 +1844,27 @@
                     tabs.forEach(t => t.classList.remove('active'));
                     btn.classList.add('active');
                     const tab = btn.getAttribute('data-tab');
+                    const cardSec = document.getElementById('tabCardSection');
+                    const dealsSec = document.getElementById('tabDealsSection');
+                    const actSec = document.getElementById('tabActivitySection');
+
                     if (tab === 'card') {
-                        document.getElementById('tabCardSection').style.display = 'block';
-                        document.getElementById('tabDealsSection').style.display = 'none';
-                    } else {
-                        document.getElementById('tabCardSection').style.display = 'none';
-                        document.getElementById('tabDealsSection').style.display = 'block';
+                        if (cardSec) cardSec.style.display = 'block';
+                        if (dealsSec) dealsSec.style.display = 'none';
+                        if (actSec) actSec.style.display = 'none';
+                    } else if (tab === 'deals') {
+                        if (cardSec) cardSec.style.display = 'none';
+                        if (dealsSec) dealsSec.style.display = 'block';
+                        if (actSec) actSec.style.display = 'none';
+                    } else if (tab === 'activity') {
+                        if (cardSec) cardSec.style.display = 'none';
+                        if (dealsSec) dealsSec.style.display = 'none';
+                        if (actSec) actSec.style.display = 'block';
+                        renderActivityTab();
                     }
                 });
             });
         }
-
-        // PWA Install Logic
-        let deferredPrompt = null;
-        function isAppInstalled() {
-            return window.matchMedia('(display-mode: standalone)').matches || 
-                   ('standalone' in window.navigator && window.navigator.standalone) ||
-                   localStorage.getItem('seeu_app_installed') === 'true';
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (!isAppInstalled()) {
-                const banner = document.getElementById('installBanner');
-                if (banner) banner.style.display = 'flex';
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
-            localStorage.setItem('seeu_app_installed', 'true');
-            const banner = document.getElementById('installBanner');
-            if (banner) banner.style.display = 'none';
-        });
 
         function setupModals() {
             // Digit input auto-focus handling
@@ -1833,7 +2018,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadState(); renderPurchaseHistory(); initRealtimeLoyaltySync();
+            loadState(); renderActivityTab(); initRealtimeLoyaltySync();
             renderWeeklySpecials();
             initTabs();
             setupModals();
@@ -1860,7 +2045,7 @@
                     width: 2.5,
                     height: 85,
                     displayValue: false,
-                    margin: 10,
+                    margin: 0,
                     background: "#ffffff"
                 });
             } catch(e) {
@@ -2049,10 +2234,85 @@
             }
             try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
             updateUI();
-            renderPurchaseHistory();
+            renderActivityTab();
 
             if (notify && data.earnedToday > 0) {
                 showLoyaltyCelebration(data.earnedToday, data.balance);
+            }
+        }
+        function renderActivityTab() {
+            var balEl = document.getElementById('activityBalanceAmt');
+            if (balEl) {
+                balEl.innerText = '$' + (memberState.balance || 0).toFixed(2);
+            }
+
+            var listEl = document.getElementById('activityTransactionsList');
+            if (!listEl) return;
+
+            var purchases = memberState.purchases || [];
+            if (purchases.length === 0) {
+                listEl.innerHTML = `
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 14px; padding: 30px 20px; text-align: center; color: #94a3b8; font-size: 13px;">
+                        <i class="fas fa-receipt" style="font-size: 28px; color: #64748b; margin-bottom: 10px; display: block;"></i>
+                        No transactions yet.<br/>Your receipts and earned points will appear here automatically!
+                    </div>
+                `;
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < purchases.length; i++) {
+                var p = purchases[i];
+                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
+                var itemsCount = p.items ? p.items.length : 0;
+                var itemsHtml = '';
+                if (p.items && p.items.length > 0) {
+                    for (var j = 0; j < p.items.length; j++) {
+                        var it = p.items[j];
+                        itemsHtml += `
+                            <div class="tx-item-row">
+                                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:8px;">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
+                                <span style="font-weight:700; color:#f1f5f9;">$${parseFloat(it.total).toFixed(2)}</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                html += `
+                    <div class="tx-card">
+                        <div class="tx-card-main">
+                            <div class="tx-left">
+                                <span class="tx-invoice-no">Invoice #${p.receiptNo || 'Receipt'}</span>
+                                <span class="tx-date">${dateStr}</span>
+                            </div>
+                            <div class="tx-points-badge">
+                                +${parseFloat(p.earned).toFixed(2)} pts
+                            </div>
+                        </div>
+                        ${itemsCount > 0 ? `
+                            <div class="tx-toggle-items" onclick="toggleTxItems(${i})">
+                                <span id="txToggleTxt_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="tx-items-list" id="txItemsList_${i}">
+                                ${itemsHtml}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            listEl.innerHTML = html;
+        }
+
+        function toggleTxItems(idx) {
+            var el = document.getElementById('txItemsList_' + idx);
+            var txt = document.getElementById('txToggleTxt_' + idx);
+            if (!el) return;
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
+            } else {
+                el.style.display = 'block';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
             }
         }
 </script>
