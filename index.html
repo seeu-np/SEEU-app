@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v05_tx_date_under_invoice | Created: 2026-10-20 -->
+<!-- Version: v06_two_lines_invoice_date | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -392,19 +392,13 @@
             flex-direction: column;
             gap: 3px;
         }
-        .tx-store {
-            font-size: 13px;
-            font-weight: 800;
-            color: #f8fafc;
-            letter-spacing: 0.2px;
-        }
         .tx-invoice {
-            font-size: 11.5px;
-            font-weight: 400;
-            color: #cbd5e1;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #f8fafc;
         }
         .tx-date {
-            font-size: 10.5px;
+            font-size: 11.5px;
             font-weight: 400;
             color: #94a3b8;
         }
@@ -1269,7 +1263,9 @@
                 const dd = String(d.getDate()).padStart(2, '0');
                 const mm = String(d.getMonth() + 1).padStart(2, '0');
                 const yyyy = d.getFullYear();
-                return `${dd}/${mm}/${yyyy}`;
+                const hh = String(d.getHours()).padStart(2, '0');
+                const min = String(d.getMinutes()).padStart(2, '0');
+                return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
             } catch(e) {
                 return dateStr;
             }
@@ -1300,7 +1296,6 @@
                 return `
                     <div class="activity-tx-row">
                         <div class="tx-left">
-                            <div class="tx-store">SEE U New Plymouth</div>
                             <div class="tx-invoice">Invoice #${tx.invoiceNo || 'Receipt'}</div>
                             ${formattedDate ? `<div class="tx-date">${formattedDate}</div>` : ''}
                         </div>
