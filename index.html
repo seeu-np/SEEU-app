@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v08_restore_store_and_datetime | Created: 2026-10-20 -->
+<!-- Version: v09_clean_3lines_tx | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1325,7 +1325,7 @@
                         <div class="tx-left">
                             <div class="tx-store">SEE U New Plymouth</div>
                             <div class="tx-invoice">Invoice #${tx.invoiceNo || 'Receipt'}</div>
-                            ${formattedDate ? `<div class="tx-date">${formattedDate}</div>` : ''}
+                            <div class="tx-date">${formattedDate || ''}</div>
                         </div>
                         <div class="tx-right">
                             <span class="tx-badge ${badgeClass}">${sign}$${absAmount}</span>
