@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v03_activity_dollar_format | Created: 2026-10-20 -->
+<!-- Version: v04_instant_touch_optimized | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -32,6 +32,7 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         body {
@@ -155,6 +156,9 @@
             justify-content: center;
             gap: 5px;
             white-space: nowrap;
+        }
+        .nav-tab-btn:active {
+            transform: scale(0.96);
         }
         .nav-tab-btn.active {
             background: var(--primary);
