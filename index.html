@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v06_two_lines_invoice_date | Created: 2026-10-20 -->
+<!-- Version: v07_invoice_with_datetime | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1257,18 +1257,39 @@
 
         function formatDisplayDate(dateStr) {
             if (!dateStr) return '';
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             try {
+                const krMatch = String(dateStr).match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})\s*(오전|오후|AM|PM)?\s*(\d{1,2}):(\d{1,2})/i);
+                if (krMatch) {
+                    const y = parseInt(krMatch[1], 10);
+                    const m = parseInt(krMatch[2], 10);
+                    const d = parseInt(krMatch[3], 10);
+                    const ampm = (krMatch[4] || '').toUpperCase();
+                    let h = parseInt(krMatch[5], 10);
+                    const min = String(krMatch[6]).padStart(2, '0');
+                    if ((ampm === '오후' || ampm === 'PM') && h < 12) h += 12;
+                    if ((ampm === '오전' || ampm === 'AM') && h === 12) h = 0;
+
+                    const dtObj = new Date(y, m - 1, d, h, parseInt(min, 10));
+                    const dayName = days[dtObj.getDay()] || '';
+                    const dd = String(d).padStart(2, '0');
+                    const mm = String(m).padStart(2, '0');
+                    const hh = String(h).padStart(2, '0');
+                    return `${dayName ? dayName + ', ' : ''}${dd}/${mm}/${y} ${hh}:${min}`;
+                }
+
                 const d = new Date(dateStr.replace(' ', 'T'));
-                if (isNaN(d.getTime())) return dateStr;
-                const dd = String(d.getDate()).padStart(2, '0');
-                const mm = String(d.getMonth() + 1).padStart(2, '0');
-                const yyyy = d.getFullYear();
-                const hh = String(d.getHours()).padStart(2, '0');
-                const min = String(d.getMinutes()).padStart(2, '0');
-                return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
-            } catch(e) {
-                return dateStr;
-            }
+                if (!isNaN(d.getTime())) {
+                    const dayName = days[d.getDay()] || '';
+                    const dd = String(d.getDate()).padStart(2, '0');
+                    const mm = String(d.getMonth() + 1).padStart(2, '0');
+                    const yyyy = d.getFullYear();
+                    const hh = String(d.getHours()).padStart(2, '0');
+                    const min = String(d.getMinutes()).padStart(2, '0');
+                    return `${dayName ? dayName + ', ' : ''}${dd}/${mm}/${yyyy} ${hh}:${min}`;
+                }
+            } catch(e) {}
+            return dateStr;
         }
 
         function renderTransactions() {
