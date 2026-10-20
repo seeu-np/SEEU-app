@@ -251,6 +251,18 @@
             padding: 16px 14px 10px;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .barcode-box:active {
+            transform: scale(0.98);
+        }
+        .barcode-svg {
+            width: 100%;
+            max-width: 280px;
+            height: 72px;
+            margin: 0 auto;
+            display: block;
         }
         .barcode-svg {
             width: 100%;
@@ -635,8 +647,318 @@
             font-weight: 700;
             color: #f8fafc;
         }
-    </style>
-</head>
+            .purchase-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: all 0.2s ease;
+        }
+        .purchase-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .purchase-receipt-no {
+            font-size: 13px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.5px;
+        }
+        .purchase-date {
+            font-size: 11.5px;
+            color: #94a3b8;
+        }
+        .purchase-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .purchase-total-amt {
+            font-size: 16px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+        .purchase-earned-badge {
+            font-size: 13px;
+            font-weight: 800;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 3px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+        .purchase-items-toggle {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff6b35;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .purchase-items-list {
+            display: none;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+        }
+        .purchase-item-row {
+            display: flex;
+            justify-content: space-between;
+            color: #cbd5e1;
+            padding: 3px 0;
+        }
+        .purchase-item-name {
+            flex: 1;
+            margin-right: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .purchase-item-price {
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        @keyframes glowReward {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .reward-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            z-index: 10000;
+            animation: glowReward 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js">    function openBarcodeModal() {
+        document.getElementById('modalMemberName').innerText = memberState.name || 'SEE U+ Member';
+        document.getElementById('modalBarcodeCode').innerText = memberState.code;
+        if (typeof JsBarcode !== 'undefined') {
+            document.getElementById('modalBarcodeContainer').innerHTML = '<svg id="svgModalBarcode"></svg>';
+            try {
+                JsBarcode("#svgModalBarcode", memberState.code, {
+                    format: "CODE128",
+                    lineColor: "#000000",
+                    width: 2.5,
+                    height: 85,
+                    displayValue: false,
+                    margin: 10,
+                    background: "#ffffff"
+                });
+            } catch(e) {
+                document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+            }
+        } else {
+            document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+        }
+        document.getElementById('barcodeModal').style.display = 'flex';
+    }
+    function closeBarcodeModal() {
+        document.getElementById('barcodeModal').style.display = 'none';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var bcBox = document.querySelector('.barcode-box');
+        if (bcBox) {
+            bcBox.addEventListener('click', openBarcodeModal);
+        }
+    });
+        function renderPurchaseHistory() {
+            var container = document.getElementById('purchaseListContainer');
+            var countEl = document.getElementById('lblHistoryCount');
+            if (!container) return;
+
+            var purchases = memberState.purchases || [];
+            if (countEl) {
+                countEl.innerText = purchases.length + (purchases.length === 1 ? ' receipt' : ' receipts');
+            }
+
+            if (purchases.length === 0) {
+                container.innerHTML = `
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
+                        <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
+                        Your live purchases and earned points will appear here automatically after checkout!
+                    </div>
+                `;
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < purchases.length; i++) {
+                var p = purchases[i];
+                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
+                var itemsCount = p.items ? p.items.length : 0;
+                var itemsHtml = '';
+                if (p.items && p.items.length > 0) {
+                    for (var j = 0; j < p.items.length; j++) {
+                        var it = p.items[j];
+                        itemsHtml += `
+                            <div class="purchase-item-row">
+                                <span class="purchase-item-name">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
+                                <span class="purchase-item-price">$${parseFloat(it.total).toFixed(2)}</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                html += `
+                    <div class="purchase-card">
+                        <div class="purchase-card-header">
+                            <span class="purchase-receipt-no"><i class="fas fa-receipt"></i> #${p.receiptNo || 'Receipt'}</span>
+                            <span class="purchase-date">${dateStr}</span>
+                        </div>
+                        <div class="purchase-summary-row">
+                            <div class="purchase-total-amt">Paid: $${parseFloat(p.total).toFixed(2)}</div>
+                            <div class="purchase-earned-badge">+${parseFloat(p.earned).toFixed(2)} pts earned â­</div>
+                        </div>
+                        ${itemsCount > 0 ? `
+                            <div class="purchase-items-toggle" onclick="togglePurchaseItems(${i})">
+                                <span id="toggleText_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="purchase-items-list" id="itemsList_${i}">
+                                ${itemsHtml}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function togglePurchaseItems(index) {
+            var el = document.getElementById('itemsList_' + index);
+            var txt = document.getElementById('toggleText_' + index);
+            if (!el) return;
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
+            } else {
+                el.style.display = 'block';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
+            }
+        }
+
+        function showLoyaltyCelebration(earned, newBalance) {
+            var toast = document.createElement('div');
+            toast.className = 'reward-toast';
+            toast.innerHTML = '<i class="fas fa-gift"></i> +$' + parseFloat(earned).toFixed(2) + ' Points Earned!';
+            document.body.appendChild(toast);
+            setTimeout(function() {
+                if (toast && toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 3500);
+
+            // Audio celebration
+            try {
+                var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                var osc = audioCtx.createOscillator();
+                var gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.35);
+            } catch(e){}
+        }
+
+        function initRealtimeLoyaltySync() {
+            if (!memberState.code) return;
+
+            // 1. Initial poll on load
+            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
+                .then(function(res) { return res.text(); })
+                .then(function(text) {
+                    if (!text) return;
+                    var lines = text.trim().split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        try {
+                            var event = JSON.parse(lines[i]);
+                            if (event.event === 'message' && event.message) {
+                                var data = JSON.parse(event.message);
+                                if (data.code === memberState.code) {
+                                    applyLoyaltyUpdate(data, false);
+                                }
+                            }
+                        } catch(e){}
+                    }
+                }).catch(function(err){ console.log('Poll err:', err); });
+
+            // 2. Real-time Live EventSource (SSE)
+            try {
+                var sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
+                sse.onmessage = function(e) {
+                    try {
+                        var event = JSON.parse(e.data);
+                        if (event.event === 'message' && event.message) {
+                            var data = JSON.parse(event.message);
+                            if (data.code === memberState.code) {
+                                applyLoyaltyUpdate(data, true);
+                            }
+                        }
+                    } catch(err){}
+                };
+            } catch(err){}
+        }
+
+        function applyLoyaltyUpdate(data, notify) {
+            if (data.balance !== undefined) {
+                memberState.balance = parseFloat(data.balance);
+            }
+            if (!memberState.purchases) {
+                memberState.purchases = [];
+            }
+            if (data.receiptNo) {
+                var exists = false;
+                for (var i = 0; i < memberState.purchases.length; i++) {
+                    if (memberState.purchases[i].receiptNo === data.receiptNo) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    memberState.purchases.unshift({
+                        receiptNo: data.receiptNo,
+                        date: data.date,
+                        total: data.totalSpent || data.total,
+                        earned: data.earnedToday,
+                        items: data.items || []
+                    });
+                    memberState.purchases = memberState.purchases.slice(0, 30);
+                }
+            }
+            try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+            updateUI();
+            renderPurchaseHistory();
+
+            if (notify && data.earnedToday > 0) {
+                showLoyaltyCelebration(data.earnedToday, data.balance);
+            }
+        }
+</script>`n</head>
 <body>
     <div class="app-container">
         <!-- Header -->
@@ -663,7 +985,7 @@
                 <div class="card-top">
                     <div class="member-info">
                         <div class="member-name" id="lblMemberName">VIP Member</div>
-                        <div class="member-code" id="lblMemberCode">AJE-8839201</div>
+                        <div class="member-code" id="lblMemberCode">AJE8839201</div>
                     </div>
                     <div class="card-chip"></div>
                 </div>
@@ -690,11 +1012,27 @@
                 <!-- Digital Barcode Box -->
                 <div class="barcode-box">
                     <div id="barcodeContainer"></div>
-                    <div class="barcode-text" id="lblBarcodeText">AJE-8839201</div>
+                    <div class="barcode-text" id="lblBarcodeText">AJE8839201</div>
                 </div>
 
                 <div class="scan-hint">
                     <i class="fas fa-camera"></i> Show this barcode to cashier at checkout
+                </div>
+
+                <!-- Live Purchase & Points History Section -->
+                <div class="purchase-history-box" id="purchaseHistoryBox" style="margin-top: 18px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="font-size: 15px; font-weight: 800; color: #f1f5f9; display: flex; align-items: center; gap: 7px; margin: 0;">
+                            <i class="fas fa-receipt" style="color: #ff6b35;"></i> Purchase & Points History
+                        </h4>
+                        <span id="lblHistoryCount" style="font-size: 11px; font-weight: 700; color: #94a3b8; background: rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 12px;">0 receipts</span>
+                    </div>
+                    <div id="purchaseListContainer">
+                        <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
+                            <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
+                            Your live purchases and earned points will appear here automatically after checkout!
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -777,7 +1115,7 @@
                 <p class="signup-subtitle">Welcome, <strong id="lblSuccessMemberName" style="color:#fff;"></strong>! Your member barcode is ready:</p>
                 <div class="success-card-preview" style="margin: 12px 0 16px;">
                     <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Your SEE U+ Member Code</div>
-                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">SUA-8839201</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">AJE8839201</div>
                     <div style="font-size: 11px; color: #10b981; margin-top: 6px;"><i class="fas fa-check-circle"></i> Linked to POS checkout</div>
                 </div>
 
@@ -925,7 +1263,7 @@
                 for (let i = 0; i < bars.length; i++) {
                     totalModules += parseInt(bars[i]);
                 }
-                let quietZone = 10;
+                let quietZone = 20;
                 let svgWidth = totalModules + quietZone * 2;
                 let svgHeight = 60;
                 let currentX = quietZone;
@@ -933,7 +1271,7 @@
                 for (let i = 0; i < bars.length; i++) {
                     let width = parseInt(bars[i]);
                     if (i % 2 === 0) {
-                        rects += `<rect x="${currentX}" y="0" width="${width}" height="${svgHeight}" fill="#0f172a" />`;
+                        rects += `<rect x="${currentX}" y="0" width="${width}" height="${svgHeight}" fill="#000000" />`;
                     }
                     currentX += width;
                 }
@@ -961,7 +1299,7 @@
                     memberState = Object.assign(memberState, JSON.parse(stored));
                     // Auto-migrate existing SUA codes to AJE
                     if (memberState.code && memberState.code.startsWith('SUA')) {
-                        memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+                        memberState.code = memberState.code.replace(/^SUA/i, 'AJE').replace(/-/g, '').trim();
                         try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
                     }
                     showProfilePill();
@@ -1157,7 +1495,7 @@
 
         function updateUI() {
             if (memberState.code && memberState.code.startsWith('SUA')) {
-                memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+                memberState.code = memberState.code.replace(/^SUA/i, 'AJE').replace(/-/g, '').trim();
                 try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
             }
             if (!memberState.code) {
@@ -1170,7 +1508,24 @@
             document.getElementById('lblMemberCode').innerText = memberState.code;
             document.getElementById('lblBarcodeText').innerText = memberState.code;
             document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2);
-            document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+            if (typeof JsBarcode !== 'undefined') {
+                document.getElementById('barcodeContainer').innerHTML = '<svg id="svgBarcodeActive"></svg>';
+                try {
+                    JsBarcode("#svgBarcodeActive", memberState.code, {
+                        format: "CODE128",
+                        lineColor: "#000000",
+                        width: 2.2,
+                        height: 70,
+                        displayValue: false,
+                        margin: 10,
+                        background: "#ffffff"
+                    });
+                } catch(e) {
+                    document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+                }
+            } else {
+                document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+            }
 
             const progress = Math.min(100, (memberState.balance / 1.00) * 100);
             const fill = document.getElementById('progressFill');
@@ -1478,7 +1833,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadState();
+            loadState(); renderPurchaseHistory(); initRealtimeLoyaltySync();
             renderWeeklySpecials();
             initTabs();
             setupModals();
@@ -1493,6 +1848,224 @@
                 navigator.serviceWorker.register('sw.js').catch(() => {});
             }
         });
-    </script>
+        function openBarcodeModal() {
+        document.getElementById('modalMemberName').innerText = memberState.name || 'SEE U+ Member';
+        document.getElementById('modalBarcodeCode').innerText = memberState.code;
+        if (typeof JsBarcode !== 'undefined') {
+            document.getElementById('modalBarcodeContainer').innerHTML = '<svg id="svgModalBarcode"></svg>';
+            try {
+                JsBarcode("#svgModalBarcode", memberState.code, {
+                    format: "CODE128",
+                    lineColor: "#000000",
+                    width: 2.5,
+                    height: 85,
+                    displayValue: false,
+                    margin: 10,
+                    background: "#ffffff"
+                });
+            } catch(e) {
+                document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+            }
+        } else {
+            document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
+        }
+        document.getElementById('barcodeModal').style.display = 'flex';
+    }
+    function closeBarcodeModal() {
+        document.getElementById('barcodeModal').style.display = 'none';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var bcBox = document.querySelector('.barcode-box');
+        if (bcBox) {
+            bcBox.addEventListener('click', openBarcodeModal);
+        }
+    });
+        function renderPurchaseHistory() {
+            var container = document.getElementById('purchaseListContainer');
+            var countEl = document.getElementById('lblHistoryCount');
+            if (!container) return;
+
+            var purchases = memberState.purchases || [];
+            if (countEl) {
+                countEl.innerText = purchases.length + (purchases.length === 1 ? ' receipt' : ' receipts');
+            }
+
+            if (purchases.length === 0) {
+                container.innerHTML = `
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
+                        <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
+                        Your live purchases and earned points will appear here automatically after checkout!
+                    </div>
+                `;
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < purchases.length; i++) {
+                var p = purchases[i];
+                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
+                var itemsCount = p.items ? p.items.length : 0;
+                var itemsHtml = '';
+                if (p.items && p.items.length > 0) {
+                    for (var j = 0; j < p.items.length; j++) {
+                        var it = p.items[j];
+                        itemsHtml += `
+                            <div class="purchase-item-row">
+                                <span class="purchase-item-name">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
+                                <span class="purchase-item-price">$${parseFloat(it.total).toFixed(2)}</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                html += `
+                    <div class="purchase-card">
+                        <div class="purchase-card-header">
+                            <span class="purchase-receipt-no"><i class="fas fa-receipt"></i> #${p.receiptNo || 'Receipt'}</span>
+                            <span class="purchase-date">${dateStr}</span>
+                        </div>
+                        <div class="purchase-summary-row">
+                            <div class="purchase-total-amt">Paid: $${parseFloat(p.total).toFixed(2)}</div>
+                            <div class="purchase-earned-badge">+${parseFloat(p.earned).toFixed(2)} pts earned â­</div>
+                        </div>
+                        ${itemsCount > 0 ? `
+                            <div class="purchase-items-toggle" onclick="togglePurchaseItems(${i})">
+                                <span id="toggleText_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="purchase-items-list" id="itemsList_${i}">
+                                ${itemsHtml}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function togglePurchaseItems(index) {
+            var el = document.getElementById('itemsList_' + index);
+            var txt = document.getElementById('toggleText_' + index);
+            if (!el) return;
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
+            } else {
+                el.style.display = 'block';
+                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
+            }
+        }
+
+        function showLoyaltyCelebration(earned, newBalance) {
+            var toast = document.createElement('div');
+            toast.className = 'reward-toast';
+            toast.innerHTML = '<i class="fas fa-gift"></i> +$' + parseFloat(earned).toFixed(2) + ' Points Earned!';
+            document.body.appendChild(toast);
+            setTimeout(function() {
+                if (toast && toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 3500);
+
+            // Audio celebration
+            try {
+                var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                var osc = audioCtx.createOscillator();
+                var gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.35);
+            } catch(e){}
+        }
+
+        function initRealtimeLoyaltySync() {
+            if (!memberState.code) return;
+
+            // 1. Initial poll on load
+            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
+                .then(function(res) { return res.text(); })
+                .then(function(text) {
+                    if (!text) return;
+                    var lines = text.trim().split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        try {
+                            var event = JSON.parse(lines[i]);
+                            if (event.event === 'message' && event.message) {
+                                var data = JSON.parse(event.message);
+                                if (data.code === memberState.code) {
+                                    applyLoyaltyUpdate(data, false);
+                                }
+                            }
+                        } catch(e){}
+                    }
+                }).catch(function(err){ console.log('Poll err:', err); });
+
+            // 2. Real-time Live EventSource (SSE)
+            try {
+                var sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
+                sse.onmessage = function(e) {
+                    try {
+                        var event = JSON.parse(e.data);
+                        if (event.event === 'message' && event.message) {
+                            var data = JSON.parse(event.message);
+                            if (data.code === memberState.code) {
+                                applyLoyaltyUpdate(data, true);
+                            }
+                        }
+                    } catch(err){}
+                };
+            } catch(err){}
+        }
+
+        function applyLoyaltyUpdate(data, notify) {
+            if (data.balance !== undefined) {
+                memberState.balance = parseFloat(data.balance);
+            }
+            if (!memberState.purchases) {
+                memberState.purchases = [];
+            }
+            if (data.receiptNo) {
+                var exists = false;
+                for (var i = 0; i < memberState.purchases.length; i++) {
+                    if (memberState.purchases[i].receiptNo === data.receiptNo) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    memberState.purchases.unshift({
+                        receiptNo: data.receiptNo,
+                        date: data.date,
+                        total: data.totalSpent || data.total,
+                        earned: data.earnedToday,
+                        items: data.items || []
+                    });
+                    memberState.purchases = memberState.purchases.slice(0, 30);
+                }
+            }
+            try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+            updateUI();
+            renderPurchaseHistory();
+
+            if (notify && data.earnedToday > 0) {
+                showLoyaltyCelebration(data.earnedToday, data.balance);
+            }
+        }
+</script>
+    <!-- Full-screen Barcode Modal for Scanner -->
+    <div id="barcodeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; padding:20px;">
+        <div style="background:#ffffff; border-radius:20px; padding:30px 20px; max-width:340px; width:100%; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+            <div style="font-size:13px; font-weight:800; color:#ff4500; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">SEE U+ Member Barcode</div>
+            <div id="modalMemberName" style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:15px;"></div>
+            <div id="modalBarcodeContainer" style="background:#fff; padding:10px; border:2px dashed #cbd5e1; border-radius:12px; margin-bottom:12px;"></div>
+            <div id="modalBarcodeCode" style="font-family:'Courier New', monospace; font-size:22px; font-weight:900; color:#0f172a; letter-spacing:2px; margin-bottom:15px;"></div>
+            <div style="font-size:12px; color:#64748b; margin-bottom:20px;"><i class="fas fa-lightbulb"></i> Maximize screen brightness for easiest cashier scanning</div>
+            <button onclick="closeBarcodeModal()" style="background:#ff4500; color:#fff; border:none; border-radius:10px; padding:12px 30px; font-weight:800; font-size:15px; cursor:pointer; width:100%;">Close</button>
+        </div>
+    </div>
 </body>
 </html>
