@@ -33,17 +33,6 @@
             -webkit-tap-highlight-color: transparent;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        html, body {
-            overflow-x: hidden !important;
-            width: 100% !important;
-            max-width: 100vw !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
-        }
-        *, *:before, *:after {
-            box-sizing: border-box !important;
-        }
         body {
             background: #090d16;
             color: var(--text-main);
@@ -53,14 +42,12 @@
             padding-bottom: 40px;
         }
         .app-container {
-            width: 100% !important;
-            max-width: 480px !important;
+            width: 100%;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
-            padding: 16px !important;
+            padding: 16px;
             gap: 16px;
-            overflow-x: hidden !important;
-            margin: 0 auto !important;
         }
         .app-header {
             text-align: center;
@@ -259,25 +246,11 @@
             color: #fbbf24;
         }
         .barcode-box {
-            background: #ffffff !important;
-            border-radius: 14px !important;
-            padding: 12px 12px 8px !important;
-            text-align: center !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-            cursor: pointer !important;
-            overflow: hidden !important;
-            max-width: 100% !important;
-            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-        }
-        .barcode-box:active {
-            transform: scale(0.98) !important;
-        }
-        .barcode-svg, #svgBarcodeActive {
-            width: 100% !important;
-            max-width: 240px !important;
-            height: 55px !important;
-            margin: 0 auto !important;
-            display: block !important;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 16px 14px 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .barcode-svg {
             width: 100%;
@@ -662,498 +635,8 @@
             font-weight: 700;
             color: #f8fafc;
         }
-            .purchase-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 14px 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            transition: all 0.2s ease;
-        }
-        .purchase-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .purchase-receipt-no {
-            font-size: 13px;
-            font-weight: 800;
-            color: #38bdf8;
-            letter-spacing: 0.5px;
-        }
-        .purchase-date {
-            font-size: 11.5px;
-            color: #94a3b8;
-        }
-        .purchase-summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding-bottom: 8px;
-            margin-bottom: 8px;
-        }
-        .purchase-total-amt {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .purchase-earned-badge {
-            font-size: 13px;
-            font-weight: 800;
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.12);
-            padding: 3px 8px;
-            border-radius: 8px;
-            border: 1px solid rgba(16, 185, 129, 0.25);
-        }
-        .purchase-items-toggle {
-            font-size: 12px;
-            font-weight: 700;
-            color: #ff6b35;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .purchase-items-list {
-            display: none;
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.08);
-            font-size: 12px;
-        }
-        .purchase-item-row {
-            display: flex;
-            justify-content: space-between;
-            color: #cbd5e1;
-            padding: 3px 0;
-        }
-        .purchase-item-name {
-            flex: 1;
-            margin-right: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .purchase-item-price {
-            font-weight: 700;
-            color: #f1f5f9;
-        }
-        @keyframes glowReward {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .reward-toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #10b981;
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 14px;
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-            z-index: 10000;
-            animation: glowReward 0.5s ease-in-out;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        /* Activity Tab Styling */
-        .activity-balance-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
-            border: 1.5px solid rgba(255, 69, 0, 0.35);
-            border-radius: 18px;
-            padding: 20px 16px;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-            margin-bottom: 18px;
-        }
-        .activity-balance-label {
-            font-size: 11.5px;
-            font-weight: 800;
-            color: #94a3b8;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        .activity-balance-amount {
-            font-size: 34px;
-            font-weight: 900;
-            color: #38bdf8;
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-            text-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
-            margin-bottom: 6px;
-        }
-        .activity-balance-sub {
-            font-size: 11.5px;
-            color: #10b981;
-            font-weight: 600;
-        }
-        .activity-transactions-box {
-            text-align: left;
-        }
-        .transactions-header-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #f1f5f9;
-            letter-spacing: 0.3px;
-            margin-bottom: 12px;
-        }
-        .tx-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-        }
-        .tx-card-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .tx-left {
-            display: flex;
-            flex-direction: column;
-        }
-        .tx-invoice-no {
-            font-size: 14.5px;
-            font-weight: 800;
-            color: #f8fafc;
-            letter-spacing: 0.3px;
-        }
-        .tx-date {
-            font-size: 11.5px;
-            color: #94a3b8;
-            margin-top: 3px;
-            font-weight: 500;
-        }
-        .tx-points-badge {
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            color: #ffffff;
-            font-size: 13.5px;
-            font-weight: 900;
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35);
-            white-space: nowrap;
-            letter-spacing: 0.3px;
-        }
-        .tx-toggle-items {
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.08);
-            font-size: 12px;
-            color: #ff6b35;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .tx-items-list {
-            display: none;
-            margin-top: 8px;
-            font-size: 12px;
-        }
-        .tx-item-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            color: #cbd5e1;
-        }
-</style>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js">    function openBarcodeModal() {
-        document.getElementById('modalMemberName').innerText = memberState.name || 'SEE U+ Member';
-        document.getElementById('modalBarcodeCode').innerText = memberState.code;
-        if (typeof JsBarcode !== 'undefined') {
-            document.getElementById('modalBarcodeContainer').innerHTML = '<svg id="svgModalBarcode"></svg>';
-            try {
-                JsBarcode("#svgModalBarcode", memberState.code, {
-                    format: "CODE128",
-                    lineColor: "#000000",
-                    width: 2.5,
-                    height: 85,
-                    displayValue: false,
-                    margin: 0,
-                    background: "#ffffff"
-                });
-            } catch(e) {
-                document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-            }
-        } else {
-            document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-        }
-        document.getElementById('barcodeModal').style.display = 'flex';
-    }
-    function closeBarcodeModal() {
-        document.getElementById('barcodeModal').style.display = 'none';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        var bcBox = document.querySelector('.barcode-box');
-        if (bcBox) {
-            bcBox.addEventListener('click', openBarcodeModal);
-        }
-    });
-        function renderPurchaseHistory() {
-            var container = document.getElementById('purchaseListContainer');
-            var countEl = document.getElementById('lblHistoryCount');
-            if (!container) return;
-
-            var purchases = memberState.purchases || [];
-            if (countEl) {
-                countEl.innerText = purchases.length + (purchases.length === 1 ? ' receipt' : ' receipts');
-            }
-
-            if (purchases.length === 0) {
-                container.innerHTML = `
-                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
-                        <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
-                        Your live purchases and earned points will appear here automatically after checkout!
-                    </div>
-                `;
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < purchases.length; i++) {
-                var p = purchases[i];
-                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
-                var itemsCount = p.items ? p.items.length : 0;
-                var itemsHtml = '';
-                if (p.items && p.items.length > 0) {
-                    for (var j = 0; j < p.items.length; j++) {
-                        var it = p.items[j];
-                        itemsHtml += `
-                            <div class="purchase-item-row">
-                                <span class="purchase-item-name">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
-                                <span class="purchase-item-price">$${parseFloat(it.total).toFixed(2)}</span>
-                            </div>
-                        `;
-                    }
-                }
-
-                html += `
-                    <div class="purchase-card">
-                        <div class="purchase-card-header">
-                            <span class="purchase-receipt-no"><i class="fas fa-receipt"></i> #${p.receiptNo || 'Receipt'}</span>
-                            <span class="purchase-date">${dateStr}</span>
-                        </div>
-                        <div class="purchase-summary-row">
-                            <div class="purchase-total-amt">Paid: $${parseFloat(p.total).toFixed(2)}</div>
-                            <div class="purchase-earned-badge">+${parseFloat(p.earned).toFixed(2)} pts earned â­</div>
-                        </div>
-                        ${itemsCount > 0 ? `
-                            <div class="purchase-items-toggle" onclick="togglePurchaseItems(${i})">
-                                <span id="toggleText_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
-                            </div>
-                            <div class="purchase-items-list" id="itemsList_${i}">
-                                ${itemsHtml}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-
-        function togglePurchaseItems(index) {
-            var el = document.getElementById('itemsList_' + index);
-            var txt = document.getElementById('toggleText_' + index);
-            if (!el) return;
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
-            } else {
-                el.style.display = 'block';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
-            }
-        }
-
-        function showLoyaltyCelebration(earned, newBalance) {
-            var toast = document.createElement('div');
-            toast.className = 'reward-toast';
-            toast.innerHTML = '<i class="fas fa-gift"></i> +$' + parseFloat(earned).toFixed(2) + ' Points Earned!';
-            document.body.appendChild(toast);
-            setTimeout(function() {
-                if (toast && toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 3500);
-
-            // Audio celebration
-            try {
-                var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                var osc = audioCtx.createOscillator();
-                var gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.35);
-            } catch(e){}
-        }
-
-        function initRealtimeLoyaltySync() {
-            if (!memberState.code) return;
-
-            // 1. Initial poll on load
-            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
-                .then(function(res) { return res.text(); })
-                .then(function(text) {
-                    if (!text) return;
-                    var lines = text.trim().split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        try {
-                            var event = JSON.parse(lines[i]);
-                            if (event.event === 'message' && event.message) {
-                                var data = JSON.parse(event.message);
-                                if (data.code === memberState.code) {
-                                    applyLoyaltyUpdate(data, false);
-                                }
-                            }
-                        } catch(e){}
-                    }
-                }).catch(function(err){ console.log('Poll err:', err); });
-
-            // 2. Real-time Live EventSource (SSE)
-            try {
-                var sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
-                sse.onmessage = function(e) {
-                    try {
-                        var event = JSON.parse(e.data);
-                        if (event.event === 'message' && event.message) {
-                            var data = JSON.parse(event.message);
-                            if (data.code === memberState.code) {
-                                applyLoyaltyUpdate(data, true);
-                            }
-                        }
-                    } catch(err){}
-                };
-            } catch(err){}
-        }
-
-        function applyLoyaltyUpdate(data, notify) {
-            if (data.balance !== undefined) {
-                memberState.balance = parseFloat(data.balance);
-            }
-            if (!memberState.purchases) {
-                memberState.purchases = [];
-            }
-            if (data.receiptNo) {
-                var exists = false;
-                for (var i = 0; i < memberState.purchases.length; i++) {
-                    if (memberState.purchases[i].receiptNo === data.receiptNo) {
-                        exists = true;
-                        break;
-                    }
-                }
-                if (!exists) {
-                    memberState.purchases.unshift({
-                        receiptNo: data.receiptNo,
-                        date: data.date,
-                        total: data.totalSpent || data.total,
-                        earned: data.earnedToday,
-                        items: data.items || []
-                    });
-                    memberState.purchases = memberState.purchases.slice(0, 30);
-                }
-            }
-            try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
-            updateUI();
-            renderActivityTab();
-
-            if (notify && data.earnedToday > 0) {
-                showLoyaltyCelebration(data.earnedToday, data.balance);
-            }
-        }
-        function renderActivityTab() {
-            var balEl = document.getElementById('activityBalanceAmt');
-            if (balEl) {
-                balEl.innerText = '$' + (memberState.balance || 0).toFixed(2);
-            }
-
-            var listEl = document.getElementById('activityTransactionsList');
-            if (!listEl) return;
-
-            var purchases = memberState.purchases || [];
-            if (purchases.length === 0) {
-                listEl.innerHTML = `
-                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 14px; padding: 30px 20px; text-align: center; color: #94a3b8; font-size: 13px;">
-                        <i class="fas fa-receipt" style="font-size: 28px; color: #64748b; margin-bottom: 10px; display: block;"></i>
-                        No transactions yet.<br/>Your receipts and earned points will appear here automatically!
-                    </div>
-                `;
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < purchases.length; i++) {
-                var p = purchases[i];
-                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
-                var itemsCount = p.items ? p.items.length : 0;
-                var itemsHtml = '';
-                if (p.items && p.items.length > 0) {
-                    for (var j = 0; j < p.items.length; j++) {
-                        var it = p.items[j];
-                        itemsHtml += `
-                            <div class="tx-item-row">
-                                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:8px;">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
-                                <span style="font-weight:700; color:#f1f5f9;">$${parseFloat(it.total).toFixed(2)}</span>
-                            </div>
-                        `;
-                    }
-                }
-
-                html += `
-                    <div class="tx-card">
-                        <div class="tx-card-main">
-                            <div class="tx-left">
-                                <span class="tx-invoice-no">Invoice #${p.receiptNo || 'Receipt'}</span>
-                                <span class="tx-date">${dateStr}</span>
-                            </div>
-                            <div class="tx-points-badge">
-                                +${parseFloat(p.earned).toFixed(2)} pts
-                            </div>
-                        </div>
-                        ${itemsCount > 0 ? `
-                            <div class="tx-toggle-items" onclick="toggleTxItems(${i})">
-                                <span id="txToggleTxt_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
-                            </div>
-                            <div class="tx-items-list" id="txItemsList_${i}">
-                                ${itemsHtml}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-            listEl.innerHTML = html;
-        }
-
-        function toggleTxItems(idx) {
-            var el = document.getElementById('txItemsList_' + idx);
-            var txt = document.getElementById('txToggleTxt_' + idx);
-            if (!el) return;
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
-            } else {
-                el.style.display = 'block';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
-            }
-        }
-</script>`n</head>
+    </style>
+</head>
 <body>
     <div class="app-container">
         <!-- Header -->
@@ -1172,7 +655,6 @@
         <div class="nav-tabs">
             <button class="nav-tab-btn active" data-tab="card"><i class="fas fa-id-card"></i> My Card</button>
             <button class="nav-tab-btn" data-tab="deals"><i class="fas fa-tags"></i> Weekly Specials</button>
-            <button class="nav-tab-btn" data-tab="activity"><i class="fas fa-history"></i> Activity</button>
         </div>
 
         <!-- Section: Member Card -->
@@ -1181,7 +663,7 @@
                 <div class="card-top">
                     <div class="member-info">
                         <div class="member-name" id="lblMemberName">VIP Member</div>
-                        <div class="member-code" id="lblMemberCode">AJE8839201</div>
+                        <div class="member-code" id="lblMemberCode">AJE-8839201</div>
                     </div>
                     <div class="card-chip"></div>
                 </div>
@@ -1208,14 +690,15 @@
                 <!-- Digital Barcode Box -->
                 <div class="barcode-box">
                     <div id="barcodeContainer"></div>
-                    <div class="barcode-text" id="lblBarcodeText">AJE8839201</div>
+                    <div class="barcode-text" id="lblBarcodeText">AJE-8839201</div>
                 </div>
 
                 <div class="scan-hint">
                     <i class="fas fa-camera"></i> Show this barcode to cashier at checkout
                 </div>
+            </div>
 
-                <!-- Install to Home Screen Banner -->
+            <!-- Install to Home Screen Banner -->
             <div class="install-banner" id="installBanner" style="margin-top: 14px;">
                 <button class="close-install" id="btnCloseInstall">&times;</button>
                 <div class="install-text">
@@ -1237,24 +720,6 @@
                     <!-- Categorized specials rendered dynamically -->
                 </div>
             </div>
-        <!-- Section: Activity (New Tab) -->
-        <div id="tabActivitySection" style="display: none;">
-            <!-- Top Box: Available Rewards Balance -->
-            <div class="activity-balance-card">
-                <div class="activity-balance-label">AVAILABLE REWARDS</div>
-                <div class="activity-balance-amount" id="activityBalanceAmt">$0.00</div>
-                <div class="activity-balance-sub">Can be used anytime at checkout (Min $1.00)</div>
-            </div>
-
-            <!-- Transactions Section -->
-            <div class="activity-transactions-box">
-                <div class="transactions-header-title">Transactions</div>
-                <div id="activityTransactionsList">
-                    <!-- Dynamic receipts list -->
-                </div>
-            </div>
-        </div>
-        </div>
         </div>
     </div>
 
@@ -1312,7 +777,7 @@
                 <p class="signup-subtitle">Welcome, <strong id="lblSuccessMemberName" style="color:#fff;"></strong>! Your member barcode is ready:</p>
                 <div class="success-card-preview" style="margin: 12px 0 16px;">
                     <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Your SEE U+ Member Code</div>
-                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">AJE8839201</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">SUA-8839201</div>
                     <div style="font-size: 11px; color: #10b981; margin-top: 6px;"><i class="fas fa-check-circle"></i> Linked to POS checkout</div>
                 </div>
 
@@ -1460,7 +925,7 @@
                 for (let i = 0; i < bars.length; i++) {
                     totalModules += parseInt(bars[i]);
                 }
-                let quietZone = 20;
+                let quietZone = 10;
                 let svgWidth = totalModules + quietZone * 2;
                 let svgHeight = 60;
                 let currentX = quietZone;
@@ -1468,7 +933,7 @@
                 for (let i = 0; i < bars.length; i++) {
                     let width = parseInt(bars[i]);
                     if (i % 2 === 0) {
-                        rects += `<rect x="${currentX}" y="0" width="${width}" height="${svgHeight}" fill="#000000" />`;
+                        rects += `<rect x="${currentX}" y="0" width="${width}" height="${svgHeight}" fill="#0f172a" />`;
                     }
                     currentX += width;
                 }
@@ -1496,7 +961,7 @@
                     memberState = Object.assign(memberState, JSON.parse(stored));
                     // Auto-migrate existing SUA codes to AJE
                     if (memberState.code && memberState.code.startsWith('SUA')) {
-                        memberState.code = memberState.code.replace(/^SUA/i, 'AJE').replace(/-/g, '').trim();
+                        memberState.code = memberState.code.replace(/^SUA/, 'AJE');
                         try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
                     }
                     showProfilePill();
@@ -1692,7 +1157,7 @@
 
         function updateUI() {
             if (memberState.code && memberState.code.startsWith('SUA')) {
-                memberState.code = memberState.code.replace(/^SUA/i, 'AJE').replace(/-/g, '').trim();
+                memberState.code = memberState.code.replace(/^SUA/, 'AJE');
                 try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
             }
             if (!memberState.code) {
@@ -1704,25 +1169,8 @@
             document.getElementById('lblMemberName').innerText = memberState.name;
             document.getElementById('lblMemberCode').innerText = memberState.code;
             document.getElementById('lblBarcodeText').innerText = memberState.code;
-            document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2); if(document.getElementById('activityBalanceAmt')) { document.getElementById('activityBalanceAmt').innerText = '$' + memberState.balance.toFixed(2); }
-            if (typeof JsBarcode !== 'undefined') {
-                document.getElementById('barcodeContainer').innerHTML = '<svg id="svgBarcodeActive"></svg>';
-                try {
-                    JsBarcode("#svgBarcodeActive", memberState.code, {
-                        format: "CODE128",
-                        lineColor: "#000000",
-                        width: 1.8,
-                        height: 55,
-                        displayValue: false,
-                        margin: 0,
-                        background: "#ffffff"
-                    });
-                } catch(e) {
-                    document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-                }
-            } else {
-                document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-            }
+            document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2);
+            document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
 
             const progress = Math.min(100, (memberState.balance / 1.00) * 100);
             const fill = document.getElementById('progressFill');
@@ -1844,27 +1292,39 @@
                     tabs.forEach(t => t.classList.remove('active'));
                     btn.classList.add('active');
                     const tab = btn.getAttribute('data-tab');
-                    const cardSec = document.getElementById('tabCardSection');
-                    const dealsSec = document.getElementById('tabDealsSection');
-                    const actSec = document.getElementById('tabActivitySection');
-
                     if (tab === 'card') {
-                        if (cardSec) cardSec.style.display = 'block';
-                        if (dealsSec) dealsSec.style.display = 'none';
-                        if (actSec) actSec.style.display = 'none';
-                    } else if (tab === 'deals') {
-                        if (cardSec) cardSec.style.display = 'none';
-                        if (dealsSec) dealsSec.style.display = 'block';
-                        if (actSec) actSec.style.display = 'none';
-                    } else if (tab === 'activity') {
-                        if (cardSec) cardSec.style.display = 'none';
-                        if (dealsSec) dealsSec.style.display = 'none';
-                        if (actSec) actSec.style.display = 'block';
-                        renderActivityTab();
+                        document.getElementById('tabCardSection').style.display = 'block';
+                        document.getElementById('tabDealsSection').style.display = 'none';
+                    } else {
+                        document.getElementById('tabCardSection').style.display = 'none';
+                        document.getElementById('tabDealsSection').style.display = 'block';
                     }
                 });
             });
         }
+
+        // PWA Install Logic
+        let deferredPrompt = null;
+        function isAppInstalled() {
+            return window.matchMedia('(display-mode: standalone)').matches || 
+                   ('standalone' in window.navigator && window.navigator.standalone) ||
+                   localStorage.getItem('seeu_app_installed') === 'true';
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (!isAppInstalled()) {
+                const banner = document.getElementById('installBanner');
+                if (banner) banner.style.display = 'flex';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            localStorage.setItem('seeu_app_installed', 'true');
+            const banner = document.getElementById('installBanner');
+            if (banner) banner.style.display = 'none';
+        });
 
         function setupModals() {
             // Digit input auto-focus handling
@@ -2018,7 +1478,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadState(); renderActivityTab(); initRealtimeLoyaltySync();
+            loadState();
             renderWeeklySpecials();
             initTabs();
             setupModals();
@@ -2033,299 +1493,6 @@
                 navigator.serviceWorker.register('sw.js').catch(() => {});
             }
         });
-        function openBarcodeModal() {
-        document.getElementById('modalMemberName').innerText = memberState.name || 'SEE U+ Member';
-        document.getElementById('modalBarcodeCode').innerText = memberState.code;
-        if (typeof JsBarcode !== 'undefined') {
-            document.getElementById('modalBarcodeContainer').innerHTML = '<svg id="svgModalBarcode"></svg>';
-            try {
-                JsBarcode("#svgModalBarcode", memberState.code, {
-                    format: "CODE128",
-                    lineColor: "#000000",
-                    width: 2.5,
-                    height: 85,
-                    displayValue: false,
-                    margin: 0,
-                    background: "#ffffff"
-                });
-            } catch(e) {
-                document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-            }
-        } else {
-            document.getElementById('modalBarcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
-        }
-        document.getElementById('barcodeModal').style.display = 'flex';
-    }
-    function closeBarcodeModal() {
-        document.getElementById('barcodeModal').style.display = 'none';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        var bcBox = document.querySelector('.barcode-box');
-        if (bcBox) {
-            bcBox.addEventListener('click', openBarcodeModal);
-        }
-    });
-        function renderPurchaseHistory() {
-            var container = document.getElementById('purchaseListContainer');
-            var countEl = document.getElementById('lblHistoryCount');
-            if (!container) return;
-
-            var purchases = memberState.purchases || [];
-            if (countEl) {
-                countEl.innerText = purchases.length + (purchases.length === 1 ? ' receipt' : ' receipts');
-            }
-
-            if (purchases.length === 0) {
-                container.innerHTML = `
-                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">
-                        <i class="fas fa-shopping-bag" style="font-size: 24px; color: #64748b; margin-bottom: 8px; display: block;"></i>
-                        Your live purchases and earned points will appear here automatically after checkout!
-                    </div>
-                `;
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < purchases.length; i++) {
-                var p = purchases[i];
-                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
-                var itemsCount = p.items ? p.items.length : 0;
-                var itemsHtml = '';
-                if (p.items && p.items.length > 0) {
-                    for (var j = 0; j < p.items.length; j++) {
-                        var it = p.items[j];
-                        itemsHtml += `
-                            <div class="purchase-item-row">
-                                <span class="purchase-item-name">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
-                                <span class="purchase-item-price">$${parseFloat(it.total).toFixed(2)}</span>
-                            </div>
-                        `;
-                    }
-                }
-
-                html += `
-                    <div class="purchase-card">
-                        <div class="purchase-card-header">
-                            <span class="purchase-receipt-no"><i class="fas fa-receipt"></i> #${p.receiptNo || 'Receipt'}</span>
-                            <span class="purchase-date">${dateStr}</span>
-                        </div>
-                        <div class="purchase-summary-row">
-                            <div class="purchase-total-amt">Paid: $${parseFloat(p.total).toFixed(2)}</div>
-                            <div class="purchase-earned-badge">+${parseFloat(p.earned).toFixed(2)} pts earned â­</div>
-                        </div>
-                        ${itemsCount > 0 ? `
-                            <div class="purchase-items-toggle" onclick="togglePurchaseItems(${i})">
-                                <span id="toggleText_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
-                            </div>
-                            <div class="purchase-items-list" id="itemsList_${i}">
-                                ${itemsHtml}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-
-        function togglePurchaseItems(index) {
-            var el = document.getElementById('itemsList_' + index);
-            var txt = document.getElementById('toggleText_' + index);
-            if (!el) return;
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
-            } else {
-                el.style.display = 'block';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
-            }
-        }
-
-        function showLoyaltyCelebration(earned, newBalance) {
-            var toast = document.createElement('div');
-            toast.className = 'reward-toast';
-            toast.innerHTML = '<i class="fas fa-gift"></i> +$' + parseFloat(earned).toFixed(2) + ' Points Earned!';
-            document.body.appendChild(toast);
-            setTimeout(function() {
-                if (toast && toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 3500);
-
-            // Audio celebration
-            try {
-                var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                var osc = audioCtx.createOscillator();
-                var gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.35);
-            } catch(e){}
-        }
-
-        function initRealtimeLoyaltySync() {
-            if (!memberState.code) return;
-
-            // 1. Initial poll on load
-            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
-                .then(function(res) { return res.text(); })
-                .then(function(text) {
-                    if (!text) return;
-                    var lines = text.trim().split('\n');
-                    for (var i = 0; i < lines.length; i++) {
-                        try {
-                            var event = JSON.parse(lines[i]);
-                            if (event.event === 'message' && event.message) {
-                                var data = JSON.parse(event.message);
-                                if (data.code === memberState.code) {
-                                    applyLoyaltyUpdate(data, false);
-                                }
-                            }
-                        } catch(e){}
-                    }
-                }).catch(function(err){ console.log('Poll err:', err); });
-
-            // 2. Real-time Live EventSource (SSE)
-            try {
-                var sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
-                sse.onmessage = function(e) {
-                    try {
-                        var event = JSON.parse(e.data);
-                        if (event.event === 'message' && event.message) {
-                            var data = JSON.parse(event.message);
-                            if (data.code === memberState.code) {
-                                applyLoyaltyUpdate(data, true);
-                            }
-                        }
-                    } catch(err){}
-                };
-            } catch(err){}
-        }
-
-        function applyLoyaltyUpdate(data, notify) {
-            if (data.balance !== undefined) {
-                memberState.balance = parseFloat(data.balance);
-            }
-            if (!memberState.purchases) {
-                memberState.purchases = [];
-            }
-            if (data.receiptNo) {
-                var exists = false;
-                for (var i = 0; i < memberState.purchases.length; i++) {
-                    if (memberState.purchases[i].receiptNo === data.receiptNo) {
-                        exists = true;
-                        break;
-                    }
-                }
-                if (!exists) {
-                    memberState.purchases.unshift({
-                        receiptNo: data.receiptNo,
-                        date: data.date,
-                        total: data.totalSpent || data.total,
-                        earned: data.earnedToday,
-                        items: data.items || []
-                    });
-                    memberState.purchases = memberState.purchases.slice(0, 30);
-                }
-            }
-            try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
-            updateUI();
-            renderActivityTab();
-
-            if (notify && data.earnedToday > 0) {
-                showLoyaltyCelebration(data.earnedToday, data.balance);
-            }
-        }
-        function renderActivityTab() {
-            var balEl = document.getElementById('activityBalanceAmt');
-            if (balEl) {
-                balEl.innerText = '$' + (memberState.balance || 0).toFixed(2);
-            }
-
-            var listEl = document.getElementById('activityTransactionsList');
-            if (!listEl) return;
-
-            var purchases = memberState.purchases || [];
-            if (purchases.length === 0) {
-                listEl.innerHTML = `
-                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px dashed rgba(255,255,255,0.1); border-radius: 14px; padding: 30px 20px; text-align: center; color: #94a3b8; font-size: 13px;">
-                        <i class="fas fa-receipt" style="font-size: 28px; color: #64748b; margin-bottom: 10px; display: block;"></i>
-                        No transactions yet.<br/>Your receipts and earned points will appear here automatically!
-                    </div>
-                `;
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < purchases.length; i++) {
-                var p = purchases[i];
-                var dateStr = p.date ? p.date.substring(0, 16) : 'Recent';
-                var itemsCount = p.items ? p.items.length : 0;
-                var itemsHtml = '';
-                if (p.items && p.items.length > 0) {
-                    for (var j = 0; j < p.items.length; j++) {
-                        var it = p.items[j];
-                        itemsHtml += `
-                            <div class="tx-item-row">
-                                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:8px;">${it.name} <span style="color:#64748b;">x${it.qty}</span></span>
-                                <span style="font-weight:700; color:#f1f5f9;">$${parseFloat(it.total).toFixed(2)}</span>
-                            </div>
-                        `;
-                    }
-                }
-
-                html += `
-                    <div class="tx-card">
-                        <div class="tx-card-main">
-                            <div class="tx-left">
-                                <span class="tx-invoice-no">Invoice #${p.receiptNo || 'Receipt'}</span>
-                                <span class="tx-date">${dateStr}</span>
-                            </div>
-                            <div class="tx-points-badge">
-                                +${parseFloat(p.earned).toFixed(2)} pts
-                            </div>
-                        </div>
-                        ${itemsCount > 0 ? `
-                            <div class="tx-toggle-items" onclick="toggleTxItems(${i})">
-                                <span id="txToggleTxt_${i}">View ${itemsCount} items <i class="fas fa-chevron-down"></i></span>
-                            </div>
-                            <div class="tx-items-list" id="txItemsList_${i}">
-                                ${itemsHtml}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-            listEl.innerHTML = html;
-        }
-
-        function toggleTxItems(idx) {
-            var el = document.getElementById('txItemsList_' + idx);
-            var txt = document.getElementById('txToggleTxt_' + idx);
-            if (!el) return;
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-up', 'chevron-down');
-            } else {
-                el.style.display = 'block';
-                if (txt) txt.innerHTML = txt.innerHTML.replace('chevron-down', 'chevron-up');
-            }
-        }
-</script>
-    <!-- Full-screen Barcode Modal for Scanner -->
-    <div id="barcodeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; padding:20px;">
-        <div style="background:#ffffff; border-radius:20px; padding:30px 20px; max-width:340px; width:100%; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
-            <div style="font-size:13px; font-weight:800; color:#ff4500; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">SEE U+ Member Barcode</div>
-            <div id="modalMemberName" style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:15px;"></div>
-            <div id="modalBarcodeContainer" style="background:#fff; padding:10px; border:2px dashed #cbd5e1; border-radius:12px; margin-bottom:12px;"></div>
-            <div id="modalBarcodeCode" style="font-family:'Courier New', monospace; font-size:22px; font-weight:900; color:#0f172a; letter-spacing:2px; margin-bottom:15px;"></div>
-            <div style="font-size:12px; color:#64748b; margin-bottom:20px;"><i class="fas fa-lightbulb"></i> Maximize screen brightness for easiest cashier scanning</div>
-            <button onclick="closeBarcodeModal()" style="background:#ff4500; color:#fff; border:none; border-radius:10px; padding:12px 30px; font-weight:800; font-size:15px; cursor:pointer; width:100%;">Close</button>
-        </div>
-    </div>
+    </script>
 </body>
 </html>
