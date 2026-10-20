@@ -1,55 +1,19 @@
 ﻿{
-    "updatedAt":  "2026-10-20 17:59:20",
+    "updatedAt":  "2026-10-20 19:09:28",
     "weekIndex":  1,
     "badge":  "Week 1 - 10 In-Stock Specials",
     "items":  [
                   {
-                      "price":  "$16.99",
-                      "save":  "WAS $21.99",
-                      "name":  "Hawke\u0027s Bay Eggs Colony Size 7 (30pk)",
-                      "desc":  "Fresh Eggs - Save $5.00"
+                      "price":  "$2.99",
+                      "save":  "Special",
+                      "name":  "SY Carbo Buldak Ramen 130g",
+                      "desc":  "In-Stock Member Special"
                   },
                   {
                       "price":  "$64.99",
                       "save":  "WAS $79.99",
                       "name":  "JG Napa Cabbage Kimchi Whole 5kg",
                       "desc":  "Chilled Korean Kimchi - Save $15.00"
-                  },
-                  {
-                      "price":  "$28.99",
-                      "save":  "WAS $34.99",
-                      "name":  "SMA Pork Flat Meat 1kg",
-                      "desc":  "Chilled Meat - Save $6.00"
-                  },
-                  {
-                      "price":  "$24.99",
-                      "save":  "WAS $28.99",
-                      "name":  "JFN Kimchi Dumpling Real Meat 600g",
-                      "desc":  "Frozen Dumplings - Save $4.00"
-                  },
-                  {
-                      "price":  "$4.99",
-                      "save":  "WAS $18.79",
-                      "name":  "Tender Meaty Hotdog - Cocktail 500g",
-                      "desc":  "Chilled Hotdog - Save $13.80"
-                  },
-                  {
-                      "price":  "$8.99",
-                      "save":  "WAS $12.99",
-                      "name":  "Okazu Enoki Mushroom 500g",
-                      "desc":  "Fresh Chilled Mushrooms - Save $4.00"
-                  },
-                  {
-                      "price":  "$1.79",
-                      "save":  "Special",
-                      "name":  "Vifon Vietnamese Beef Rice Noodles 60g",
-                      "desc":  "In-Stock Member Special"
-                  },
-                  {
-                      "price":  "$1.79",
-                      "save":  "Special",
-                      "name":  "Vifon Vietnamese Beef Rice Noodles 60g",
-                      "desc":  "In-Stock Member Special"
                   },
                   {
                       "price":  "$9.99",

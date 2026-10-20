@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v09_clean_3lines_tx | Created: 2026-10-20 -->
+<!-- Version: v10_cloud_specials_final | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1525,20 +1525,44 @@
             let items = null;
             let badgeText = '';
 
-            // Try loading dynamic specials JSON first
+            // 1. Try loading real-time specials from POS cloud broadcast (ntfy)
             try {
-                const res = await fetch('dpos_promos.json?t=' + Date.now());
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        items = data.slice(0, 10);
-                        badgeText = '10 In-Stock Member Specials';
-                    } else if (data && Array.isArray(data.items) && data.items.length > 0) {
-                        items = data.items.slice(0, 10);
-                        badgeText = data.badge || '10 In-Stock Member Specials';
+                const cloudRes = await fetch('https://ntfy.sh/seeu_promos_dpos_prod/json?poll=1');
+                if (cloudRes.ok) {
+                    const text = await cloudRes.text();
+                    const lines = text.trim().split('\n');
+                    for (let i = lines.length - 1; i >= 0; i--) {
+                        try {
+                            const evt = JSON.parse(lines[i]);
+                            if (evt.message) {
+                                const data = JSON.parse(evt.message);
+                                if (data && Array.isArray(data.items) && data.items.length > 0) {
+                                    items = data.items.slice(0, 10);
+                                    badgeText = data.badge || '10 In-Stock Member Specials';
+                                    break;
+                                }
+                            }
+                        } catch(e) {}
                     }
                 }
             } catch(e) {}
+
+            // 2. Fallback to local dpos_promos.json
+            if (!items) {
+                try {
+                    const res = await fetch('dpos_promos.json?t=' + Date.now());
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            items = data.slice(0, 10);
+                            badgeText = '10 In-Stock Member Specials';
+                        } else if (data && Array.isArray(data.items) && data.items.length > 0) {
+                            items = data.items.slice(0, 10);
+                            badgeText = data.badge || '10 In-Stock Member Specials';
+                        }
+                    }
+                } catch(e) {}
+            }
 
             // Fallback to scheduled rotation if dynamic JSON not reachable
             if (!items) {
