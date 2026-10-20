@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Version: v02_activity_and_specials | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -132,7 +133,7 @@
         }
         .nav-tabs {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             background: rgba(30, 41, 59, 0.7);
             padding: 4px;
             border-radius: 12px;
@@ -140,11 +141,11 @@
         }
         .nav-tab-btn {
             flex: 1;
-            padding: 10px;
+            padding: 9px 4px;
             border: none;
             background: transparent;
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
@@ -152,7 +153,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
+            white-space: nowrap;
         }
         .nav-tab-btn.active {
             background: var(--primary);
@@ -251,10 +253,12 @@
             padding: 16px 14px 10px;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
         .barcode-svg {
             width: 100%;
-            height: 68px;
+            max-width: 100%;
+            height: 66px;
             display: block;
         }
         .barcode-text {
@@ -319,6 +323,109 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+        /* Activity / Point History Tab Styles */
+        .activity-balance-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border: 1.5px solid rgba(255, 69, 0, 0.35);
+            border-radius: 20px;
+            padding: 22px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.15);
+            margin-bottom: 14px;
+        }
+        .activity-balance-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .activity-balance-val {
+            font-size: 36px;
+            font-weight: 900;
+            color: #38bdf8;
+            margin: 6px 0 4px;
+            letter-spacing: -0.5px;
+        }
+        .activity-balance-sub {
+            font-size: 12px;
+            color: #10b981;
+            font-weight: 700;
+        }
+        .activity-tx-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 18px;
+        }
+        .activity-tx-header {
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .activity-tx-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .activity-tx-row {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tx-left {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .tx-store {
+            font-size: 13px;
+            font-weight: 800;
+            color: #f8fafc;
+            letter-spacing: 0.2px;
+        }
+        .tx-invoice {
+            font-size: 11px;
+            font-weight: 400;
+            color: #94a3b8;
+        }
+        .tx-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 5px 9px;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .badge-earned {
+            background: rgba(16, 185, 129, 0.18);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.45);
+        }
+        .badge-used {
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.45);
+        }
+        .tx-empty-state {
+            text-align: center;
+            padding: 24px 10px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Specials Card Styles */
         .specials-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -449,54 +556,46 @@
             line-height: 1.4;
         }
         .guide-box {
-            background: rgba(15, 23, 42, 0.7);
-            border-radius: 12px;
-            padding: 12px 14px;
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px;
         }
         .guide-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
-            color: #ff6b35;
+            color: #ffffff;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .guide-steps {
-            padding-left: 20px;
+            padding-left: 18px;
             font-size: 12px;
-            color: #e2e8f0;
-            line-height: 1.6;
+            color: #cbd5e1;
+            line-height: 1.7;
         }
-        .guide-steps li {
-            margin-bottom: 4px;
+        .guide-steps strong {
+            color: #ffffff;
         }
         .modal-footer {
-            margin-top: 16px;
-            text-align: center;
+            margin-top: 18px;
         }
         .btn-modal-ok {
-            background: #ff4500;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
             color: #ffffff;
             border: none;
-            padding: 11px 24px;
             border-radius: 10px;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.4);
-            transition: all 0.2s;
         }
-        .btn-modal-ok:active {
-            transform: scale(0.97);
-        }
-
-        /* Signup & Verification Specific Styles */
         .signup-logo-box {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .signup-logo-box img {
             height: 52px;
@@ -651,10 +750,11 @@
             </div>
         </header>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation Tabs: My Card | Weekly Specials | Activity -->
         <div class="nav-tabs">
             <button class="nav-tab-btn active" data-tab="card"><i class="fas fa-id-card"></i> My Card</button>
             <button class="nav-tab-btn" data-tab="deals"><i class="fas fa-tags"></i> Weekly Specials</button>
+            <button class="nav-tab-btn" data-tab="activity"><i class="fas fa-history"></i> Activity</button>
         </div>
 
         <!-- Section: Member Card -->
@@ -709,7 +809,7 @@
             </div>
         </div>
 
-        <!-- Section: Weekly Specials (English-Only) -->
+        <!-- Section: Weekly Specials -->
         <div id="tabDealsSection" style="display: none;">
             <div class="specials-card">
                 <div class="specials-header">
@@ -718,6 +818,26 @@
                 </div>
                 <div class="deals-list" id="dealsList">
                     <!-- Categorized specials rendered dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Activity / Points & Transactions -->
+        <div id="tabActivitySection" style="display: none;">
+            <!-- Prominently displayed available points -->
+            <div class="activity-balance-card">
+                <div class="activity-balance-label"><i class="fas fa-coins" style="color: var(--gold);"></i> Available Rewards Balance</div>
+                <div class="activity-balance-val">$<span id="lblActivityPoints">0.00</span></div>
+                <div class="activity-balance-sub">Ready to redeem at checkout</div>
+            </div>
+
+            <!-- Transactions list -->
+            <div class="activity-tx-container">
+                <div class="activity-tx-header">
+                    <i class="fas fa-receipt" style="color: #ff4500;"></i> Transactions
+                </div>
+                <div class="activity-tx-list" id="activityTxList">
+                    <!-- Dynamic transactions rendered here -->
                 </div>
             </div>
         </div>
@@ -751,66 +871,46 @@
                 </button>
             </div>
 
-            <!-- Step 2: Verification Code -->
+            <!-- Step 2: Email Verification Code Entry -->
             <div id="stepVerification" style="display: none;">
-                <h3 class="signup-title">Verify Email</h3>
-                <p class="signup-subtitle">We sent a 4-digit code to <strong id="lblSentEmail" style="color:#38bdf8;"></strong>.<br>Please enter the code from your email to activate:</p>
+                <h3 class="signup-title">Verify Your Email</h3>
+                <p class="signup-subtitle">Enter 4-digit code sent to<br><strong id="lblSentEmail" style="color: #38bdf8;"></strong></p>
                 <div id="verifyError" class="form-error"></div>
                 <div class="code-input-group">
-                    <input type="text" maxlength="1" class="code-digit" id="code1" inputmode="numeric">
-                    <input type="text" maxlength="1" class="code-digit" id="code2" inputmode="numeric">
-                    <input type="text" maxlength="1" class="code-digit" id="code3" inputmode="numeric">
-                    <input type="text" maxlength="1" class="code-digit" id="code4" inputmode="numeric">
+                    <input type="tel" maxlength="1" class="code-digit" id="code1" autocomplete="one-time-code">
+                    <input type="tel" maxlength="1" class="code-digit" id="code2">
+                    <input type="tel" maxlength="1" class="code-digit" id="code3">
+                    <input type="tel" maxlength="1" class="code-digit" id="code4">
                 </div>
                 <button id="btnConfirmCode" class="btn-primary-action">
-                    <i class="fas fa-check-circle"></i> Verify & Activate Card
+                    <i class="fas fa-check-circle"></i> Activate Membership
                 </button>
-                <div style="text-align: center; margin-top: 14px;">
-                    <a href="javascript:void(0)" id="btnBackToForm" style="color: #94a3b8; font-size: 12px; text-decoration: none;">&larr; Back to edit details</a>
-                </div>
+                <button id="btnBackToForm" class="btn-primary-action" style="background: transparent; border: 1px solid #334155; box-shadow: none; margin-top: 8px;">
+                    Change Email / Info
+                </button>
             </div>
 
-            <!-- Step 3: Success & Direct Install Flow -->
-            <div id="stepSignupSuccess" style="display: none;" class="success-box">
-                <i class="fas fa-check-circle success-icon"></i>
-                <h3 class="signup-title" style="color: #10b981;">SEE U+ Card Activated!</h3>
-                <p class="signup-subtitle">Welcome, <strong id="lblSuccessMemberName" style="color:#fff;"></strong>! Your member barcode is ready:</p>
-                <div class="success-card-preview" style="margin: 12px 0 16px;">
-                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Your SEE U+ Member Code</div>
-                    <div style="font-size: 22px; font-weight: 900; color: #ff6b35; margin-top: 4px; letter-spacing: 2px;" id="lblSuccessMemberCode">SUA-8839201</div>
-                    <div style="font-size: 11px; color: #10b981; margin-top: 6px;"><i class="fas fa-check-circle"></i> Linked to POS checkout</div>
-                </div>
-
-                <!-- Prompt to Install App Directly -->
-                <div id="installPromptBox" style="background: rgba(255, 69, 0, 0.12); border: 1.5px solid #ff4500; border-radius: 14px; padding: 14px; margin-bottom: 14px; text-align: left;">
-                    <div style="font-size: 14px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
-                        <span>📲</span> <span>Add App Icon to Home Screen</span>
+            <!-- Step 3: Success and Direct Install -->
+            <div id="stepSignupSuccess" style="display: none;">
+                <div class="success-box">
+                    <div class="success-icon"><i class="fas fa-shield-check"></i></div>
+                    <h3 class="signup-title" style="color: #10b981;">Membership Activated!</h3>
+                    <p class="signup-subtitle">Your digital card is ready to use immediately.</p>
+                    <div class="success-card-preview">
+                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Member Code</div>
+                        <div style="font-size: 20px; font-weight: 800; color: #ff6a33; margin: 4px 0;" id="lblSuccessMemberCode">AJE-0000000</div>
+                        <div style="font-size: 13px; color: #ffffff;" id="lblSuccessMemberName">Member</div>
                     </div>
-                    <p style="font-size: 12px; color: #cbd5e1; margin-top: 4px; line-height: 1.4;">
-                        Install SEE U+ to your phone screen so your digital card is ready with 1 tap at checkout:
-                    </p>
-                    
-                    <!-- Android One-Tap Button -->
-                    <div id="boxAndroidInstall" style="margin-top: 10px;">
-                        <button id="btnDirectInstallApp" class="btn-primary-action" style="margin-top: 0; padding: 11px; font-size: 14px;">
-                            <i class="fas fa-download"></i> Install App to Phone Screen
+                    <div id="installPromptBox" style="margin-top: 14px;">
+                        <button id="btnDirectInstallApp" class="btn-primary-action">
+                            <i class="fas fa-download"></i> Save App to Home Screen
                         </button>
+                        <p style="font-size: 11px; color: #94a3b8; margin-top: 8px;">Instant 1-tap checkout at SEE U Again</p>
                     </div>
-
-                    <!-- iOS Step-by-Step Instructions -->
-                    <div id="boxIOSInstall" style="display: none; margin-top: 10px; background: rgba(15, 23, 42, 0.8); border-radius: 10px; padding: 10px; border: 1px solid rgba(255,255,255,0.08);">
-                        <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 6px;">iPhone / Safari:</div>
-                        <ol style="padding-left: 18px; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
-                            <li>Tap <strong>Share</strong> <i class="fas fa-arrow-up-from-bracket" style="color:#38bdf8;"></i> at bottom of Safari.</li>
-                            <li>Scroll &amp; tap <strong>Add to Home Screen</strong> <i class="far fa-plus-square"></i>.</li>
-                            <li>Tap <strong>Add</strong> at top right.</li>
-                        </ol>
-                    </div>
+                    <button id="btnCompleteAndInstall" class="btn-primary-action" style="background: #334155; box-shadow: none; margin-top: 10px;">
+                        View My Rewards Card
+                    </button>
                 </div>
-
-                <button id="btnCompleteAndInstall" class="btn-modal-ok" style="background: #334155; font-size: 13px; padding: 10px 16px;">
-                    View My Member Card &rarr;
-                </button>
             </div>
         </div>
     </div>
@@ -828,6 +928,10 @@
                     <span class="account-detail-val" id="profName">-</span>
                 </div>
                 <div class="account-detail-row">
+                    <span class="account-detail-label">Member Code</span>
+                    <span class="account-detail-val" id="profCode">-</span>
+                </div>
+                <div class="account-detail-row">
                     <span class="account-detail-label">Email</span>
                     <span class="account-detail-val" id="profEmail">-</span>
                 </div>
@@ -836,16 +940,8 @@
                     <span class="account-detail-val" id="profMobile">-</span>
                 </div>
                 <div class="account-detail-row">
-                    <span class="account-detail-label">Barcode</span>
-                    <span class="account-detail-val" id="profCode" style="color: #ff6b35;">-</span>
-                </div>
-                <div class="account-detail-row">
-                    <span class="account-detail-label">Rewards Balance</span>
+                    <span class="account-detail-label">Available Points</span>
                     <span class="account-detail-val" id="profBalance" style="color: #38bdf8;">$0.00</span>
-                </div>
-                <div class="account-detail-row">
-                    <span class="account-detail-label">Status</span>
-                    <span class="account-detail-val" style="color: #10b981;"><i class="fas fa-check-circle"></i> Active Club Member</span>
                 </div>
             </div>
             <div class="modal-footer" style="display: flex; gap: 8px;">
@@ -865,7 +961,6 @@
             <div class="modal-body">
                 <p class="modal-subtitle">Save SEE U Again to your phone home screen for 1-tap checkout rewards:</p>
                 
-                <!-- iOS Instructions -->
                 <div class="guide-box ios-guide">
                     <div class="guide-title"><i class="fab fa-apple"></i> iPhone / iPad (Safari)</div>
                     <ol class="guide-steps">
@@ -875,7 +970,6 @@
                     </ol>
                 </div>
 
-                <!-- Android Instructions -->
                 <div class="guide-box android-guide" style="margin-top: 12px;">
                     <div class="guide-title"><i class="fab fa-android"></i> Android (Chrome)</div>
                     <ol class="guide-steps">
@@ -949,7 +1043,8 @@
             name: '',
             email: '',
             mobile: '',
-            balance: 0.00
+            balance: 0.00,
+            transactions: []
         };
         let currentVerificationCode = '';
 
@@ -959,6 +1054,9 @@
                 const stored = localStorage.getItem(STATE_KEY);
                 if (stored && isReg) {
                     memberState = Object.assign(memberState, JSON.parse(stored));
+                    if (!Array.isArray(memberState.transactions)) {
+                        memberState.transactions = [];
+                    }
                     // Auto-migrate existing SUA codes to AJE
                     if (memberState.code && memberState.code.startsWith('SUA')) {
                         memberState.code = memberState.code.replace(/^SUA/, 'AJE');
@@ -967,7 +1065,6 @@
                     showProfilePill();
                     updateUI();
                 } else {
-                    // Not registered yet: Open Registration Modal
                     openSignupModal();
                 }
             } catch(e) {
@@ -1029,7 +1126,7 @@
             currentVerificationCode = '' + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('lblSentEmail').innerText = email;
 
-            // Trigger REAL email dispatch directly from seeuplus.admin@gmail.com
+            // Trigger email dispatch directly from seeuplus.admin@gmail.com
             try {
                 fetch('https://script.google.com/macros/s/AKfycbw9vE0VHjZht71FRDBwMb71OvhxmG7cDioYFdMdsS4wMiRo0eQyVNtLGhzDn6Z4SQb9bw/exec', {
                     method: 'POST',
@@ -1052,7 +1149,6 @@
                 if (el) el.value = '';
             });
 
-            // Switch to Step 2
             document.getElementById('stepSignupForm').style.display = 'none';
             document.getElementById('stepVerification').style.display = 'block';
             document.getElementById('verifyError').style.display = 'none';
@@ -1086,6 +1182,7 @@
             memberState.email = email;
             memberState.mobile = mobile;
             memberState.balance = 0.00;
+            memberState.transactions = [];
 
             // Save state permanently
             localStorage.setItem(REG_KEY, 'true');
@@ -1098,14 +1195,14 @@
             showProfilePill();
             updateUI();
 
-            // Show Step 3 (Success & Direct Install Step)
+            // Show Step 3
             document.getElementById('stepVerification').style.display = 'none';
             document.getElementById('stepSignupSuccess').style.display = 'block';
             document.getElementById('lblSuccessMemberName').innerText = name;
             document.getElementById('lblSuccessMemberCode').innerText = newCode;
 
-            // Handle device detection for install prompt
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isStandalone = isAppInstalled();
             const boxAndroid = document.getElementById('boxAndroidInstall');
             const boxIOS = document.getElementById('boxIOSInstall');
             const promptBox = document.getElementById('installPromptBox');
@@ -1137,7 +1234,7 @@
                 timestamp: new Date().toISOString()
             };
 
-            // 1. Cloud storage object backup
+            // Cloud storage object backup
             try {
                 fetch('https://api.restful-api.dev/objects', {
                     method: 'POST',
@@ -1146,7 +1243,7 @@
                 }).catch(function() {});
             } catch(e) {}
 
-            // 2. Direct pub/sub stream to POS PC
+            // Direct pub/sub stream to POS PC
             try {
                 fetch('https://ntfy.sh/seeu_cust_reg_dpos_prod', {
                     method: 'POST',
@@ -1155,13 +1252,64 @@
             } catch(e) {}
         }
 
+        function formatDisplayDate(dateStr) {
+            if (!dateStr) return '';
+            try {
+                const d = new Date(dateStr.replace(' ', 'T'));
+                if (isNaN(d.getTime())) return dateStr;
+                const dd = String(d.getDate()).padStart(2, '0');
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const yyyy = d.getFullYear();
+                const hh = String(d.getHours()).padStart(2, '0');
+                const min = String(d.getMinutes()).padStart(2, '0');
+                return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+            } catch(e) {
+                return dateStr;
+            }
+        }
+
+        function renderTransactions() {
+            const listEl = document.getElementById('activityTxList');
+            if (!listEl) return;
+
+            const txs = memberState.transactions || [];
+            if (txs.length === 0) {
+                listEl.innerHTML = `
+                    <div class="tx-empty-state">
+                        <i class="fas fa-receipt" style="font-size: 26px; color: #475569; margin-bottom: 8px; display: block;"></i>
+                        No transaction history yet.<br>Scan your barcode at checkout to earn rewards!
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = txs.map(tx => {
+                const isUsed = tx.type === 'use' || (tx.amount < 0);
+                const absAmount = Math.abs(tx.amount || 0).toFixed(2);
+                const badgeClass = isUsed ? 'badge-used' : 'badge-earned';
+                const sign = isUsed ? '-' : '+';
+                const formattedDate = formatDisplayDate(tx.date);
+
+                return `
+                    <div class="activity-tx-row">
+                        <div class="tx-left">
+                            <div class="tx-store">SEE U New Plymouth</div>
+                            <div class="tx-invoice">Invoice #${tx.invoiceNo || 'Receipt'}${formattedDate ? ' · ' + formattedDate : ''}</div>
+                        </div>
+                        <div class="tx-right">
+                            <span class="tx-badge ${badgeClass}">${sign}${absAmount} pts</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function updateUI() {
             if (memberState.code && memberState.code.startsWith('SUA')) {
                 memberState.code = memberState.code.replace(/^SUA/, 'AJE');
                 try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
             }
             if (!memberState.code) {
-                // Temporary preview before registration
                 memberState.code = 'AJE' + Math.floor(1000000 + Math.random() * 9000000);
                 memberState.name = 'VIP Member';
             }
@@ -1169,10 +1317,11 @@
             document.getElementById('lblMemberName').innerText = memberState.name;
             document.getElementById('lblMemberCode').innerText = memberState.code;
             document.getElementById('lblBarcodeText').innerText = memberState.code;
-            document.getElementById('lblPointsAmount').innerText = memberState.balance.toFixed(2);
+            document.getElementById('lblPointsAmount').innerText = (memberState.balance || 0).toFixed(2);
+            document.getElementById('lblActivityPoints').innerText = (memberState.balance || 0).toFixed(2);
             document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
 
-            const progress = Math.min(100, (memberState.balance / 1.00) * 100);
+            const progress = Math.min(100, ((memberState.balance || 0) / 1.00) * 100);
             const fill = document.getElementById('progressFill');
             if (fill) {
                 fill.style.width = progress + '%';
@@ -1184,94 +1333,198 @@
             }
             const lblProgress = document.getElementById('lblProgressToGo');
             if (lblProgress) {
-                if (memberState.balance >= 1.00) {
+                if ((memberState.balance || 0) >= 1.00) {
                     lblProgress.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i> Redeemable at checkout!';
                 } else {
                     lblProgress.innerHTML = '<i class="fas fa-coins" style="color: var(--gold);"></i> Earn 1% rewards at checkout';
                 }
             }
+
+            renderTransactions();
         }
 
-        // 5-Week Categorized Specials (1 Eggs always, 5 Frozen/Chilled, 1 Rice, 1 Noodle, 1 Sauce, 1 Snack)
-        const weeklyBatches = [
-  [
-    { "name": "Hawke's Bay Eggs Colony Size 7 (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
-    { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
-    { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Meat • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
-    { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
-    { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
-    { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
-    { "name": "Naju Premium Rice SAECHUNGMU 10kg (새청무)", "desc": "Korean Premium Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
-    { "name": "Sukina Buckwheat Noodle with Sauce 435g", "desc": "Japanese Buckwheat • Save $2.00", "price": "$4.99", "save": "WAS $6.99" },
-    { "name": "LKK Gluten Free Soy Sauce 1.9L", "desc": "Premium Soy Sauce • Save $12.00", "price": "$9.99", "save": "WAS $21.99" },
-    { "name": "Master Hee's Roasted Seaweed Flakes 50g", "desc": "Crispy Seaweed Flakes • Save $4.80", "price": "$1.99", "save": "WAS $6.79" }
-  ],
-  [
-    { "name": "NEG SPCA Certified Cage Free Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
-    { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
-    { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
-    { "name": "KS Pork & Chive Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
-    { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
-    { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
-    { "name": "FRTN Everyday Jasmine Rice 20kg", "desc": "Aromatic Jasmine Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
-    { "name": "GF Hot Pot Noodles 200g", "desc": "Hot Pot Glass Noodles • Save $1.50", "price": "$0.99", "save": "WAS $2.49" },
-    { "name": "CJ Korean Rice Syrup 1.2kg (조청 쌀엿)", "desc": "Cooking Syrup • Save $10.00", "price": "$4.99", "save": "WAS $14.99" },
-    { "name": "Check Roasted Seaweed Sushi Nori 100sheets 280g", "desc": "Sushi Seaweed • Save $4.00", "price": "$37.99", "save": "WAS $41.99" }
-  ],
-  [
-    { "name": "WOODLAND Free Range Eggs Size 7 (20pk)", "desc": "Free Range Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
-    { "name": "TFC Roasted EEL (UNAGI KABAYAKI) 125g", "desc": "Frozen Roasted Eel • Save $5.00", "price": "$9.99", "save": "WAS $14.99" },
-    { "name": "WY Potato All Mozzarella Corn Dog 4x90g (감자 모짜렐라)", "desc": "Frozen Potato Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
-    { "name": "KS Har Gow (Prawn Dumplings) Made in NZ 240g", "desc": "Frozen Prawn Dumplings • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
-    { "name": "Jinju Fish Sausage 320g (비엔나 소세지)", "desc": "Chilled Fish Sausage • Save $4.00", "price": "$14.99", "save": "WAS $18.99" },
-    { "name": "Check Frozen Split Broad Beans 454g", "desc": "Frozen Broad Beans • Save $5.00", "price": "$1.99", "save": "WAS $6.99" },
-    { "name": "Arawana Short Grain Sushi Rice 20kg", "desc": "Premium Sushi Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
-    { "name": "Paldo Lobster Big Bowl Sriracha 110g", "desc": "Korean Instant Bowl • Save $1.50", "price": "$1.99", "save": "WAS $3.49" },
-    { "name": "CJO Doenjang Fermented Soy Bean Paste 2.8kg", "desc": "Korean Soy Paste • Save $7.00", "price": "$17.99", "save": "WAS $24.99" },
-    { "name": "PXY Black Sesame Paste 500g", "desc": "Pure Black Sesame • Save $4.50", "price": "$1.99", "save": "WAS $6.49" }
-  ],
-  [
-    { "name": "NEG SPCA Certified Free Range Size 7 Eggs (30pk)", "desc": "Free Range Eggs • Save $4.00", "price": "$18.99", "save": "WAS $22.99" },
-    { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
-    { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
-    { "name": "KS Chicken & Corn Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
-    { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
-    { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
-    { "name": "FRTN Long Grain Rice 20kg", "desc": "Quality Long Grain Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
-    { "name": "LD Mung Bean Vermicelli 200g", "desc": "Glass Noodles • Save $2.80", "price": "$1.99", "save": "WAS $4.79" },
-    { "name": "CB Rokete Bongo Chilli Sauce 250ml", "desc": "Spicy Chilli Sauce • Save $6.00", "price": "$1.99", "save": "WAS $7.99" },
-    { "name": "MG Roasted Seaweed Snack Original 12pk", "desc": "Crispy Snack • Save $4.00", "price": "$4.99", "save": "WAS $8.99" }
-  ],
-  [
-    { "name": "Hawke's Bay Eggs Colony Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
-    { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Pork • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
-    { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
-    { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
-    { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
-    { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
-    { "name": "FRTN Aromatic Basmati Rice 20kg", "desc": "Basmati Rice • Save $4.00", "price": "$55.99", "save": "WAS $59.99" },
-    { "name": "Assi Spicy Seafood Noodle Bowl 225g", "desc": "Spicy Seafood Bowl • Save $1.00", "price": "$5.79", "save": "WAS $6.79" },
-    { "name": "Doree 100% Pure Sesame Oil 2L", "desc": "Pure Sesame Oil • Save $5.00", "price": "$44.99", "save": "WAS $49.99" },
-    { "name": "SY Carbo Buldak Sauce 200g (까르보불닭소스)", "desc": "Spicy Buldak Sauce • Save $3.80", "price": "$4.99", "save": "WAS $8.79" }
-  ]
-];
+        // Real-Time Loyalty Sync via Cloud Stream (ntfy)
+        function initRealtimeLoyaltySync() {
+            const cleanCode = (code) => (code || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            const myCleanCode = cleanCode(memberState.code);
 
-        function renderWeeklySpecials() {
+            function handleIncomingLoyalty(data) {
+                if (!data) return;
+                const incomingCode = cleanCode(data.code);
+                // Match customer code or customer name if code matches
+                if (myCleanCode && incomingCode && myCleanCode === incomingCode) {
+                    let updated = false;
+
+                    if (typeof data.balance === 'number' && data.balance !== memberState.balance) {
+                        memberState.balance = data.balance;
+                        updated = true;
+                    }
+
+                    // Check for transaction payload
+                    if (data.receiptNo) {
+                        if (!Array.isArray(memberState.transactions)) {
+                            memberState.transactions = [];
+                        }
+                        const exists = memberState.transactions.some(t => String(t.invoiceNo) === String(data.receiptNo));
+                        if (!exists) {
+                            const newTx = {
+                                invoiceNo: data.receiptNo,
+                                amount: typeof data.earnedToday === 'number' ? data.earnedToday : (data.earned || 0),
+                                type: (data.used && data.used > 0) ? 'use' : 'earn',
+                                date: data.date || new Date().toISOString()
+                            };
+                            memberState.transactions.unshift(newTx);
+                            // Keep last 50 transactions
+                            if (memberState.transactions.length > 50) {
+                                memberState.transactions.pop();
+                            }
+                            updated = true;
+                        }
+                    }
+
+                    if (updated) {
+                        try {
+                            localStorage.setItem(STATE_KEY, JSON.stringify(memberState));
+                        } catch(e) {}
+                        updateUI();
+                    }
+                }
+            }
+
+            // 1. Initial snapshot poll
+            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
+                .then(res => res.text())
+                .then(text => {
+                    const lines = text.trim().split('\n');
+                    lines.forEach(line => {
+                        try {
+                            const eventObj = JSON.parse(line);
+                            if (eventObj.message) {
+                                const payload = JSON.parse(eventObj.message);
+                                handleIncomingLoyalty(payload);
+                            }
+                        } catch(e) {}
+                    });
+                })
+                .catch(() => {});
+
+            // 2. Real-time Live EventSource (SSE) stream
+            try {
+                const sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
+                sse.onmessage = function(e) {
+                    try {
+                        const eventObj = JSON.parse(e.data);
+                        if (eventObj.message) {
+                            const payload = JSON.parse(eventObj.message);
+                            handleIncomingLoyalty(payload);
+                        }
+                    } catch(err) {}
+                };
+            } catch(e) {}
+        }
+
+        // 5-Week Categorized Specials Fallback Data
+        const weeklyBatches = [
+            [
+                { "name": "Hawke's Bay Eggs Colony Size 7 (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+                { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
+                { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Meat • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
+                { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
+                { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
+                { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+                { "name": "Naju Premium Rice SAECHUNGMU 10kg (새청무)", "desc": "Korean Premium Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
+                { "name": "Sukina Buckwheat Noodle with Sauce 435g", "desc": "Japanese Buckwheat • Save $2.00", "price": "$4.99", "save": "WAS $6.99" },
+                { "name": "LKK Gluten Free Soy Sauce 1.9L", "desc": "Premium Soy Sauce • Save $12.00", "price": "$9.99", "save": "WAS $21.99" },
+                { "name": "Master Hee's Roasted Seaweed Flakes 50g", "desc": "Crispy Seaweed Flakes • Save $4.80", "price": "$1.99", "save": "WAS $6.79" }
+            ],
+            [
+                { "name": "NEG SPCA Certified Cage Free Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+                { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+                { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
+                { "name": "KS Pork & Chive Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+                { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+                { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
+                { "name": "FRTN Everyday Jasmine Rice 20kg", "desc": "Aromatic Jasmine Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
+                { "name": "GF Hot Pot Noodles 200g", "desc": "Hot Pot Glass Noodles • Save $1.50", "price": "$0.99", "save": "WAS $2.49" },
+                { "name": "CJ Korean Rice Syrup 1.2kg (조청 쌀엿)", "desc": "Cooking Syrup • Save $10.00", "price": "$4.99", "save": "WAS $14.99" },
+                { "name": "Check Roasted Seaweed Sushi Nori 100sheets 280g", "desc": "Sushi Seaweed • Save $4.00", "price": "$37.99", "save": "WAS $41.99" }
+            ],
+            [
+                { "name": "WOODLAND Free Range Eggs Size 7 (20pk)", "desc": "Free Range Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+                { "name": "TFC Roasted EEL (UNAGI KABAYAKI) 125g", "desc": "Frozen Roasted Eel • Save $5.00", "price": "$9.99", "save": "WAS $14.99" },
+                { "name": "WY Potato All Mozzarella Corn Dog 4x90g (감자 모짜렐라)", "desc": "Frozen Potato Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+                { "name": "KS Har Gow (Prawn Dumplings) Made in NZ 240g", "desc": "Frozen Prawn Dumplings • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+                { "name": "Jinju Fish Sausage 320g (비엔나 소세지)", "desc": "Chilled Fish Sausage • Save $4.00", "price": "$14.99", "save": "WAS $18.99" },
+                { "name": "Check Frozen Split Broad Beans 454g", "desc": "Frozen Broad Beans • Save $5.00", "price": "$1.99", "save": "WAS $6.99" },
+                { "name": "Arawana Short Grain Sushi Rice 20kg", "desc": "Premium Sushi Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
+                { "name": "Paldo Lobster Big Bowl Sriracha 110g", "desc": "Korean Instant Bowl • Save $1.50", "price": "$1.99", "save": "WAS $3.49" },
+                { "name": "CJO Doenjang Fermented Soy Bean Paste 2.8kg", "desc": "Korean Soy Paste • Save $7.00", "price": "$17.99", "save": "WAS $24.99" },
+                { "name": "PXY Black Sesame Paste 500g", "desc": "Pure Black Sesame • Save $4.50", "price": "$1.99", "save": "WAS $6.49" }
+            ],
+            [
+                { "name": "NEG SPCA Certified Free Range Size 7 Eggs (30pk)", "desc": "Free Range Eggs • Save $4.00", "price": "$18.99", "save": "WAS $22.99" },
+                { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
+                { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
+                { "name": "KS Chicken & Corn Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+                { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
+                { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+                { "name": "FRTN Long Grain Rice 20kg", "desc": "Quality Long Grain Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
+                { "name": "LD Mung Bean Vermicelli 200g", "desc": "Glass Noodles • Save $2.80", "price": "$1.99", "save": "WAS $4.79" },
+                { "name": "CB Rokete Bongo Chilli Sauce 250ml", "desc": "Spicy Chilli Sauce • Save $6.00", "price": "$1.99", "save": "WAS $7.99" },
+                { "name": "MG Roasted Seaweed Snack Original 12pk", "desc": "Crispy Snack • Save $4.00", "price": "$4.99", "save": "WAS $8.99" }
+            ],
+            [
+                { "name": "Hawke's Bay Eggs Colony Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+                { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Pork • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
+                { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
+                { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+                { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+                { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
+                { "name": "FRTN Aromatic Basmati Rice 20kg", "desc": "Basmati Rice • Save $4.00", "price": "$55.99", "save": "WAS $59.99" },
+                { "name": "Assi Spicy Seafood Noodle Bowl 225g", "desc": "Spicy Seafood Bowl • Save $1.00", "price": "$5.79", "save": "WAS $6.79" },
+                { "name": "Doree 100% Pure Sesame Oil 2L", "desc": "Pure Sesame Oil • Save $5.00", "price": "$44.99", "save": "WAS $49.99" },
+                { "name": "SY Carbo Buldak Sauce 200g (까르보불닭소스)", "desc": "Spicy Buldak Sauce • Save $3.80", "price": "$4.99", "save": "WAS $8.79" }
+            ]
+        ];
+
+        async function renderWeeklySpecials() {
             const list = document.getElementById('dealsList');
             if (!list) return;
 
-            const epoch = new Date('2026-10-19T00:00:00Z').getTime();
-            const now = Date.now();
-            const weeksPassed = Math.floor((now - epoch) / (7 * 24 * 60 * 60 * 1000));
-            const batchIndex = ((weeksPassed % 5) + 5) % 5;
-            const currentBatch = weeklyBatches[batchIndex];
+            let items = null;
+            let badgeText = '';
 
-            const badge = document.querySelector('.specials-badge');
-            if (badge) {
-                badge.innerText = 'Week ' + (batchIndex + 1) + ' \u2022 10 Items (Eggs, Frozen & Chilled Specials)';
+            // Try loading dynamic specials JSON first
+            try {
+                const res = await fetch('dpos_promos.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        items = data.slice(0, 10);
+                        badgeText = '10 In-Stock Member Specials';
+                    } else if (data && Array.isArray(data.items) && data.items.length > 0) {
+                        items = data.items.slice(0, 10);
+                        badgeText = data.badge || '10 In-Stock Member Specials';
+                    }
+                }
+            } catch(e) {}
+
+            // Fallback to scheduled rotation if dynamic JSON not reachable
+            if (!items) {
+                const epoch = new Date('2026-10-19T00:00:00Z').getTime();
+                const now = Date.now();
+                const weeksPassed = Math.floor((now - epoch) / (7 * 24 * 60 * 60 * 1000));
+                const batchIndex = ((weeksPassed % 5) + 5) % 5;
+                items = weeklyBatches[batchIndex];
+                badgeText = 'Week ' + (batchIndex + 1) + ' \u2022 10 Items (Eggs, Frozen & Chilled Specials)';
             }
 
-            list.innerHTML = currentBatch.map(function(d) {
+            const badge = document.querySelector('.specials-badge');
+            if (badge && badgeText) {
+                badge.innerText = badgeText;
+            }
+
+            list.innerHTML = items.map(function(d) {
                 return '<div class="deal-item">' +
                     '<div style="flex: 1; padding-right: 10px;">' +
                         '<div class="deal-name">' + d.name + '</div>' +
@@ -1292,12 +1545,17 @@
                     tabs.forEach(t => t.classList.remove('active'));
                     btn.classList.add('active');
                     const tab = btn.getAttribute('data-tab');
-                    if (tab === 'card') {
-                        document.getElementById('tabCardSection').style.display = 'block';
-                        document.getElementById('tabDealsSection').style.display = 'none';
-                    } else {
-                        document.getElementById('tabCardSection').style.display = 'none';
-                        document.getElementById('tabDealsSection').style.display = 'block';
+
+                    const secCard = document.getElementById('tabCardSection');
+                    const secDeals = document.getElementById('tabDealsSection');
+                    const secActivity = document.getElementById('tabActivitySection');
+
+                    if (secCard) secCard.style.display = (tab === 'card') ? 'block' : 'none';
+                    if (secDeals) secDeals.style.display = (tab === 'deals') ? 'block' : 'none';
+                    if (secActivity) secActivity.style.display = (tab === 'activity') ? 'block' : 'none';
+
+                    if (tab === 'activity') {
+                        renderTransactions();
                     }
                 });
             });
@@ -1482,6 +1740,7 @@
             renderWeeklySpecials();
             initTabs();
             setupModals();
+            initRealtimeLoyaltySync();
 
             if (isAppInstalled()) {
                 const banner = document.getElementById('installBanner');
