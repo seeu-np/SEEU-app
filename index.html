@@ -764,6 +764,7 @@
             <button class="nav-tab-btn active" data-tab="card"><i class="fas fa-id-card"></i> My Card</button>
             <button class="nav-tab-btn" data-tab="deals"><i class="fas fa-tags"></i> Weekly Specials</button>
             <button class="nav-tab-btn" data-tab="activity"><i class="fas fa-history"></i> Activity</button>
+            <button class="nav-tab-btn" data-tab="shopping" style="color: #ff6b4a;"><i class="fas fa-shopping-bag"></i> Shopping</button>
         </div>
 
         <!-- Section: Member Card -->
@@ -1631,6 +1632,12 @@
                     tabs.forEach(t => t.classList.remove('active'));
                     btn.classList.add('active');
                     const tab = btn.getAttribute('data-tab');
+
+                    if (tab === 'shopping') {
+                        // Open Shopify Online Store in new tab
+                        window.open('https://prdu8g-qv.myshopify.com', '_blank');
+                        return;
+                    }
 
                     const secCard = document.getElementById('tabCardSection');
                     const secDeals = document.getElementById('tabDealsSection');
