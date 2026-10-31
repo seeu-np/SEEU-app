@@ -749,8 +749,8 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <div class="app-brand-banner" style="display: flex; flex-direction: column; align-items: center; padding: 12px 0 8px;">
-                <img src="seeu_plus_official_logo.png" alt="SEE U+" style="height: 48px; max-width: 85%; object-fit: contain; margin-bottom: 6px;">
+            <div class="app-brand-banner">
+                <div class="brand-title">SEE U<span class="brand-plus">+</span></div>
                 <div class="card-badge">Membership Card</div>
                 <div class="brand-slogan">Come Again, Save Again, SEE U Again.</div>
             </div>
@@ -758,15 +758,6 @@
                 <i class="fas fa-user-check"></i> <span id="lblProfilePillName">Member</span>
             </div>
         </header>
-
-        <!-- SEE U+ Online Shopping Banner -->
-        <div style="margin: 0 16px 14px; text-align: center;">
-            <a href="https://prdu8g-qv.myshopify.com" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #FF3B1D, #e11d48); color: #ffffff; text-decoration: none; padding: 12px 18px; border-radius: 12px; font-weight: 800; font-size: 15px; box-shadow: 0 4px 14px rgba(255, 59, 29, 0.35); transition: transform 0.15s ease;">
-                <i class="fas fa-shopping-basket" style="font-size: 18px;"></i>
-                <span>SEE U⁺ 온라인 장보기 (픽업 & 전국배송)</span>
-                <i class="fas fa-chevron-right" style="font-size: 13px; margin-left: 4px;"></i>
-            </a>
-        </div>
 
         <!-- Navigation Tabs: My Card | Weekly Specials | Activity -->
         <div class="nav-tabs">
@@ -1386,21 +1377,21 @@
         // Real-Time Loyalty Sync via Cloud Stream (ntfy)
         function initRealtimeLoyaltySync() {
             const cleanCode = (code) => (code || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-            const myCleanCode = cleanCode(memberState.code);
 
             function handleIncomingLoyalty(data) {
                 if (!data) return;
+                const myClean = cleanCode(memberState.code);
                 const incomingCode = cleanCode(data.code);
-                // Match customer code or customer name if code matches
-                if (myCleanCode && incomingCode && myCleanCode === incomingCode) {
+
+                if (myClean && incomingCode && myClean === incomingCode) {
                     let updated = false;
 
-                    if (typeof data.balance === 'number' && data.balance !== memberState.balance) {
-                        memberState.balance = data.balance;
+                    const newBal = parseFloat(data.balance);
+                    if (!isNaN(newBal) && Math.abs(newBal - (memberState.balance || 0)) > 0.001) {
+                        memberState.balance = newBal;
                         updated = true;
                     }
 
-                    // Check for transaction payload
                     if (data.receiptNo) {
                         if (!Array.isArray(memberState.transactions)) {
                             memberState.transactions = [];
@@ -1409,12 +1400,11 @@
                         if (!exists) {
                             const newTx = {
                                 invoiceNo: data.receiptNo,
-                                amount: typeof data.earnedToday === 'number' ? data.earnedToday : (data.earned || 0),
-                                type: (data.used && data.used > 0) ? 'use' : 'earn',
+                                amount: typeof data.earnedToday === 'number' ? data.earnedToday : (parseFloat(data.earned) || 0),
+                                type: (data.pointsUsed && data.pointsUsed > 0) ? 'use' : 'earn',
                                 date: data.date || new Date().toISOString()
                             };
                             memberState.transactions.unshift(newTx);
-                            // Keep last 50 transactions
                             if (memberState.transactions.length > 50) {
                                 memberState.transactions.pop();
                             }
@@ -1431,31 +1421,63 @@
                 }
             }
 
-            // 1. Initial snapshot poll
-            fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1')
-                .then(res => res.text())
-                .then(text => {
-                    const lines = text.trim().split('\n');
-                    lines.forEach(line => {
+            function pollLoyaltySnapshot() {
+                const ts = Date.now();
+                const myClean = cleanCode(memberState.code);
+
+                const parseNtfyLines = (text) => {
+                    if (!text) return;
+                    const lines = text.split('\n');
+                    lines.forEach(rawLine => {
+                        const line = rawLine.trim();
+                        if (!line) return;
                         try {
                             const eventObj = JSON.parse(line);
                             if (eventObj.message) {
-                                const payload = JSON.parse(eventObj.message);
+                                const payload = typeof eventObj.message === 'string' ? JSON.parse(eventObj.message) : eventObj.message;
                                 handleIncomingLoyalty(payload);
                             }
                         } catch(e) {}
                     });
-                })
-                .catch(() => {});
+                };
 
-            // 2. Real-time Live EventSource (SSE) stream
+                // 1. Shared stream poll
+                fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
+                    .then(res => res.text())
+                    .then(parseNtfyLines)
+                    .catch(() => {});
+
+                // 2. Direct member-code channel poll (guarantees update regardless of global traffic volume)
+                if (myClean) {
+                    fetch('https://ntfy.sh/seeu_loyalty_' + myClean + '/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
+                        .then(res => res.text())
+                        .then(parseNtfyLines)
+                        .catch(() => {});
+                }
+            }
+
+            // 1. Initial snapshot poll
+            pollLoyaltySnapshot();
+
+            // 2. Active fast polling loop every 2.5 seconds
+            setInterval(pollLoyaltySnapshot, 2500);
+
+            // 3. Instant wakeup on screen unlock / app switch
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    pollLoyaltySnapshot();
+                }
+            });
+            window.addEventListener('focus', pollLoyaltySnapshot);
+
+            // 4. SSE real-time stream backup
             try {
                 const sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
                 sse.onmessage = function(e) {
                     try {
                         const eventObj = JSON.parse(e.data);
                         if (eventObj.message) {
-                            const payload = JSON.parse(eventObj.message);
+                            const payload = typeof eventObj.message === 'string' ? JSON.parse(eventObj.message) : eventObj.message;
                             handleIncomingLoyalty(payload);
                         }
                     } catch(err) {}
