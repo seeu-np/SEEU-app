@@ -1,31 +1,43 @@
 ﻿{
-    "updatedAt":  "2026-10-20 19:09:28",
-    "weekIndex":  1,
-    "badge":  "Week 1 - 10 In-Stock Specials",
+    "updatedAt":  "2026-10-31 09:00:02",
+    "weekIndex":  2,
+    "badge":  "Week 2 - 10 In-Stock Specials",
     "items":  [
                   {
-                      "price":  "$2.99",
+                      "price":  "$16.99",
+                      "save":  "WAS $21.99",
+                      "name":  "NEG SPCA Certified Cage Free Size 7 Eggs (30pk)",
+                      "desc":  "Fresh Eggs - Save $5.00"
+                  },
+                  {
+                      "price":  "$7.99",
+                      "save":  "WAS $11.99",
+                      "name":  "CJO JG Napa Cabbage Kimchi Cut 600g",
+                      "desc":  "Chilled Fresh Kimchi - Save $4.00"
+                  },
+                  {
+                      "price":  "$1.79",
                       "save":  "Special",
-                      "name":  "SY Carbo Buldak Ramen 130g",
+                      "name":  "Vifon Vietnamese Beef Rice Noodles 60g",
                       "desc":  "In-Stock Member Special"
                   },
                   {
-                      "price":  "$64.99",
-                      "save":  "WAS $79.99",
-                      "name":  "JG Napa Cabbage Kimchi Whole 5kg",
-                      "desc":  "Chilled Korean Kimchi - Save $15.00"
+                      "price":  "$7.99",
+                      "save":  "WAS $11.99",
+                      "name":  "KS Pork \u0026 Chive Dumplings Made in NZ 336g",
+                      "desc":  "Frozen Dumplings - Save $4.00"
                   },
                   {
-                      "price":  "$9.99",
-                      "save":  "WAS $21.99",
-                      "name":  "LKK Gluten Free Soy Sauce 1.9L",
-                      "desc":  "Premium Soy Sauce - Save $12.00"
+                      "price":  "$4.99",
+                      "save":  "WAS $14.99",
+                      "name":  "CJ Korean Rice Syrup 1.2kg",
+                      "desc":  "Cooking Syrup - Save $10.00"
                   },
                   {
-                      "price":  "$1.99",
-                      "save":  "WAS $6.79",
-                      "name":  "Master Hee\u0027s Roasted Seaweed Flakes 50g",
-                      "desc":  "Crispy Seaweed Flakes - Save $4.80"
+                      "price":  "$37.99",
+                      "save":  "WAS $41.99",
+                      "name":  "Check Roasted Seaweed Sushi Nori 100sheets 280g",
+                      "desc":  "Sushi Seaweed - Save $4.00"
                   }
               ]
 }
