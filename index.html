@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v10_cloud_specials_final | Created: 2026-10-20 -->
+<!-- Version: v13_instant_cloud_sync | Created: 2026-10-20 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1448,13 +1448,23 @@
                     });
                 };
 
-                // 1. Shared stream poll
+                // 1. Ultra-fast direct cloud relay poll (always online, high speed)
+                fetch('https://extendsclass.com/api/json-storage/bin/eccaade?_t=' + ts, { cache: 'no-store' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.code) {
+                            handleIncomingLoyalty(data);
+                        }
+                    })
+                    .catch(() => {});
+
+                // 2. Shared stream fallback poll
                 fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
                     .then(res => res.text())
                     .then(parseNtfyLines)
                     .catch(() => {});
 
-                // 2. Direct member-code channel poll (guarantees update regardless of global traffic volume)
+                // 3. Direct member-code channel poll
                 if (myClean) {
                     fetch('https://ntfy.sh/seeu_loyalty_' + myClean + '/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
                         .then(res => res.text())
