@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Version: v13_instant_cloud_sync | Created: 2026-10-20 -->
+<!-- Version: v14_loyalty_fix | Created: 2026-10-31 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1452,7 +1452,14 @@
                 fetch('https://extendsclass.com/api/json-storage/bin/eccaade?_t=' + ts, { cache: 'no-store' })
                     .then(res => res.json())
                     .then(data => {
-                        if (data && data.code) {
+                        if (!data) return;
+                        const myClean = cleanCode(memberState.code);
+                        const myMob = (memberState.mobile || '').replace(/[^0-9]/g, '');
+                        if (myClean && data[myClean]) {
+                            handleIncomingLoyalty(data[myClean]);
+                        } else if (myMob && data[myMob]) {
+                            handleIncomingLoyalty(data[myMob]);
+                        } else if (data.code && cleanCode(data.code) === myClean) {
                             handleIncomingLoyalty(data);
                         }
                     })
