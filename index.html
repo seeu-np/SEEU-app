@@ -1,1400 +1,2790 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <!-- Version: v14_loyalty_fix | Created: 2026-10-31 -->
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>SEE U+ | Member Rewards & Digital Card</title>
+
     <link rel="manifest" href="manifest.json">
+
     <meta name="theme-color" content="#ff4500">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
+
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <meta name="apple-mobile-web-app-title" content="SEE U+">
+
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
     <link rel="icon" type="image/png" href="icon-192.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
         :root {
+
             --primary: #ff4500;
+
             --primary-dark: #dc3200;
+
             --accent: #f97316;
+
             --accent-hover: #ea580c;
+
             --success: #10b981;
+
             --bg-dark: #0f172a;
+
             --card-bg: #1e293b;
+
             --card-border: #334155;
+
             --text-main: #f8fafc;
+
             --text-muted: #94a3b8;
+
             --gold: #fbbf24;
+
         }
+
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
             -webkit-tap-highlight-color: transparent;
+
             touch-action: manipulation;
+
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
         }
+
         body {
+
             background: #090d16;
+
             color: var(--text-main);
+
             display: flex;
+
             justify-content: center;
+
             min-height: 100vh;
+
             padding-bottom: 40px;
+
         }
+
         .app-container {
+
             width: 100%;
+
             max-width: 480px;
+
             display: flex;
+
             flex-direction: column;
+
             padding: 16px;
+
             gap: 16px;
+
         }
+
         .app-header {
+
             text-align: center;
+
             padding: 14px 0 8px;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             position: relative;
+
         }
+
         .app-brand-banner {
+
             width: 100%;
+
             background: linear-gradient(135deg, #ff4500 0%, #dc2626 100%);
+
             color: #ffffff;
+
             padding: 22px 16px 20px;
+
             border-radius: 24px;
+
             box-shadow: 0 10px 25px rgba(255, 69, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
+
             text-align: center;
+
             margin-bottom: 8px;
+
             position: relative;
+
         }
+
         .brand-title {
+
             font-size: 34px;
+
             font-weight: 900;
+
             letter-spacing: -0.5px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+
             line-height: 1;
+
             padding-left: 12px;
+
         }
+
         .brand-plus {
+
             color: #fbbf24;
+
             font-size: 28px;
+
             font-weight: 900;
+
             line-height: 1;
+
             margin-left: 4px;
+
             position: relative;
+
             top: -8px;
+
         }
+
         .card-badge {
+
             display: inline-block;
+
             background: rgba(0,0,0,0.25);
+
             border: 1px solid rgba(255,255,255,0.3);
+
             padding: 4px 12px;
+
             border-radius: 20px;
+
             font-size: 11px;
+
             font-weight: 800;
+
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
+
             margin-top: 6px;
+
         }
+
         .brand-slogan {
+
             font-size: 10px;
+
             font-weight: 800;
+
             color: #fbbf24;
+
             letter-spacing: 0.3px;
+
             text-transform: uppercase;
+
             margin-top: 8px;
+
             text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+
             white-space: nowrap;
+
         }
+
         .profile-pill {
+
             margin-top: 10px;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 6px;
+
             background: rgba(30, 41, 59, 0.9);
+
             border: 1px solid rgba(255, 69, 0, 0.4);
+
             padding: 6px 14px;
+
             border-radius: 20px;
+
             font-size: 12px;
+
             font-weight: 700;
+
             color: #38bdf8;
+
             cursor: pointer;
+
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
             transition: all 0.2s ease;
+
         }
+
         .profile-pill:active {
+
             transform: scale(0.96);
+
             background: rgba(255, 69, 0, 0.2);
+
         }
+
         .nav-tabs {
+
             display: flex;
+
             gap: 6px;
+
             background: rgba(30, 41, 59, 0.7);
+
             padding: 4px;
+
             border-radius: 12px;
+
             border: 1px solid var(--card-border);
+
         }
+
         .nav-tab-btn {
+
             flex: 1;
+
             padding: 9px 4px;
+
             border: none;
+
             background: transparent;
+
             color: var(--text-muted);
+
             font-size: 12px;
+
             font-weight: 700;
+
             border-radius: 8px;
+
             cursor: pointer;
+
             transition: all 0.2s ease;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 5px;
+
             white-space: nowrap;
+
         }
+
         .nav-tab-btn:active {
+
             transform: scale(0.96);
+
         }
+
         .nav-tab-btn.active {
+
             background: var(--primary);
+
             color: #ffffff;
+
             box-shadow: 0 4px 12px rgba(255, 69, 0, 0.35);
+
         }
+
         .member-card {
+
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+
             border: 1.5px solid rgba(255, 69, 0, 0.35);
+
             border-radius: 20px;
+
             padding: 22px 20px;
+
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.15);
+
             position: relative;
+
             overflow: hidden;
+
         }
+
         .card-top {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: flex-start;
+
             margin-bottom: 18px;
+
         }
+
         .member-info .member-name {
+
             font-size: 20px;
+
             font-weight: 800;
+
             color: #ffffff;
+
         }
+
         .member-info .member-code {
+
             font-size: 13px;
+
             font-weight: 700;
+
             color: #ff6a33;
+
             margin-top: 2px;
+
             letter-spacing: 0.5px;
+
         }
+
         .card-chip {
+
             width: 44px;
+
             height: 32px;
+
             background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+
             border-radius: 6px;
+
             box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.3);
+
         }
+
         .points-section {
+
             background: rgba(15, 23, 42, 0.6);
+
             border: 1px solid rgba(255, 255, 255, 0.08);
+
             border-radius: 14px;
+
             padding: 16px;
+
             margin-bottom: 20px;
+
         }
+
         .points-header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: baseline;
+
             margin-bottom: 10px;
+
         }
+
         .points-label {
+
             font-size: 13px;
+
             color: var(--text-muted);
+
             font-weight: 600;
+
         }
+
         .points-value {
+
             font-size: 32px;
+
             font-weight: 900;
+
             color: #38bdf8;
+
             letter-spacing: -0.5px;
+
         }
+
         .progress-container {
+
             margin-top: 6px;
+
         }
+
         .progress-track {
+
             height: 8px;
+
             background: rgba(255, 255, 255, 0.1);
+
             border-radius: 4px;
+
             overflow: hidden;
+
             margin-bottom: 8px;
+
         }
+
         .progress-fill {
+
             height: 100%;
+
             background: linear-gradient(90deg, #10b981, #34d399);
+
             border-radius: 4px;
+
             transition: width 0.4s ease;
+
         }
+
         .progress-meta {
+
             display: flex;
+
             justify-content: space-between;
+
             font-size: 12px;
+
             font-weight: 700;
+
         }
+
         .progress-meta #lblProgressToGo {
+
             color: #10b981;
+
         }
+
         .progress-meta .progress-target {
+
             color: #fbbf24;
+
         }
+
         .barcode-box {
+
             background: #ffffff;
+
             border-radius: 14px;
+
             padding: 16px 14px 10px;
+
             text-align: center;
+
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
             overflow: hidden;
+
         }
+
         .barcode-svg {
+
             width: 100%;
+
             max-width: 100%;
+
             height: 66px;
+
             display: block;
+
         }
+
         .barcode-text {
+
             font-family: 'Courier New', Courier, monospace;
+
             font-size: 16px;
+
             font-weight: 900;
+
             color: #0f172a;
+
             margin-top: 6px;
+
             letter-spacing: 3px;
+
         }
+
         .scan-hint {
+
             text-align: center;
+
             font-size: 12px;
+
             color: var(--text-muted);
+
             margin-top: 14px;
+
         }
+
         .install-banner {
+
             background: linear-gradient(135deg, rgba(255, 69, 0, 0.15) 0%, rgba(30, 41, 59, 0.9) 100%);
+
             border: 1.5px solid #ff4500;
+
             border-radius: 14px;
+
             padding: 14px 16px;
+
             display: none;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 12px;
+
             box-shadow: 0 4px 14px rgba(255, 69, 0, 0.25);
+
             position: relative;
+
         }
+
         .install-text h4 {
+
             font-size: 14px;
+
             font-weight: 800;
+
             color: #ffffff;
+
         }
+
         .install-text p {
+
             font-size: 12px;
+
             color: var(--text-muted);
+
             margin-top: 2px;
+
         }
+
         .btn-install {
+
             background: #ff4500;
+
             color: #ffffff;
+
             border: none;
+
             padding: 9px 16px;
+
             border-radius: 8px;
+
             font-size: 13px;
+
             font-weight: 800;
+
             cursor: pointer;
+
             white-space: nowrap;
+
             box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+
             transition: all 0.2s ease;
+
         }
+
         .btn-install:active {
+
             transform: scale(0.96);
+
         }
+
         .close-install {
+
             position: absolute;
+
             top: 6px;
+
             right: 8px;
+
             background: transparent;
+
             border: none;
+
             color: #64748b;
+
             font-size: 16px;
+
             cursor: pointer;
+
         }
+
+
 
         /* Activity / Point History Tab Styles */
+
         .activity-balance-card {
+
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+
             border: 1.5px solid rgba(255, 69, 0, 0.35);
+
             border-radius: 20px;
+
             padding: 22px 20px;
+
             text-align: center;
+
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.15);
+
             margin-bottom: 14px;
+
         }
+
         .activity-balance-label {
+
             font-size: 13px;
+
             color: var(--text-muted);
+
             font-weight: 700;
+
             letter-spacing: 0.3px;
+
         }
+
         .activity-balance-val {
+
             font-size: 36px;
+
             font-weight: 900;
+
             color: #38bdf8;
+
             margin: 6px 0 4px;
+
             letter-spacing: -0.5px;
+
         }
+
         .activity-balance-sub {
+
             font-size: 12px;
+
             color: #10b981;
+
             font-weight: 700;
+
         }
+
         .activity-tx-container {
+
             background: var(--card-bg);
+
             border: 1px solid var(--card-border);
+
             border-radius: 18px;
+
             padding: 18px;
+
         }
+
         .activity-tx-header {
+
             font-size: 17px;
+
             font-weight: 800;
+
             color: #ffffff;
+
             margin-bottom: 14px;
+
             padding-bottom: 10px;
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
         .activity-tx-list {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 10px;
+
         }
+
         .activity-tx-row {
+
             background: rgba(15, 23, 42, 0.6);
+
             border: 1px solid rgba(255, 255, 255, 0.06);
+
             border-radius: 12px;
+
             padding: 12px 14px;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
         }
+
         .tx-left {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 2px;
+
         }
+
         .tx-store {
+
             font-size: 13px;
+
             font-weight: 800;
+
             color: #f8fafc;
+
             letter-spacing: 0.2px;
+
         }
+
         .tx-invoice {
+
             font-size: 11.5px;
+
             font-weight: 400;
+
             color: #cbd5e1;
+
         }
+
         .tx-date {
+
             font-size: 10.5px;
+
             font-weight: 400;
+
             color: #94a3b8;
+
         }
+
         .tx-badge {
+
             display: inline-block;
+
             font-size: 12px;
+
             font-weight: 800;
+
             padding: 5px 9px;
+
             border-radius: 6px;
+
             letter-spacing: 0.3px;
+
             white-space: nowrap;
+
         }
+
         .badge-earned {
+
             background: rgba(16, 185, 129, 0.18);
+
             color: #34d399;
+
             border: 1px solid rgba(16, 185, 129, 0.45);
+
         }
+
         .badge-used {
+
             background: rgba(245, 158, 11, 0.18);
+
             color: #fbbf24;
+
             border: 1px solid rgba(245, 158, 11, 0.45);
+
         }
+
         .tx-empty-state {
+
             text-align: center;
+
             padding: 24px 10px;
+
             color: var(--text-muted);
+
             font-size: 13px;
+
         }
+
+
 
         /* Specials Card Styles */
+
         .specials-card {
+
             background: var(--card-bg);
+
             border: 1px solid var(--card-border);
+
             border-radius: 18px;
+
             padding: 18px;
+
         }
+
         .specials-header {
+
             display: flex;
+
             flex-direction: column;
+
             align-items: flex-start;
+
             margin-bottom: 14px;
+
             padding-bottom: 10px;
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
             gap: 6px;
+
         }
+
         .specials-title {
+
             font-size: 17px;
+
             font-weight: 800;
+
             color: #ffffff;
+
         }
+
         .specials-badge {
+
             background: rgba(249, 115, 22, 0.2);
+
             color: #f97316;
+
             font-size: 11px;
+
             font-weight: 800;
+
             padding: 4px 10px;
+
             border-radius: 20px;
+
             border: 1px solid rgba(249, 115, 22, 0.4);
+
             text-transform: uppercase;
+
         }
+
         .deals-list {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 12px;
+
         }
+
         .deal-item {
+
             background: rgba(15, 23, 42, 0.6);
+
             border: 1px solid rgba(255, 255, 255, 0.06);
+
             border-radius: 12px;
+
             padding: 12px 14px;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
         }
+
         .deal-name {
+
             font-size: 14px;
+
             font-weight: 700;
+
             color: #f8fafc;
+
             line-height: 1.3;
+
         }
+
         .deal-desc {
+
             font-size: 11px;
+
             color: var(--text-muted);
+
             margin-top: 3px;
+
         }
+
         .deal-pricing {
+
             text-align: right;
+
             white-space: nowrap;
+
             margin-left: 12px;
+
         }
+
         .deal-price {
+
             font-size: 16px;
+
             font-weight: 900;
+
             color: #ff4500;
+
         }
+
         .deal-save {
+
             font-size: 11px;
+
             font-weight: 700;
+
             color: #10b981;
+
             margin-top: 2px;
+
         }
+
+
 
         /* Modal Base Styles */
+
         .modal-overlay {
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             right: 0;
+
             bottom: 0;
+
             background: rgba(0, 0, 0, 0.85);
+
             backdrop-filter: blur(8px);
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             padding: 20px;
+
             z-index: 9999;
+
         }
+
         .modal-card {
+
             background: #1e293b;
+
             border: 2px solid #ff4500;
+
             border-radius: 22px;
+
             width: 100%;
+
             max-width: 410px;
+
             padding: 22px;
+
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+
             animation: modalFadeIn 0.25s ease-out;
+
             position: relative;
+
         }
+
         @keyframes modalFadeIn {
+
             from { opacity: 0; transform: scale(0.95); }
+
             to { opacity: 1; transform: scale(1); }
+
         }
+
         .modal-header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 12px;
+
             padding-bottom: 8px;
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
         }
+
         .modal-header h3 {
+
             font-size: 18px;
+
             font-weight: 800;
+
             color: #ffffff;
+
         }
+
         .modal-close-btn {
+
             background: transparent;
+
             border: none;
+
             color: #94a3b8;
+
             font-size: 24px;
+
             cursor: pointer;
+
             line-height: 1;
+
         }
+
         .modal-subtitle {
+
             font-size: 13px;
+
             color: #cbd5e1;
+
             margin-bottom: 14px;
+
             line-height: 1.4;
+
         }
+
         .guide-box {
+
             background: rgba(15, 23, 42, 0.6);
+
             border: 1px solid rgba(255, 255, 255, 0.08);
+
             border-radius: 12px;
+
             padding: 14px;
+
         }
+
         .guide-title {
+
             font-size: 13px;
+
             font-weight: 800;
+
             color: #ffffff;
+
             margin-bottom: 8px;
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
         .guide-steps {
+
             padding-left: 18px;
+
             font-size: 12px;
+
             color: #cbd5e1;
+
             line-height: 1.7;
+
         }
+
         .guide-steps strong {
+
             color: #ffffff;
+
         }
+
         .modal-footer {
+
             margin-top: 18px;
+
         }
+
         .btn-modal-ok {
+
             width: 100%;
+
             padding: 12px;
+
             background: var(--primary);
+
             color: #ffffff;
+
             border: none;
+
             border-radius: 10px;
+
             font-size: 14px;
+
             font-weight: 800;
+
             cursor: pointer;
+
         }
+
         .signup-logo-box {
+
             text-align: center;
+
             margin-bottom: 12px;
+
         }
+
         .signup-logo-box img {
+
             height: 52px;
+
             background: #ffffff;
+
             padding: 6px 12px;
+
             border-radius: 14px;
+
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
         }
+
         .signup-title {
+
             font-size: 20px;
+
             font-weight: 800;
+
             color: #ffffff;
+
             text-align: center;
+
             margin-bottom: 4px;
+
         }
+
         .signup-subtitle {
+
             font-size: 12px;
+
             color: #94a3b8;
+
             text-align: center;
+
             line-height: 1.4;
+
             margin-bottom: 16px;
+
         }
+
         .form-group {
+
             margin-bottom: 12px;
+
             text-align: left;
+
         }
+
         .form-label {
+
             display: block;
+
             font-size: 12px;
+
             font-weight: 700;
+
             color: #e2e8f0;
+
             margin-bottom: 5px;
+
         }
+
         .form-input {
+
             width: 100%;
+
             padding: 11px 14px;
+
             background: #0f172a;
+
             border: 1.5px solid #334155;
+
             border-radius: 10px;
+
             color: #ffffff;
+
             font-size: 14px;
+
             outline: none;
+
             transition: border-color 0.2s;
+
         }
+
         .form-input:focus {
+
             border-color: #ff4500;
+
             box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2);
+
         }
+
         .btn-primary-action {
+
             width: 100%;
+
             padding: 13px;
+
             background: linear-gradient(135deg, #ff4500, #ea580c);
+
             color: #ffffff;
+
             border: none;
+
             border-radius: 10px;
+
             font-size: 15px;
+
             font-weight: 800;
+
             cursor: pointer;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 8px;
+
             box-shadow: 0 4px 14px rgba(255, 69, 0, 0.4);
+
             transition: all 0.2s;
+
             margin-top: 10px;
+
         }
+
         .btn-primary-action:active {
+
             transform: scale(0.97);
+
         }
+
         .btn-primary-action:disabled {
+
             opacity: 0.6;
+
             cursor: not-allowed;
+
         }
+
         .form-error {
+
             background: rgba(239, 68, 68, 0.15);
+
             border: 1px solid #ef4444;
+
             color: #fca5a5;
+
             padding: 8px 12px;
+
             border-radius: 8px;
+
             font-size: 12px;
+
             margin-bottom: 12px;
+
             display: none;
+
             text-align: left;
+
         }
+
         .code-input-group {
+
             display: flex;
+
             justify-content: center;
+
             gap: 10px;
+
             margin: 20px 0;
+
         }
+
         .code-digit {
+
             width: 52px;
+
             height: 60px;
+
             font-size: 26px;
+
             font-weight: 800;
+
             text-align: center;
+
             background: #0f172a;
+
             border: 2px solid #334155;
+
             border-radius: 10px;
+
             color: #38bdf8;
+
             outline: none;
+
         }
+
         .code-digit:focus {
+
             border-color: #38bdf8;
+
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+
         }
+
         .success-box {
+
             text-align: center;
+
             padding: 6px 0;
+
         }
+
         .success-icon {
+
             font-size: 48px;
+
             color: #10b981;
+
             margin-bottom: 10px;
+
             text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+
         }
+
         .success-card-preview {
+
             background: #0f172a;
+
             border: 1px solid #334155;
+
             border-radius: 12px;
+
             padding: 14px;
+
             margin: 14px 0;
+
         }
+
         .account-detail-row {
+
             display: flex;
+
             justify-content: space-between;
+
             padding: 10px 0;
+
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
             font-size: 13px;
+
         }
+
         .account-detail-label {
+
             color: var(--text-muted);
+
             font-weight: 600;
+
         }
+
         .account-detail-val {
+
             font-weight: 700;
+
             color: #f8fafc;
+
         }
+
     </style>
+
 </head>
+
 <body>
+
     <div class="app-container">
+
         <!-- Header -->
+
         <header class="app-header">
+
             <div class="app-brand-banner">
+
                 <div class="brand-title">SEE U<span class="brand-plus">+</span></div>
+
                 <div class="card-badge">Membership Card</div>
+
                 <div class="brand-slogan">Come Again, Save Again, SEE U Again.</div>
+
             </div>
+
             <div class="profile-pill" id="btnMemberProfile" style="display: none;">
+
                 <i class="fas fa-user-check"></i> <span id="lblProfilePillName">Member</span>
+
             </div>
+
         </header>
 
+
+
         <!-- Navigation Tabs: My Card | Weekly Specials | Activity -->
+
         <div class="nav-tabs">
+
             <button class="nav-tab-btn active" data-tab="card"><i class="fas fa-id-card"></i> My Card</button>
+
             <button class="nav-tab-btn" data-tab="deals"><i class="fas fa-tags"></i> Weekly Specials</button>
+
             <button class="nav-tab-btn" data-tab="activity"><i class="fas fa-history"></i> Activity</button>
+
         </div>
+
         <div style="margin-top: 8px;">
+
             <a href="https://prdu8g-qv.myshopify.com" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border); color: #ff6b4a; padding: 11px 16px; border-radius: 12px; font-size: 13px; font-weight: 800; text-decoration: none; letter-spacing: 0.3px; transition: all 0.2s ease;">
+
                 <i class="fas fa-shopping-bag" style="font-size: 15px;"></i>
+
                 <span>Shopping 🛍️</span>
+
                 <i class="fas fa-external-link-alt" style="font-size: 11px; opacity: 0.7; margin-left: 4px;"></i>
+
             </a>
+
         </div>
+
+
 
         <!-- Section: Member Card -->
+
         <div id="tabCardSection">
+
             <div class="member-card">
+
                 <div class="card-top">
+
                     <div class="member-info">
+
                         <div class="member-name" id="lblMemberName">VIP Member</div>
+
                         <div class="member-code" id="lblMemberCode">AJE-8839201</div>
+
                     </div>
+
                     <div class="card-chip"></div>
+
                 </div>
+
+
 
                 <!-- Live Points Section -->
+
                 <div class="points-section">
+
                     <div class="points-header">
+
                         <span class="points-label"><i class="fas fa-coins"></i> Rewards Balance</span>
+
                         <div class="points-value"><span>$</span><span id="lblPointsAmount">0.00</span></div>
+
                     </div>
+
+
 
                     <!-- Instant Redemption Badge -->
+
                     <div class="progress-container">
+
                         <div class="progress-track">
+
                             <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+
                         </div>
+
                         <div class="progress-meta">
+
                             <span id="lblProgressToGo"><i class="fas fa-coins" style="color: var(--gold);"></i> Earn 1% rewards at checkout</span>
+
                             <span class="progress-target"><i class="fas fa-coins"></i> Use from $1.00</span>
+
                         </div>
+
                     </div>
+
                 </div>
+
+
 
                 <!-- Digital Barcode Box -->
+
                 <div class="barcode-box">
+
                     <div id="barcodeContainer"></div>
+
                     <div class="barcode-text" id="lblBarcodeText">AJE-8839201</div>
+
                 </div>
+
+
 
                 <div class="scan-hint">
+
                     <i class="fas fa-camera"></i> Show this barcode to cashier at checkout
+
                 </div>
+
             </div>
+
+
 
             <!-- Install to Home Screen Banner -->
+
             <div class="install-banner" id="installBanner" style="margin-top: 14px;">
+
                 <button class="close-install" id="btnCloseInstall">&times;</button>
+
                 <div class="install-text">
+
                     <h4>📲 Download & Install App</h4>
+
                     <p>Add SEE U Again app icon to your phone screen</p>
+
                 </div>
+
                 <button class="btn-install" id="btnInstallApp"><i class="fas fa-download"></i> Install App</button>
+
             </div>
+
         </div>
+
+
 
         <!-- Section: Weekly Specials -->
+
         <div id="tabDealsSection" style="display: none;">
+
             <div class="specials-card">
+
                 <div class="specials-header">
+
                     <div class="specials-title"><i class="fas fa-fire" style="color: #f97316;"></i> Member Specials</div>
+
                     <span class="specials-badge">Limited Time</span>
+
                 </div>
+
                 <div class="deals-list" id="dealsList">
+
                     <!-- Categorized specials rendered dynamically -->
+
                 </div>
+
             </div>
+
         </div>
+
+
 
         <!-- Section: Activity / Points & Transactions -->
+
         <div id="tabActivitySection" style="display: none;">
+
             <!-- Prominently displayed available points -->
+
             <div class="activity-balance-card">
+
                 <div class="activity-balance-label"><i class="fas fa-coins" style="color: var(--gold);"></i> Available Rewards Balance</div>
+
                 <div class="activity-balance-val">$<span id="lblActivityPoints">0.00</span></div>
+
                 <div class="activity-balance-sub">Ready to redeem at checkout</div>
+
             </div>
+
+
 
             <!-- Transactions list -->
+
             <div class="activity-tx-container">
+
                 <div class="activity-tx-header">
+
                     <i class="fas fa-receipt" style="color: #ff4500;"></i> Transactions
+
                 </div>
+
                 <div class="activity-tx-list" id="activityTxList">
+
                     <!-- Dynamic transactions rendered here -->
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- Member Sign-Up & Email Verification Modal -->
+
     <div id="signupModal" class="modal-overlay" style="display: none;">
+
         <div class="modal-card">
+
             <!-- Step 1: Registration Form -->
+
             <div id="stepSignupForm">
+
                 <div class="signup-logo-box">
+
                     <img src="icon-192.png" alt="SEE U Logo">
+
                 </div>
+
                 <h3 class="signup-title">Join SEE U+</h3>
+
                 <p class="signup-subtitle">Earn 1% cashback on every purchase & unlock weekly member specials</p>
+
                 <div id="signupError" class="form-error"></div>
+
                 <div class="form-group">
+
                     <label class="form-label" for="txtCustName">Full Name *</label>
+
                     <input type="text" id="txtCustName" class="form-input" placeholder="e.g. David Kim" autocomplete="name">
+
                 </div>
+
                 <div class="form-group">
+
                     <label class="form-label" for="txtCustEmail">Email Address *</label>
+
                     <input type="email" id="txtCustEmail" class="form-input" placeholder="e.g. david@gmail.com" autocomplete="email">
+
                 </div>
+
                 <div class="form-group">
+
                     <label class="form-label" for="txtCustMobile">Phone Number *</label>
+
                     <input type="tel" id="txtCustMobile" class="form-input" placeholder="e.g. 021 123 4567" autocomplete="tel">
+
                 </div>
+
                 <button id="btnSendVerification" class="btn-primary-action">
+
                     <i class="fas fa-paper-plane"></i> Send Verification Code
+
                 </button>
+
             </div>
+
+
 
             <!-- Step 2: Email Verification Code Entry -->
+
             <div id="stepVerification" style="display: none;">
+
                 <h3 class="signup-title">Verify Your Email</h3>
+
                 <p class="signup-subtitle">Enter 4-digit code sent to<br><strong id="lblSentEmail" style="color: #38bdf8;"></strong></p>
+
                 <div id="verifyError" class="form-error"></div>
+
                 <div class="code-input-group">
+
                     <input type="tel" maxlength="1" class="code-digit" id="code1" autocomplete="one-time-code">
+
                     <input type="tel" maxlength="1" class="code-digit" id="code2">
+
                     <input type="tel" maxlength="1" class="code-digit" id="code3">
+
                     <input type="tel" maxlength="1" class="code-digit" id="code4">
+
                 </div>
+
                 <button id="btnConfirmCode" class="btn-primary-action">
+
                     <i class="fas fa-check-circle"></i> Activate Membership
+
                 </button>
+
                 <button id="btnBackToForm" class="btn-primary-action" style="background: transparent; border: 1px solid #334155; box-shadow: none; margin-top: 8px;">
+
                     Change Email / Info
+
                 </button>
+
             </div>
+
+
 
             <!-- Step 3: Success and Direct Install -->
+
             <div id="stepSignupSuccess" style="display: none;">
+
                 <div class="success-box">
+
                     <div class="success-icon"><i class="fas fa-shield-check"></i></div>
+
                     <h3 class="signup-title" style="color: #10b981;">Membership Activated!</h3>
+
                     <p class="signup-subtitle">Your digital card is ready to use immediately.</p>
+
                     <div class="success-card-preview">
+
                         <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Member Code</div>
+
                         <div style="font-size: 20px; font-weight: 800; color: #ff6a33; margin: 4px 0;" id="lblSuccessMemberCode">AJE-0000000</div>
+
                         <div style="font-size: 13px; color: #ffffff;" id="lblSuccessMemberName">Member</div>
+
                     </div>
+
                     <div id="installPromptBox" style="margin-top: 14px;">
+
                         <button id="btnDirectInstallApp" class="btn-primary-action">
+
                             <i class="fas fa-download"></i> Save App to Home Screen
+
                         </button>
+
                         <p style="font-size: 11px; color: #94a3b8; margin-top: 8px;">Instant 1-tap checkout at SEE U Again</p>
+
                     </div>
+
                     <button id="btnCompleteAndInstall" class="btn-primary-action" style="background: #334155; box-shadow: none; margin-top: 10px;">
+
                         View My Rewards Card
+
                     </button>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- Member Profile Modal -->
+
     <div id="profileModal" class="modal-overlay" style="display: none;">
+
         <div class="modal-card">
+
             <div class="modal-header">
+
                 <h3>Member Profile</h3>
+
                 <button class="modal-close-btn" id="btnCloseProfile">&times;</button>
+
             </div>
+
             <div class="modal-body">
+
                 <div class="account-detail-row">
+
                     <span class="account-detail-label">Name</span>
+
                     <span class="account-detail-val" id="profName">-</span>
+
                 </div>
+
                 <div class="account-detail-row">
+
                     <span class="account-detail-label">Member Code</span>
+
                     <span class="account-detail-val" id="profCode">-</span>
+
                 </div>
+
                 <div class="account-detail-row">
+
                     <span class="account-detail-label">Email</span>
+
                     <span class="account-detail-val" id="profEmail">-</span>
+
                 </div>
+
                 <div class="account-detail-row">
+
                     <span class="account-detail-label">Mobile</span>
+
                     <span class="account-detail-val" id="profMobile">-</span>
+
                 </div>
+
                 <div class="account-detail-row">
+
                     <span class="account-detail-label">Available Points</span>
+
                     <span class="account-detail-val" id="profBalance" style="color: #38bdf8;">$0.00</span>
+
                 </div>
+
             </div>
+
             <div class="modal-footer" style="display: flex; gap: 8px;">
+
                 <button class="btn-modal-ok" id="btnModalCloseProfile" style="flex: 1;">Close</button>
+
                 <button class="btn-modal-ok" id="btnResetAccount" style="flex: 1; background: #334155;">Switch Account</button>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- Install Guide Modal -->
+
     <div id="installModal" class="modal-overlay" style="display: none;">
+
         <div class="modal-card">
+
             <div class="modal-header">
+
                 <h3>Save App to Phone</h3>
+
                 <button class="modal-close-btn" id="btnCloseModal">&times;</button>
+
             </div>
+
             <div class="modal-body">
+
                 <p class="modal-subtitle">Save SEE U Again to your phone home screen for 1-tap checkout rewards:</p>
+
                 
+
                 <div class="guide-box ios-guide">
+
                     <div class="guide-title"><i class="fab fa-apple"></i> iPhone / iPad (Safari)</div>
+
                     <ol class="guide-steps">
+
                         <li>Tap the <strong>Share</strong> button <i class="fas fa-arrow-up-from-bracket" style="color: #38bdf8;"></i> at bottom of Safari.</li>
+
                         <li>Scroll down and tap <strong>Add to Home Screen</strong> <i class="far fa-plus-square"></i>.</li>
+
                         <li>Tap <strong>Add</strong> in top right corner.</li>
+
                     </ol>
+
                 </div>
+
+
 
                 <div class="guide-box android-guide" style="margin-top: 12px;">
+
                     <div class="guide-title"><i class="fab fa-android"></i> Android (Chrome)</div>
+
                     <ol class="guide-steps">
+
                         <li>Tap the <strong>Menu (3 dots)</strong> <i class="fas fa-ellipsis-vertical" style="color: #38bdf8;"></i> at top right.</li>
+
                         <li>Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+
                         <li>Tap <strong>Install</strong> to complete.</li>
+
                     </ol>
+
                 </div>
+
             </div>
+
             <div class="modal-footer">
+
                 <button class="btn-modal-ok" id="btnModalOk">Got it!</button>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <script>
+
         // High-contrast Code 128 Barcode Generator
+
         const Code128 = {
+
             patterns: [
+
                 "212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213",
+
                 "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132",
+
                 "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211",
+
                 "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313",
+
                 "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331",
+
                 "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111",
+
                 "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214",
+
                 "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111",
+
                 "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141",
+
                 "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141",
+
                 "114131", "311141", "411131", "211412", "211214", "211232", "2331112"
+
             ],
+
             generateSVG: function(text) {
+
                 let codes = [104];
+
                 let checkSum = 104;
+
                 for (let i = 0; i < text.length; i++) {
+
                     let code = text.charCodeAt(i) - 32;
+
                     codes.push(code);
+
                     checkSum += code * (i + 1);
+
                 }
+
                 codes.push(checkSum % 103);
+
                 codes.push(106);
+
                 let bars = "";
+
                 for (let c of codes) {
+
                     bars += this.patterns[c];
+
                 }
+
                 let totalModules = 0;
+
                 for (let i = 0; i < bars.length; i++) {
+
                     totalModules += parseInt(bars[i]);
+
                 }
+
                 let quietZone = 10;
+
                 let svgWidth = totalModules + quietZone * 2;
+
                 let svgHeight = 60;
+
                 let currentX = quietZone;
+
                 let rects = "";
+
                 for (let i = 0; i < bars.length; i++) {
+
                     let width = parseInt(bars[i]);
+
                     if (i % 2 === 0) {
+
                         rects += `<rect x="${currentX}" y="0" width="${width}" height="${svgHeight}" fill="#0f172a" />`;
+
                     }
+
                     currentX += width;
+
                 }
+
                 return `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="none" class="barcode-svg" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+
             }
+
         };
+
+
 
         // State Management
+
         const STATE_KEY = 'seeu_member_state_v3';
+
         const REG_KEY = 'seeu_member_registered';
+
         let memberState = {
+
             code: '',
+
             name: '',
+
             email: '',
+
             mobile: '',
+
             balance: 0.00,
+
             transactions: []
+
         };
+
         let currentVerificationCode = '';
 
+
+
         function loadState() {
+
             try {
+
                 const isReg = localStorage.getItem(REG_KEY) === 'true';
+
                 const stored = localStorage.getItem(STATE_KEY);
+
                 if (stored && isReg) {
+
                     memberState = Object.assign(memberState, JSON.parse(stored));
+
                     if (!Array.isArray(memberState.transactions)) {
+
                         memberState.transactions = [];
+
                     }
+
                     // Auto-migrate existing SUA codes to AJE
+
                     if (memberState.code && memberState.code.startsWith('SUA')) {
+
                         memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+
                         try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+
                     }
+
                     showProfilePill();
+
                     updateUI();
+
                 } else {
+
                     openSignupModal();
+
                 }
+
             } catch(e) {
+
                 openSignupModal();
+
             }
+
         }
+
+
 
         function showProfilePill() {
+
             const pill = document.getElementById('btnMemberProfile');
+
             const lbl = document.getElementById('lblProfilePillName');
+
             if (pill && lbl) {
+
                 pill.style.display = 'inline-flex';
+
                 lbl.innerText = memberState.name || 'Member';
+
             }
+
         }
+
+
 
         function openSignupModal() {
+
             document.getElementById('stepSignupForm').style.display = 'block';
+
             document.getElementById('stepVerification').style.display = 'none';
+
             document.getElementById('stepSignupSuccess').style.display = 'none';
+
             document.getElementById('signupError').style.display = 'none';
+
             document.getElementById('signupModal').style.display = 'flex';
+
         }
+
+
 
         function showError(elementId, msg) {
+
             const el = document.getElementById(elementId);
+
             if (el) {
+
                 el.innerText = msg;
+
                 el.style.display = 'block';
+
             }
+
         }
+
+
 
         async function sendVerification() {
+
             const name = document.getElementById('txtCustName').value.trim();
+
             const email = document.getElementById('txtCustEmail').value.trim();
+
             const mobile = document.getElementById('txtCustMobile').value.trim();
+
             const errEl = document.getElementById('signupError');
+
             errEl.style.display = 'none';
 
+
+
             if (!name) {
+
                 showError('signupError', 'Please enter your full name.');
+
                 return;
+
             }
+
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
             if (!email || !emailRegex.test(email)) {
+
                 showError('signupError', 'Please enter a valid email address.');
+
                 return;
+
             }
+
             if (!mobile || mobile.length < 7) {
+
                 showError('signupError', 'Please enter your phone number.');
+
                 return;
+
             }
+
+
 
             const btnSend = document.getElementById('btnSendVerification');
+
             btnSend.disabled = true;
+
             btnSend.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Code...';
 
+
+
             // Generate 4-digit code
+
             currentVerificationCode = '' + Math.floor(1000 + Math.random() * 9000);
+
             document.getElementById('lblSentEmail').innerText = email;
 
+
+
             // Trigger email dispatch directly from seeuplus.admin@gmail.com
+
             try {
+
                 fetch('https://script.google.com/macros/s/AKfycbw9vE0VHjZht71FRDBwMb71OvhxmG7cDioYFdMdsS4wMiRo0eQyVNtLGhzDn6Z4SQb9bw/exec', {
+
                     method: 'POST',
+
                     mode: 'no-cors',
+
                     headers: { 'Content-Type': 'application/json' },
+
                     body: JSON.stringify({
+
                         email: email,
+
                         name: name,
+
                         code: currentVerificationCode
+
                     })
+
                 }).catch(function(e) {});
+
             } catch(e) {}
+
+
 
             btnSend.disabled = false;
+
             btnSend.innerHTML = '<i class="fas fa-paper-plane"></i> Send Verification Code';
 
+
+
             // Clear inputs
+
             ['code1','code2','code3','code4'].forEach(id => {
+
                 const el = document.getElementById(id);
+
                 if (el) el.value = '';
+
             });
 
+
+
             document.getElementById('stepSignupForm').style.display = 'none';
+
             document.getElementById('stepVerification').style.display = 'block';
+
             document.getElementById('verifyError').style.display = 'none';
 
+
+
             setTimeout(() => {
+
                 const first = document.getElementById('code1');
+
                 if (first) first.focus();
+
             }, 200);
+
         }
+
+
 
         function verifyAndActivate() {
+
             const c1 = document.getElementById('code1').value.trim();
+
             const c2 = document.getElementById('code2').value.trim();
+
             const c3 = document.getElementById('code3').value.trim();
+
             const c4 = document.getElementById('code4').value.trim();
+
             const entered = c1 + c2 + c3 + c4;
 
+
+
             if (entered !== currentVerificationCode) {
+
                 showError('verifyError', 'Incorrect verification code. Please check your email inbox.');
+
                 return;
+
             }
+
+
 
             // Successful verification: generate unique AJE barcode
+
             const newCode = 'AJE' + Math.floor(1000000 + Math.random() * 9000000);
+
             const name = document.getElementById('txtCustName').value.trim();
+
             const email = document.getElementById('txtCustEmail').value.trim();
+
             const mobile = document.getElementById('txtCustMobile').value.trim();
 
+
+
             memberState.code = newCode;
+
             memberState.name = name;
+
             memberState.email = email;
+
             memberState.mobile = mobile;
+
             memberState.balance = 0.00;
+
             memberState.transactions = [];
 
+
+
             // Save state permanently
+
             localStorage.setItem(REG_KEY, 'true');
+
             localStorage.setItem(STATE_KEY, JSON.stringify(memberState));
 
+
+
             // Sync to DPOS background relay
+
             syncCustomerToPOS(memberState);
 
+
+
             // Update UI
+
             showProfilePill();
+
             updateUI();
 
+
+
             // Show Step 3
+
             document.getElementById('stepVerification').style.display = 'none';
+
             document.getElementById('stepSignupSuccess').style.display = 'block';
+
             document.getElementById('lblSuccessMemberName').innerText = name;
+
             document.getElementById('lblSuccessMemberCode').innerText = newCode;
 
+
+
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
             const isStandalone = isAppInstalled();
+
             const boxAndroid = document.getElementById('boxAndroidInstall');
+
             const boxIOS = document.getElementById('boxIOSInstall');
+
             const promptBox = document.getElementById('installPromptBox');
 
+
+
             if (isStandalone) {
+
                 if (promptBox) promptBox.style.display = 'none';
+
             } else if (isIOS) {
+
                 if (boxAndroid) boxAndroid.style.display = 'none';
+
                 if (boxIOS) boxIOS.style.display = 'block';
+
             } else {
+
                 if (boxAndroid) boxAndroid.style.display = 'block';
+
                 if (boxIOS) boxIOS.style.display = 'none';
+
             }
+
         }
+
+
 
         // Relay registration data to DPOS integration queue
+
         async function syncCustomerToPOS(cust) {
+
             const parts = cust.name.trim().split(' ');
+
             const firstName = parts[0] || 'Member';
+
             const lastName = parts.slice(1).join(' ') || 'SEEU';
+
             const payload = {
+
                 code: cust.code,
+
                 firstName: firstName,
+
                 lastName: lastName,
+
                 fullName: cust.name,
+
                 email: cust.email,
+
                 mobile: cust.mobile || '',
+
                 source: 'SEEU_PWA',
+
                 timestamp: new Date().toISOString()
+
             };
 
+
+
             // Cloud storage object backup
+
             try {
+
                 fetch('https://api.restful-api.dev/objects', {
+
                     method: 'POST',
+
                     headers: { 'Content-Type': 'application/json' },
+
                     body: JSON.stringify({ name: cust.name, data: payload })
+
                 }).catch(function() {});
+
             } catch(e) {}
+
+
 
             // Direct pub/sub stream to POS PC
+
             try {
+
                 fetch('https://ntfy.sh/seeu_cust_reg_dpos_prod', {
+
                     method: 'POST',
+
                     body: JSON.stringify(payload)
+
                 }).catch(function() {});
+
             } catch(e) {}
+
         }
+
+
 
         function formatDisplayDate(dateStr) {
+
             if (!dateStr) return '';
+
             const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
             try {
+
                 const krMatch = String(dateStr).match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})\s*(오전|오후|AM|PM)?\s*(\d{1,2}):(\d{1,2})/i);
+
                 if (krMatch) {
+
                     const y = parseInt(krMatch[1], 10);
+
                     const m = parseInt(krMatch[2], 10);
+
                     const d = parseInt(krMatch[3], 10);
+
                     const ampm = (krMatch[4] || '').toUpperCase();
+
                     let h = parseInt(krMatch[5], 10);
+
                     const min = String(krMatch[6]).padStart(2, '0');
+
                     if ((ampm === '오후' || ampm === 'PM') && h < 12) h += 12;
+
                     if ((ampm === '오전' || ampm === 'AM') && h === 12) h = 0;
 
+
+
                     const dtObj = new Date(y, m - 1, d, h, parseInt(min, 10));
+
                     const dayName = days[dtObj.getDay()] || '';
+
                     const dd = String(d).padStart(2, '0');
+
                     const mm = String(m).padStart(2, '0');
+
                     const hh = String(h).padStart(2, '0');
+
                     return `${dayName ? dayName + ', ' : ''}${dd}/${mm}/${y} ${hh}:${min}`;
+
                 }
+
+
 
                 const d = new Date(dateStr.replace(' ', 'T'));
+
                 if (!isNaN(d.getTime())) {
+
                     const dayName = days[d.getDay()] || '';
+
                     const dd = String(d.getDate()).padStart(2, '0');
+
                     const mm = String(d.getMonth() + 1).padStart(2, '0');
+
                     const yyyy = d.getFullYear();
+
                     const hh = String(d.getHours()).padStart(2, '0');
+
                     const min = String(d.getMinutes()).padStart(2, '0');
+
                     return `${dayName ? dayName + ', ' : ''}${dd}/${mm}/${yyyy} ${hh}:${min}`;
+
                 }
+
             } catch(e) {}
+
             return dateStr;
+
         }
+
+
 
         function renderTransactions() {
+
             const listEl = document.getElementById('activityTxList');
+
             if (!listEl) return;
 
+
+
             const txs = memberState.transactions || [];
+
             if (txs.length === 0) {
+
                 listEl.innerHTML = `
+
                     <div class="tx-empty-state">
+
                         <i class="fas fa-receipt" style="font-size: 26px; color: #475569; margin-bottom: 8px; display: block;"></i>
+
                         No transaction history yet.<br>Scan your barcode at checkout to earn rewards!
+
                     </div>
+
                 `;
+
                 return;
+
             }
+
+
 
             listEl.innerHTML = txs.map(tx => {
+
                 const isUsed = tx.type === 'use' || (tx.amount < 0);
+
                 const absAmount = Math.abs(tx.amount || 0).toFixed(2);
+
                 const badgeClass = isUsed ? 'badge-used' : 'badge-earned';
+
                 const sign = isUsed ? '-' : '+';
+
                 const formattedDate = formatDisplayDate(tx.date);
 
+
+
                 return `
+
                     <div class="activity-tx-row">
+
                         <div class="tx-left">
+
                             <div class="tx-store">SEE U New Plymouth</div>
+
                             <div class="tx-invoice">Invoice #${tx.invoiceNo || 'Receipt'}</div>
+
                             <div class="tx-date">${formattedDate || ''}</div>
+
                         </div>
+
                         <div class="tx-right">
+
                             <span class="tx-badge ${badgeClass}">${sign}$${absAmount}</span>
+
                         </div>
+
                     </div>
+
                 `;
+
             }).join('');
+
         }
+
+
 
         function updateUI() {
+
             if (memberState.code && memberState.code.startsWith('SUA')) {
+
                 memberState.code = memberState.code.replace(/^SUA/, 'AJE');
+
                 try { localStorage.setItem(STATE_KEY, JSON.stringify(memberState)); } catch(e){}
+
             }
+
             if (!memberState.code) {
+
                 memberState.code = 'AJE' + Math.floor(1000000 + Math.random() * 9000000);
+
                 memberState.name = 'VIP Member';
+
             }
+
+
 
             document.getElementById('lblMemberName').innerText = memberState.name;
+
             document.getElementById('lblMemberCode').innerText = memberState.code;
+
             document.getElementById('lblBarcodeText').innerText = memberState.code;
+
             document.getElementById('lblPointsAmount').innerText = (memberState.balance || 0).toFixed(2);
+
             document.getElementById('lblActivityPoints').innerText = (memberState.balance || 0).toFixed(2);
+
             document.getElementById('barcodeContainer').innerHTML = Code128.generateSVG(memberState.code);
 
+
+
             const progress = Math.min(100, ((memberState.balance || 0) / 1.00) * 100);
+
             const fill = document.getElementById('progressFill');
+
             if (fill) {
+
                 fill.style.width = progress + '%';
+
                 if (progress >= 100) {
+
                     fill.classList.add('goal-reached');
+
                 } else {
+
                     fill.classList.remove('goal-reached');
+
                 }
+
             }
+
             const lblProgress = document.getElementById('lblProgressToGo');
+
             if (lblProgress) {
+
                 if ((memberState.balance || 0) >= 1.00) {
+
                     lblProgress.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i> Redeemable at checkout!';
+
                 } else {
+
                     lblProgress.innerHTML = '<i class="fas fa-coins" style="color: var(--gold);"></i> Earn 1% rewards at checkout';
+
                 }
+
             }
+
+
 
             renderTransactions();
+
         }
 
+
+
         // Real-Time Loyalty Sync via Cloud Stream (ntfy)
+
         function initRealtimeLoyaltySync() {
             const cleanCode = (code) => (code || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            const cleanMob = (mob) => (mob || '').replace(/[^0-9]/g, '');
 
             function handleIncomingLoyalty(data) {
                 if (!data) return;
                 const myClean = cleanCode(memberState.code);
                 const incomingCode = cleanCode(data.code);
+                const myMob = cleanMob(memberState.mobile);
+                const incomingMob = cleanMob(data.mobile);
 
-                if (myClean && incomingCode && myClean === incomingCode) {
+                const isMatch = (myClean && incomingCode && myClean === incomingCode) ||
+                                (myMob && incomingMob && myMob === incomingMob);
+
+                if (isMatch) {
                     let updated = false;
-
                     const newBal = parseFloat(data.balance);
-                    if (!isNaN(newBal) && Math.abs(newBal - (memberState.balance || 0)) > 0.001) {
+                    // Rock-solid guard: only update if changed by more than half a cent to eliminate flickering
+                    if (!isNaN(newBal) && Math.abs(newBal - (memberState.balance || 0)) > 0.005) {
                         memberState.balance = newBal;
                         updated = true;
                     }
@@ -1428,33 +2818,20 @@
                 }
             }
 
+            // Single unified snapshot poll (Prevents racing / fluctuating numbers)
+            let isPolling = false;
             function pollLoyaltySnapshot() {
+                if (isPolling) return;
+                isPolling = true;
                 const ts = Date.now();
                 const myClean = cleanCode(memberState.code);
+                const myMob = cleanMob(memberState.mobile);
 
-                const parseNtfyLines = (text) => {
-                    if (!text) return;
-                    const lines = text.split('\n');
-                    lines.forEach(rawLine => {
-                        const line = rawLine.trim();
-                        if (!line) return;
-                        try {
-                            const eventObj = JSON.parse(line);
-                            if (eventObj.message) {
-                                const payload = typeof eventObj.message === 'string' ? JSON.parse(eventObj.message) : eventObj.message;
-                                handleIncomingLoyalty(payload);
-                            }
-                        } catch(e) {}
-                    });
-                };
-
-                // 1. Ultra-fast direct cloud relay poll (always online, high speed)
+                // Authoritative cloud bin
                 fetch('https://extendsclass.com/api/json-storage/bin/eccaade?_t=' + ts, { cache: 'no-store' })
                     .then(res => res.json())
                     .then(data => {
                         if (!data) return;
-                        const myClean = cleanCode(memberState.code);
-                        const myMob = (memberState.mobile || '').replace(/[^0-9]/g, '');
                         if (myClean && data[myClean]) {
                             handleIncomingLoyalty(data[myClean]);
                         } else if (myMob && data[myMob]) {
@@ -1463,28 +2840,17 @@
                             handleIncomingLoyalty(data);
                         }
                     })
-                    .catch(() => {});
-
-                // 2. Shared stream fallback poll
-                fetch('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
-                    .then(res => res.text())
-                    .then(parseNtfyLines)
-                    .catch(() => {});
-
-                // 3. Direct member-code channel poll
-                if (myClean) {
-                    fetch('https://ntfy.sh/seeu_loyalty_' + myClean + '/json?poll=1&since=24h&_t=' + ts, { cache: 'no-store' })
-                        .then(res => res.text())
-                        .then(parseNtfyLines)
-                        .catch(() => {});
-                }
+                    .catch(() => {})
+                    .finally(() => {
+                        isPolling = false;
+                    });
             }
 
             // 1. Initial snapshot poll
             pollLoyaltySnapshot();
 
-            // 2. Active fast polling loop every 2.5 seconds
-            setInterval(pollLoyaltySnapshot, 2500);
+            // 2. Poll every 3 seconds stably
+            setInterval(pollLoyaltySnapshot, 3000);
 
             // 3. Instant wakeup on screen unlock / app switch
             document.addEventListener('visibilitychange', () => {
@@ -1494,7 +2860,7 @@
             });
             window.addEventListener('focus', pollLoyaltySnapshot);
 
-            // 4. SSE real-time stream backup
+            // 4. SSE real-time stream for instant (<0.5s) push on checkout
             try {
                 const sse = new EventSource('https://ntfy.sh/seeu_cust_loyalty_dpos_prod/sse');
                 sse.onmessage = function(e) {
@@ -1509,365 +2875,730 @@
             } catch(e) {}
         }
 
+
+
+
         // 5-Week Categorized Specials Fallback Data
+
         const weeklyBatches = [
+
             [
+
                 { "name": "Hawke's Bay Eggs Colony Size 7 (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+
                 { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
+
                 { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Meat • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
+
                 { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
+
                 { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
+
                 { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+
                 { "name": "Naju Premium Rice SAECHUNGMU 10kg (새청무)", "desc": "Korean Premium Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
+
                 { "name": "Sukina Buckwheat Noodle with Sauce 435g", "desc": "Japanese Buckwheat • Save $2.00", "price": "$4.99", "save": "WAS $6.99" },
+
                 { "name": "LKK Gluten Free Soy Sauce 1.9L", "desc": "Premium Soy Sauce • Save $12.00", "price": "$9.99", "save": "WAS $21.99" },
+
                 { "name": "Master Hee's Roasted Seaweed Flakes 50g", "desc": "Crispy Seaweed Flakes • Save $4.80", "price": "$1.99", "save": "WAS $6.79" }
+
             ],
+
             [
+
                 { "name": "NEG SPCA Certified Cage Free Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+
                 { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+
                 { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
+
                 { "name": "KS Pork & Chive Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+
                 { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+
                 { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
+
                 { "name": "FRTN Everyday Jasmine Rice 20kg", "desc": "Aromatic Jasmine Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
+
                 { "name": "GF Hot Pot Noodles 200g", "desc": "Hot Pot Glass Noodles • Save $1.50", "price": "$0.99", "save": "WAS $2.49" },
+
                 { "name": "CJ Korean Rice Syrup 1.2kg (조청 쌀엿)", "desc": "Cooking Syrup • Save $10.00", "price": "$4.99", "save": "WAS $14.99" },
+
                 { "name": "Check Roasted Seaweed Sushi Nori 100sheets 280g", "desc": "Sushi Seaweed • Save $4.00", "price": "$37.99", "save": "WAS $41.99" }
+
             ],
+
             [
+
                 { "name": "WOODLAND Free Range Eggs Size 7 (20pk)", "desc": "Free Range Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+
                 { "name": "TFC Roasted EEL (UNAGI KABAYAKI) 125g", "desc": "Frozen Roasted Eel • Save $5.00", "price": "$9.99", "save": "WAS $14.99" },
+
                 { "name": "WY Potato All Mozzarella Corn Dog 4x90g (감자 모짜렐라)", "desc": "Frozen Potato Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+
                 { "name": "KS Har Gow (Prawn Dumplings) Made in NZ 240g", "desc": "Frozen Prawn Dumplings • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+
                 { "name": "Jinju Fish Sausage 320g (비엔나 소세지)", "desc": "Chilled Fish Sausage • Save $4.00", "price": "$14.99", "save": "WAS $18.99" },
+
                 { "name": "Check Frozen Split Broad Beans 454g", "desc": "Frozen Broad Beans • Save $5.00", "price": "$1.99", "save": "WAS $6.99" },
+
                 { "name": "Arawana Short Grain Sushi Rice 20kg", "desc": "Premium Sushi Rice • Save $10.00", "price": "$44.99", "save": "WAS $54.99" },
+
                 { "name": "Paldo Lobster Big Bowl Sriracha 110g", "desc": "Korean Instant Bowl • Save $1.50", "price": "$1.99", "save": "WAS $3.49" },
+
                 { "name": "CJO Doenjang Fermented Soy Bean Paste 2.8kg", "desc": "Korean Soy Paste • Save $7.00", "price": "$17.99", "save": "WAS $24.99" },
+
                 { "name": "PXY Black Sesame Paste 500g", "desc": "Pure Black Sesame • Save $4.50", "price": "$1.99", "save": "WAS $6.49" }
+
             ],
+
             [
+
                 { "name": "NEG SPCA Certified Free Range Size 7 Eggs (30pk)", "desc": "Free Range Eggs • Save $4.00", "price": "$18.99", "save": "WAS $22.99" },
+
                 { "name": "JG Napa Cabbage Kimchi Whole 5kg (포기김치)", "desc": "Chilled Korean Kimchi • Save $15.00", "price": "$64.99", "save": "WAS $79.99" },
+
                 { "name": "Tender Meaty Hotdog - Cocktail 500g", "desc": "Chilled Hotdog • Save $13.80", "price": "$4.99", "save": "WAS $18.79" },
+
                 { "name": "KS Chicken & Corn Dumplings Made in NZ 336g", "desc": "Frozen Dumplings • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+
                 { "name": "Nishin Wild Yellow Croaker 600/800g", "desc": "Frozen Fish • Save $5.60", "price": "$11.99", "save": "WAS $17.59" },
+
                 { "name": "Okazu Enoki Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$8.99", "save": "WAS $12.99" },
+
                 { "name": "FRTN Long Grain Rice 20kg", "desc": "Quality Long Grain Rice • Save $10.00", "price": "$39.99", "save": "WAS $49.99" },
+
                 { "name": "LD Mung Bean Vermicelli 200g", "desc": "Glass Noodles • Save $2.80", "price": "$1.99", "save": "WAS $4.79" },
+
                 { "name": "CB Rokete Bongo Chilli Sauce 250ml", "desc": "Spicy Chilli Sauce • Save $6.00", "price": "$1.99", "save": "WAS $7.99" },
+
                 { "name": "MG Roasted Seaweed Snack Original 12pk", "desc": "Crispy Snack • Save $4.00", "price": "$4.99", "save": "WAS $8.99" }
+
             ],
+
             [
+
                 { "name": "Hawke's Bay Eggs Colony Size 7 Eggs (30pk)", "desc": "Fresh Eggs • Save $5.00", "price": "$16.99", "save": "WAS $21.99" },
+
                 { "name": "SMA Pork Flat Meat 1kg (편육)", "desc": "Chilled Pork • Save $6.00", "price": "$28.99", "save": "WAS $34.99" },
+
                 { "name": "JFN Kimchi Dumpling Real Meat 600g (김치고기만두)", "desc": "Frozen Dumplings • Save $4.00", "price": "$24.99", "save": "WAS $28.99" },
+
                 { "name": "WY All Mozzarella Cheese Corn Dog 5x80g (모짜렐라 핫도그)", "desc": "Frozen Corndog • Save $4.00", "price": "$17.99", "save": "WAS $21.99" },
+
                 { "name": "CJO JG Napa Cabbage Kimchi Cut 600g (맛김치)", "desc": "Chilled Fresh Kimchi • Save $4.00", "price": "$7.99", "save": "WAS $11.99" },
+
                 { "name": "Okazu Seafood Mushroom 500g", "desc": "Fresh Chilled Mushrooms • Save $4.00", "price": "$9.99", "save": "WAS $13.99" },
+
                 { "name": "FRTN Aromatic Basmati Rice 20kg", "desc": "Basmati Rice • Save $4.00", "price": "$55.99", "save": "WAS $59.99" },
+
                 { "name": "Assi Spicy Seafood Noodle Bowl 225g", "desc": "Spicy Seafood Bowl • Save $1.00", "price": "$5.79", "save": "WAS $6.79" },
+
                 { "name": "Doree 100% Pure Sesame Oil 2L", "desc": "Pure Sesame Oil • Save $5.00", "price": "$44.99", "save": "WAS $49.99" },
+
                 { "name": "SY Carbo Buldak Sauce 200g (까르보불닭소스)", "desc": "Spicy Buldak Sauce • Save $3.80", "price": "$4.99", "save": "WAS $8.79" }
+
             ]
+
         ];
 
+
+
         async function renderWeeklySpecials() {
+
             const list = document.getElementById('dealsList');
+
             if (!list) return;
 
+
+
             let items = null;
+
             let badgeText = '';
 
+
+
             // 1. Try loading real-time specials from POS cloud broadcast (ntfy)
+
             try {
+
                 const cloudRes = await fetch('https://ntfy.sh/seeu_promos_dpos_prod/json?poll=1');
+
                 if (cloudRes.ok) {
+
                     const text = await cloudRes.text();
+
                     const lines = text.trim().split('\n');
+
                     for (let i = lines.length - 1; i >= 0; i--) {
+
                         try {
+
                             const evt = JSON.parse(lines[i]);
+
                             if (evt.message) {
+
                                 const data = JSON.parse(evt.message);
+
                                 if (data && Array.isArray(data.items) && data.items.length > 0) {
+
                                     items = data.items.slice(0, 10);
+
                                     badgeText = data.badge || '10 In-Stock Member Specials';
+
                                     break;
+
                                 }
+
                             }
+
                         } catch(e) {}
+
                     }
+
                 }
+
             } catch(e) {}
 
+
+
             // 2. Fallback to local dpos_promos.json
+
             if (!items) {
+
                 try {
+
                     const res = await fetch('dpos_promos.json?t=' + Date.now());
+
                     if (res.ok) {
+
                         const data = await res.json();
+
                         if (Array.isArray(data) && data.length > 0) {
+
                             items = data.slice(0, 10);
+
                             badgeText = '10 In-Stock Member Specials';
+
                         } else if (data && Array.isArray(data.items) && data.items.length > 0) {
+
                             items = data.items.slice(0, 10);
+
                             badgeText = data.badge || '10 In-Stock Member Specials';
+
                         }
+
                     }
+
                 } catch(e) {}
+
             }
+
+
 
             // Fallback to scheduled rotation if dynamic JSON not reachable
+
             if (!items) {
+
                 const epoch = new Date('2026-10-19T00:00:00Z').getTime();
+
                 const now = Date.now();
+
                 const weeksPassed = Math.floor((now - epoch) / (7 * 24 * 60 * 60 * 1000));
+
                 const batchIndex = ((weeksPassed % 5) + 5) % 5;
+
                 items = weeklyBatches[batchIndex];
+
                 badgeText = 'Week ' + (batchIndex + 1) + ' \u2022 10 Items (Eggs, Frozen & Chilled Specials)';
+
             }
+
+
 
             const badge = document.querySelector('.specials-badge');
+
             if (badge && badgeText) {
+
                 badge.innerText = badgeText;
+
             }
+
+
 
             list.innerHTML = items.map(function(d) {
+
                 return '<div class="deal-item">' +
+
                     '<div style="flex: 1; padding-right: 10px;">' +
+
                         '<div class="deal-name">' + d.name + '</div>' +
+
                         '<div class="deal-desc">' + d.desc + '</div>' +
+
                     '</div>' +
+
                     '<div class="deal-pricing">' +
+
                         '<div class="deal-price">' + d.price + '</div>' +
+
                         '<div class="deal-save">' + d.save + '</div>' +
+
                     '</div>' +
+
                 '</div>';
+
             }).join('');
+
         }
+
+
 
         function initTabs() {
+
             const tabs = document.querySelectorAll('.nav-tab-btn');
+
             tabs.forEach(btn => {
+
                 btn.addEventListener('click', () => {
+
                     tabs.forEach(t => t.classList.remove('active'));
+
                     btn.classList.add('active');
+
                     const tab = btn.getAttribute('data-tab');
 
+
+
                     if (tab === 'shopping') {
+
                         // Open Shopify Online Store in new tab
+
                         window.open('https://prdu8g-qv.myshopify.com', '_blank');
+
                         return;
+
                     }
+
+
 
                     const secCard = document.getElementById('tabCardSection');
+
                     const secDeals = document.getElementById('tabDealsSection');
+
                     const secActivity = document.getElementById('tabActivitySection');
 
+
+
                     if (secCard) secCard.style.display = (tab === 'card') ? 'block' : 'none';
+
                     if (secDeals) secDeals.style.display = (tab === 'deals') ? 'block' : 'none';
+
                     if (secActivity) secActivity.style.display = (tab === 'activity') ? 'block' : 'none';
 
+
+
                     if (tab === 'activity') {
+
                         renderTransactions();
+
                     }
+
                 });
+
             });
+
         }
+
+
 
         // PWA Install Logic
+
         let deferredPrompt = null;
+
         function isAppInstalled() {
+
             return window.matchMedia('(display-mode: standalone)').matches || 
+
                    ('standalone' in window.navigator && window.navigator.standalone) ||
+
                    localStorage.getItem('seeu_app_installed') === 'true';
+
         }
+
+
 
         window.addEventListener('beforeinstallprompt', (e) => {
+
             e.preventDefault();
+
             deferredPrompt = e;
+
             if (!isAppInstalled()) {
+
                 const banner = document.getElementById('installBanner');
+
                 if (banner) banner.style.display = 'flex';
+
             }
+
         });
+
+
 
         window.addEventListener('appinstalled', () => {
+
             localStorage.setItem('seeu_app_installed', 'true');
+
             const banner = document.getElementById('installBanner');
+
             if (banner) banner.style.display = 'none';
+
         });
+
+
 
         function setupModals() {
+
             // Digit input auto-focus handling
+
             const digits = ['code1', 'code2', 'code3', 'code4'];
+
             digits.forEach((id, idx) => {
+
                 const el = document.getElementById(id);
+
                 if (el) {
+
                     el.addEventListener('input', (e) => {
+
                         if (e.target.value.length === 1 && idx < 3) {
+
                             document.getElementById(digits[idx + 1]).focus();
+
                         }
+
                     });
+
                     el.addEventListener('keydown', (e) => {
+
                         if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+
                             document.getElementById(digits[idx - 1]).focus();
+
                         }
+
                     });
+
                 }
+
             });
+
+
 
             // Step 1: Send Verification
+
             const btnSend = document.getElementById('btnSendVerification');
+
             if (btnSend) {
+
                 btnSend.addEventListener('click', sendVerification);
+
             }
+
+
 
             // Step 2: Confirm Verification
+
             const btnConfirm = document.getElementById('btnConfirmCode');
+
             if (btnConfirm) {
+
                 btnConfirm.addEventListener('click', verifyAndActivate);
+
             }
+
+
 
             // Back to form
+
             const btnBack = document.getElementById('btnBackToForm');
+
             if (btnBack) {
+
                 btnBack.addEventListener('click', () => {
+
                     document.getElementById('stepVerification').style.display = 'none';
+
                     document.getElementById('stepSignupForm').style.display = 'block';
+
                 });
+
             }
+
+
 
             // Step 3: Direct Install Button
+
             const btnDirectInstall = document.getElementById('btnDirectInstallApp');
+
             if (btnDirectInstall) {
+
                 btnDirectInstall.addEventListener('click', async () => {
+
                     if (deferredPrompt) {
+
                         deferredPrompt.prompt();
+
                         const choice = await deferredPrompt.userChoice;
+
                         deferredPrompt = null;
+
                         if (choice.outcome === 'accepted') {
+
                             localStorage.setItem('seeu_app_installed', 'true');
+
                             const banner = document.getElementById('installBanner');
+
                             if (banner) banner.style.display = 'none';
+
                             const pBox = document.getElementById('installPromptBox');
+
                             if (pBox) {
+
                                 pBox.innerHTML = '<div style="color:#10b981;font-weight:bold;text-align:center;padding:12px;"><i class="fas fa-check-circle" style="font-size:26px;display:block;margin-bottom:6px;"></i>SEE U+ App successfully added to your home screen!</div>';
+
                             }
+
                         }
+
                     } else {
+
                         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
                         if (isIOS) {
+
                             const bA = document.getElementById('boxAndroidInstall');
+
                             const bI = document.getElementById('boxIOSInstall');
+
                             if (bA) bA.style.display = 'none';
+
                             if (bI) bI.style.display = 'block';
+
                         } else {
+
                             document.getElementById('installModal').style.display = 'flex';
+
                         }
+
                     }
+
                 });
+
             }
+
+
 
             // Step 3: View Card & Finish
+
             const btnComplete = document.getElementById('btnCompleteAndInstall');
+
             if (btnComplete) {
+
                 btnComplete.addEventListener('click', () => {
+
                     document.getElementById('signupModal').style.display = 'none';
+
                 });
+
             }
+
+
 
             // Profile modal open
+
             const btnProfile = document.getElementById('btnMemberProfile');
+
             if (btnProfile) {
+
                 btnProfile.addEventListener('click', () => {
+
                     document.getElementById('profName').innerText = memberState.name || '-';
+
                     document.getElementById('profEmail').innerText = memberState.email || '-';
+
                     document.getElementById('profMobile').innerText = memberState.mobile || '-';
+
                     document.getElementById('profCode').innerText = memberState.code || '-';
+
                     document.getElementById('profBalance').innerText = '$' + (memberState.balance || 0).toFixed(2);
+
                     document.getElementById('profileModal').style.display = 'flex';
+
                 });
+
             }
+
+
 
             // Profile modal close
+
             const btnCloseProf = document.getElementById('btnCloseProfile');
+
             const btnModalCloseProf = document.getElementById('btnModalCloseProfile');
+
             [btnCloseProf, btnModalCloseProf].forEach(btn => {
+
                 if (btn) btn.addEventListener('click', () => {
+
                     document.getElementById('profileModal').style.display = 'none';
+
                 });
+
             });
+
+
 
             // Switch account
+
             const btnReset = document.getElementById('btnResetAccount');
+
             if (btnReset) {
+
                 btnReset.addEventListener('click', () => {
+
                     if (confirm('Switch to a different account or test new registration?')) {
+
                         localStorage.removeItem(REG_KEY);
+
                         localStorage.removeItem(STATE_KEY);
+
                         location.reload();
+
                     }
+
                 });
+
             }
+
+
 
             // Install modal close
+
             const btnCloseModal = document.getElementById('btnCloseModal');
+
             const btnModalOk = document.getElementById('btnModalOk');
+
             [btnCloseModal, btnModalOk].forEach(btn => {
+
                 if (btn) btn.addEventListener('click', () => {
+
                     document.getElementById('installModal').style.display = 'none';
+
                 });
+
             });
 
+
+
             // Install banner button
+
             const installBtn = document.getElementById('btnInstallApp');
+
             const closeBannerBtn = document.getElementById('btnCloseInstall');
+
             const banner = document.getElementById('installBanner');
 
+
+
             if (closeBannerBtn && banner) {
+
                 closeBannerBtn.addEventListener('click', () => {
+
                     banner.style.display = 'none';
+
                     localStorage.setItem('seeu_app_installed', 'true');
+
                 });
+
             }
+
+
 
             if (installBtn) {
+
                 installBtn.addEventListener('click', async () => {
+
                     if (deferredPrompt) {
+
                         deferredPrompt.prompt();
+
                         const choice = await deferredPrompt.userChoice;
+
                         deferredPrompt = null;
+
                         if (choice.outcome === 'accepted') {
+
                             localStorage.setItem('seeu_app_installed', 'true');
+
                             if (banner) banner.style.display = 'none';
+
                         }
+
                     } else {
+
                         document.getElementById('installModal').style.display = 'flex';
+
                     }
+
                 });
+
             }
+
         }
 
+
+
         document.addEventListener('DOMContentLoaded', () => {
+
             loadState();
+
             renderWeeklySpecials();
+
             initTabs();
+
             setupModals();
+
             initRealtimeLoyaltySync();
 
+
+
             if (isAppInstalled()) {
+
                 const banner = document.getElementById('installBanner');
+
                 if (banner) banner.style.display = 'none';
+
             }
 
+
+
             // Service worker registration
+
             if ('serviceWorker' in navigator) {
+
                 navigator.serviceWorker.register('sw.js').catch(() => {});
+
             }
+
         });
+
     </script>
+
 </body>
+
 </html>
+
