@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
     <title>SEE U+ | Member Rewards & Digital Card</title>
 
@@ -66,21 +66,49 @@
 
             -webkit-tap-highlight-color: transparent;
 
-            touch-action: manipulation;
+            touch-action: pan-y;
 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
         }
 
-        body {
+        html, body {
+
+            width: 100%;
+
+            max-width: 100%;
+
+            overflow-x: hidden;
+
+            overflow-x: clip;
+
+            margin: 0 auto;
+
+            padding: 0;
 
             background: #090d16;
 
             color: var(--text-main);
 
+            touch-action: pan-y;
+
+            overscroll-behavior-x: none;
+
+            -webkit-text-size-adjust: 100%;
+
+            position: relative;
+
+        }
+
+        body {
+
             display: flex;
 
-            justify-content: center;
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-start;
 
             min-height: 100vh;
 
@@ -94,21 +122,27 @@
 
             max-width: 480px;
 
+            margin: 0 auto;
+
             display: flex;
 
             flex-direction: column;
 
-            padding: 16px;
+            padding: max(40px, calc(env(safe-area-inset-top, 20px) + 20px)) 16px 40px 16px;
 
             gap: 16px;
+
+            overflow-x: hidden;
 
         }
 
         .app-header {
 
+            width: 100%;
+
             text-align: center;
 
-            padding: 14px 0 8px;
+            padding: 8px 0 8px;
 
             display: flex;
 
