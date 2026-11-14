@@ -19,5 +19,19 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Share SEE U+ Card",
+      "short_name": "Share",
+      "description": "Share SEE U+ Rewards Card with friends",
+      "url": "index.html?action=share",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

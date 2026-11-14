@@ -1,67 +1,126 @@
 {
-  "updatedAt": "2026-11-07 14:12:23",
-  "rotationPeriod": "3-Day Cycle",
-  "badge": "10 In-Stock Member Specials (3 Eggs + 3 Pack Noodles + 4 Specials)",
-  "items": [
-    {
-      "name": "NEG SPCA Certified Free Range Size 7 Eggs (30pk)",
-      "desc": "Fresh Free Range Eggs • Save $5.00",
-      "price": "$18.99",
-      "save": "WAS $23.99"
-    },
-    {
-      "name": "NEG SPCA Certified Cage Free Size 7 Eggs (30pk)",
-      "desc": "Fresh Cage Free Eggs • Save $5.00",
-      "price": "$16.99",
-      "save": "WAS $21.99"
-    },
-    {
-      "name": "NEG SPCA Certified Free Range Size 7 Eggs (12pk)",
-      "desc": "Fresh Free Range Eggs • Save $3.00",
-      "price": "$8.99",
-      "save": "WAS $11.99"
-    },
-    {
-      "name": "NS Shin Ramen Black Multipack (4 x 130g)",
-      "desc": "Premium Garlic Broth • Save $2.00",
-      "price": "$15.99",
-      "save": "WAS $17.99"
-    },
-    {
-      "name": "Paldo Spicy Bibim Cold Ramen (5 x 130g)",
-      "desc": "Sweet & Spicy Cold Ramen • Save $2.00",
-      "price": "$10.99",
-      "save": "WAS $12.99"
-    },
-    {
-      "name": "NS Shin Ramyun RED Multipack (5 x 120g)",
-      "desc": "Super Spicy Broth • Save $2.00",
-      "price": "$10.99",
-      "save": "WAS $12.99"
-    },
-    {
-      "name": "KS Pork Siu Mai Made in NZ (700g)",
-      "desc": "Authentic Dim Sum • Save $3.00",
-      "price": "$21.99",
-      "save": "WAS $24.99"
-    },
-    {
-      "name": "S&B Japanese Instant Tofu Miso Soup (30g)",
-      "desc": "Traditional Miso • Save $1.20",
-      "price": "$4.79",
-      "save": "WAS $5.99"
-    },
-    {
-      "name": "AZUMA Organic Natto Fermented Soybean (3 x 40g)",
-      "desc": "Organic Japanese Natto • Save $2.30",
-      "price": "$4.49",
-      "save": "WAS $6.79"
-    },
-    {
-      "name": "Yeo's Satay Sauce (250ml)",
-      "desc": "Asian Cooking Sauce • Save $1.00",
-      "price": "$5.79",
-      "save": "WAS $6.79"
-    }
-  ]
+    "updatedAt":  "2026-11-15 11:02:43",
+    "badge":  "10 In-Stock Member Specials",
+    "items":  [
+                  {
+                      "price":  "$17.99",
+                      "save":  "WAS $23.99",
+                      "name":  "NEG SPCA Certified Free Range Size 7 Eggs 30pk",
+                      "desc":  "Special Deal â€¢ Save $6.00"
+                  },
+                  {
+                      "price":  "$19.99",
+                      "save":  "WAS $24.99",
+                      "name":  "LS Frozen Tongan Taro 2kg",
+                      "desc":  "Special Deal â€¢ Save $5.00"
+                  },
+                  {
+                      "price":  "$9.99",
+                      "save":  "WAS $14.99",
+                      "name":  "TFC Roasted EEL (UNAGI KABAYAKI) 125g",
+                      "desc":  "Special Deal â€¢ Save $5.00"
+                  },
+                  {
+                      "price":  "$19.99",
+                      "save":  "WAS $24.99",
+                      "name":  "LS Frozen Tongan Yam 2kg",
+                      "desc":  "Special Deal â€¢ Save $5.00"
+                  },
+                  {
+                      "price":  "$16.99",
+                      "save":  "WAS $21.99",
+                      "name":  "NEG SPCA Certified Cage Free Size 7 Eggs 30pk",
+                      "desc":  "Special Deal â€¢ Save $5.00"
+                  },
+                  {
+                      "price":  "$17.99",
+                      "save":  "WAS $21.99",
+                      "name":  "WY Potato All Mozzarella Corn Dog 4 x 90g 감자 모짜렐라 핫도그",
+                      "desc":  "Special Deal â€¢ Save $4.00"
+                  },
+                  {
+                      "price":  "$14.99",
+                      "save":  "WAS $18.99",
+                      "name":  "LS Frozen Tongan Yellow Cassava 2kg",
+                      "desc":  "Special Deal â€¢ Save $4.00"
+                  },
+                  {
+                      "price":  "$7.99",
+                      "save":  "WAS $11.99",
+                      "name":  "KS Pork \u0026 Chive Dumplings Made in NZ 336g",
+                      "desc":  "Special Deal â€¢ Save $4.00"
+                  },
+                  {
+                      "price":  "$7.99",
+                      "save":  "WAS $11.99",
+                      "name":  "KS Chicken \u0026 Corn Dumplings Made in NZ 336g",
+                      "desc":  "Special Deal â€¢ Save $4.00"
+                  },
+                  {
+                      "price":  "$8.99",
+                      "save":  "WAS $12.99",
+                      "name":  "Okazu Enoki Mushroom 500g",
+                      "desc":  "Special Deal â€¢ Save $4.00"
+                  },
+                  {
+                      "price":  "$2.99",
+                      "save":  "WAS $6.79",
+                      "name":  "Sempio Naturally Brewed Soy Sauce 501 500ml 양조간장 501",
+                      "desc":  "Special Deal â€¢ Save $3.80"
+                  },
+                  {
+                      "price":  "$18.99",
+                      "save":  "WAS $21.99",
+                      "name":  "YC All Mozzarella Cheese Corn Dog 5 x 80g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$21.99",
+                      "save":  "WAS $24.99",
+                      "name":  "KS Pork Siu Mai Made in NZ 700g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$14.99",
+                      "save":  "WAS $17.99",
+                      "name":  "KS Pork \u0026 Chive Dumplings Made in NZ 700g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$14.99",
+                      "save":  "WAS $17.99",
+                      "name":  "KS Pork \u0026 Cabbage Dumplings Made in NZ 700g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$21.99",
+                      "save":  "WAS $24.99",
+                      "name":  "KS Prawn \u0026 Corn Siu Mai Made in NZ 700g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$11.99",
+                      "save":  "WAS $14.99",
+                      "name":  "Okazu Squid Pineapple Cut 500g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$8.99",
+                      "save":  "WAS $11.99",
+                      "name":  "NEG SPCA Certified Free Range Size 7 Eggs 12pk",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$11.99",
+                      "save":  "WAS $14.99",
+                      "name":  "KS Pork Siu Mai Made in NZ 324g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  },
+                  {
+                      "price":  "$11.99",
+                      "save":  "WAS $14.99",
+                      "name":  "KS BBQ Pork Buns Made in NZ 6p 540g",
+                      "desc":  "Special Deal â€¢ Save $3.00"
+                  }
+              ]
 }
