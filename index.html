@@ -2,13 +2,13 @@
 
 <html lang="en">
 
-<!-- Version: v14_loyalty_fix | Created: 2026-10-31 -->
+<!-- Version: v15_install_restore_share | Created: 2026-11-15 -->
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>SEE U+ | Member Rewards & Digital Card</title>
 
@@ -66,49 +66,21 @@
 
             -webkit-tap-highlight-color: transparent;
 
-            touch-action: pan-y;
+            touch-action: manipulation;
 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
         }
 
-        html, body {
-
-            width: 100%;
-
-            max-width: 100%;
-
-            overflow-x: hidden;
-
-            overflow-x: clip;
-
-            margin: 0 auto;
-
-            padding: 0;
+        body {
 
             background: #090d16;
 
             color: var(--text-main);
 
-            touch-action: pan-y;
-
-            overscroll-behavior-x: none;
-
-            -webkit-text-size-adjust: 100%;
-
-            position: relative;
-
-        }
-
-        body {
-
             display: flex;
 
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: flex-start;
+            justify-content: center;
 
             min-height: 100vh;
 
@@ -122,27 +94,21 @@
 
             max-width: 480px;
 
-            margin: 0 auto;
-
             display: flex;
 
             flex-direction: column;
 
-            padding: max(40px, calc(env(safe-area-inset-top, 20px) + 20px)) 16px 40px 16px;
+            padding: 16px;
 
             gap: 16px;
-
-            overflow-x: hidden;
 
         }
 
         .app-header {
 
-            width: 100%;
-
             text-align: center;
 
-            padding: 8px 0 8px;
+            padding: 14px 0 8px;
 
             display: flex;
 
@@ -1522,6 +1488,104 @@
 
         }
 
+    
+        /* --- v15 Share Pill & Sticky Install Bar Styles --- */
+        .header-action-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .share-pill-btn {
+            background: rgba(255, 69, 0, 0.15);
+            border: 1px solid rgba(255, 69, 0, 0.4);
+            color: #ff6a33;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .share-pill-btn:active {
+            transform: scale(0.93);
+            background: rgba(255, 69, 0, 0.35);
+        }
+        .sticky-install-bar {
+            background: linear-gradient(135deg, rgba(255, 69, 0, 0.18) 0%, rgba(30, 41, 59, 0.95) 100%);
+            border: 1px solid rgba(255, 69, 0, 0.45);
+            border-radius: 14px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+        .sticky-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sticky-text i {
+            color: #ff6a33;
+            font-size: 15px;
+        }
+        .btn-sticky-install {
+            background: #ff4500;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-sticky-install:active {
+            transform: scale(0.94);
+        }
+        .ios-step-box {
+            text-align: left;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 69, 0, 0.35);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-top: 14px;
+        }
+        .ios-step-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #ff6a33;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ios-step-desc {
+            font-size: 12px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .ios-badge {
+            display: inline-block;
+            background: #334155;
+            color: #38bdf8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin: 0 2px;
+        }
     </style>
 
 </head>
@@ -1544,10 +1608,13 @@
 
             </div>
 
-            <div class="profile-pill" id="btnMemberProfile" style="display: none;">
-
-                <i class="fas fa-user-check"></i> <span id="lblProfilePillName">Member</span>
-
+            <div class="header-action-group">
+                <div class="profile-pill" id="btnMemberProfile" style="display: none;">
+                    <i class="fas fa-user-check"></i> <span id="lblProfilePillName">Member</span>
+                </div>
+                <button class="share-pill-btn" id="btnHeaderShare" onclick="triggerAppShare()" title="Share SEE U+ Card">
+                    <i class="fas fa-share-alt"></i> <span>Share</span>
+                </button>
             </div>
 
         </header>
@@ -1585,6 +1652,17 @@
         <!-- Section: Member Card -->
 
         <div id="tabCardSection">
+
+            <!-- Always accessible Install Bar for Web Browser Visitors -->
+            <div id="stickyInstallBar" class="sticky-install-bar" style="display: none;">
+                <div class="sticky-text">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Save card to Home Screen</span>
+                </div>
+                <button id="btnStickyInstall" class="btn-sticky-install" onclick="handleDirectAppInstall()">
+                    Install App
+                </button>
+            </div>
 
             <div class="member-card">
 
@@ -1856,9 +1934,9 @@
 
                     <div class="success-icon"><i class="fas fa-shield-check"></i></div>
 
-                    <h3 class="signup-title" style="color: #10b981;">Membership Activated!</h3>
+                    <h3 class="signup-title" id="lblSuccessTitle" style="color: #10b981;">🎉 Membership Activated!</h3>
 
-                    <p class="signup-subtitle">Your digital card is ready to use immediately.</p>
+                    <p class="signup-subtitle" id="lblSuccessSubtitle">Never lose your card! Add SEE U+ to your phone's Home Screen.</p>
 
                     <div class="success-card-preview">
 
@@ -1870,22 +1948,25 @@
 
                     </div>
 
-                    <div id="installPromptBox" style="margin-top: 14px;">
-
-                        <button id="btnDirectInstallApp" class="btn-primary-action">
-
-                            <i class="fas fa-download"></i> Save App to Home Screen
-
+                    <!-- Android / Chrome Install Button -->
+                    <div id="boxAndroidInstall" style="display: none; margin-top: 14px;">
+                        <button id="btnDirectInstallApp" class="btn-primary-action" onclick="handleDirectAppInstall()">
+                            <i class="fas fa-download"></i> Install App to Home Screen
                         </button>
-
-                        <p style="font-size: 11px; color: #94a3b8; margin-top: 8px;">Instant 1-tap checkout at SEE U Again</p>
-
+                        <p style="font-size: 11px; color: #94a3b8; margin-top: 8px;">Instant 1-tap card opening at checkout</p>
                     </div>
 
-                    <button id="btnCompleteAndInstall" class="btn-primary-action" style="background: #334155; box-shadow: none; margin-top: 10px;">
+                    <!-- iOS Safari 2-Step Visual Guide -->
+                    <div id="boxIOSInstall" class="ios-step-box" style="display: none;">
+                        <div class="ios-step-title"><i class="fab fa-apple"></i> Save to iPhone Home Screen:</div>
+                        <div class="ios-step-desc">
+                            1. Tap the <strong>Share</strong> button <span class="ios-badge"><i class="fas fa-arrow-up-from-bracket"></i></span> at the bottom of Safari.<br>
+                            2. Scroll down and tap <strong>Add to Home Screen</strong> <span class="ios-badge"><i class="fas fa-plus-square"></i></span>.
+                        </div>
+                    </div>
 
-                        View My Rewards Card
-
+                    <button id="btnCompleteAndInstall" class="btn-primary-action" style="background: #334155; box-shadow: none; margin-top: 14px;">
+                        View My Rewards Card &rarr;
                     </button>
 
                 </div>
@@ -2262,6 +2343,80 @@
 
 
 
+        async 
+        // --- v15 Functions: Share, Direct Install & Guide ---
+        function triggerAppShare() {
+            const shareData = {
+                title: 'SEE U+ Rewards Card',
+                text: 'Get your digital SEE U+ Rewards Card! Earn 1% rewards on every dollar. Tap link to get your free card in 3s:',
+                url: 'https://seeu-np.github.io/SEEU-app/'
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText('https://seeu-np.github.io/SEEU-app/').then(() => {
+                    alert('Link copied to clipboard! Share it with your friends: https://seeu-np.github.io/SEEU-app/');
+                }).catch(() => {
+                    prompt('Copy this link to share:', 'https://seeu-np.github.io/SEEU-app/');
+                });
+            } else {
+                prompt('Copy this link to share:', 'https://seeu-np.github.io/SEEU-app/');
+            }
+        }
+
+        function handleDirectAppInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        localStorage.setItem('seeu_app_installed', 'true');
+                        const stickyBar = document.getElementById('stickyInstallBar');
+                        if (stickyBar) stickyBar.style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (isIOS) {
+                    const boxIOS = document.getElementById('boxIOSInstall');
+                    if (boxIOS) {
+                        document.getElementById('stepSignupForm').style.display = 'none';
+                        document.getElementById('stepVerification').style.display = 'none';
+                        document.getElementById('stepSignupSuccess').style.display = 'block';
+                        document.getElementById('signupModal').style.display = 'flex';
+                        setupInstallGuide();
+                    } else {
+                        alert('To install on iPhone:\n1. Tap the Share button [ ⎋ ] at the bottom.\n2. Tap "Add to Home Screen".');
+                    }
+                } else {
+                    alert('To install this app on your phone, open browser menu (⋮) and tap "Add to Home Screen" or "Install App".');
+                }
+            }
+        }
+
+        function setupInstallGuide() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isStandalone = isAppInstalled();
+            const boxAndroid = document.getElementById('boxAndroidInstall');
+            const boxIOS = document.getElementById('boxIOSInstall');
+            const stickyBar = document.getElementById('stickyInstallBar');
+
+            if (isStandalone) {
+                if (boxAndroid) boxAndroid.style.display = 'none';
+                if (boxIOS) boxIOS.style.display = 'none';
+                if (stickyBar) stickyBar.style.display = 'none';
+            } else {
+                if (stickyBar) stickyBar.style.display = 'flex';
+                if (isIOS) {
+                    if (boxAndroid) boxAndroid.style.display = 'none';
+                    if (boxIOS) boxIOS.style.display = 'block';
+                } else {
+                    if (boxAndroid) boxAndroid.style.display = 'block';
+                    if (boxIOS) boxIOS.style.display = 'none';
+                }
+            }
+        }
+
         async function sendVerification() {
 
             const name = document.getElementById('txtCustName').value.trim();
@@ -2302,7 +2457,54 @@
 
             }
 
+            const cleanEmail = email.replace(/\s+/g, '').toLowerCase();
+            const cleanMob = mobile.replace(/[^0-9]/g, '');
 
+            // Existing Member Lookup
+            let existingMember = null;
+            if (!window.cloudMemberCache) {
+                try {
+                    const cRes = await fetch('https://extendsclass.com/api/json-storage/bin/eccaade?_t=' + Date.now(), { cache: 'no-store' });
+                    window.cloudMemberCache = await cRes.json();
+                } catch(e) {}
+            }
+
+            if (window.cloudMemberCache) {
+                if (window.cloudMemberCache[cleanEmail]) {
+                    existingMember = window.cloudMemberCache[cleanEmail];
+                } else if (cleanMob && window.cloudMemberCache[cleanMob]) {
+                    existingMember = window.cloudMemberCache[cleanMob];
+                }
+            }
+
+            if (existingMember && existingMember.code) {
+                // Restore Member
+                memberState.code = existingMember.code;
+                memberState.name = existingMember.name || name;
+                memberState.email = email;
+                memberState.mobile = mobile;
+                memberState.balance = existingMember.balance || 0.00;
+                memberState.transactions = [];
+
+                localStorage.setItem(REG_KEY, 'true');
+                localStorage.setItem(STATE_KEY, JSON.stringify(memberState));
+
+                showProfilePill();
+                updateUI();
+
+                // Show restored state in Step 3
+                document.getElementById('stepSignupForm').style.display = 'none';
+                document.getElementById('stepVerification').style.display = 'none';
+                document.getElementById('stepSignupSuccess').style.display = 'block';
+
+                document.getElementById('lblSuccessTitle').innerText = '👋 Welcome Back!';
+                document.getElementById('lblSuccessSubtitle').innerText = 'Your SEE U+ Rewards Card [' + existingMember.code + '] has been safely restored!';
+                document.getElementById('lblSuccessMemberName').innerText = memberState.name;
+                document.getElementById('lblSuccessMemberCode').innerText = existingMember.code;
+
+                setupInstallGuide();
+                return;
+            }
 
             const btnSend = document.getElementById('btnSendVerification');
 
@@ -2463,6 +2665,7 @@
             document.getElementById('stepVerification').style.display = 'none';
 
             document.getElementById('stepSignupSuccess').style.display = 'block';
+            setupInstallGuide();
 
             document.getElementById('lblSuccessMemberName').innerText = name;
 
