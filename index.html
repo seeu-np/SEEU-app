@@ -4530,81 +4530,112 @@
 
 
 
+        function findCloudMember(cleanEmail, cleanMob) {
+            if (!window.cloudMemberCache) return null;
+            if (cleanEmail && window.cloudMemberCache[cleanEmail]) return window.cloudMemberCache[cleanEmail];
+            if (cleanMob) {
+                if (window.cloudMemberCache[cleanMob]) return window.cloudMemberCache[cleanMob];
+                const altMob = cleanMob.startsWith('0') ? ('64' + cleanMob.slice(1)) : (cleanMob.startsWith('64') ? ('0' + cleanMob.slice(2)) : '');
+                if (altMob && window.cloudMemberCache[altMob]) return window.cloudMemberCache[altMob];
+            }
+            if (cleanEmail) {
+                const vals = Object.values(window.cloudMemberCache);
+                for (let i = 0; i < vals.length; i++) {
+                    const m = vals[i];
+                    if (m && m.email && m.email.replace(/\s+/g, '').toLowerCase() === cleanEmail) return m;
+                }
+            }
+            return null;
+        }
+
         async function sendVerification() {
-
-
 
             const name = document.getElementById('txtCustName').value.trim();
 
-
-
             const email = document.getElementById('txtCustEmail').value.trim();
-
-
 
             const mobile = document.getElementById('txtCustMobile').value.trim();
 
-
-
             const errEl = document.getElementById('signupError');
-
-
 
             errEl.style.display = 'none';
 
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const cleanEmail = email.replace(/\s+/g, '').toLowerCase();
+            const cleanMob = mobile.replace(/[^0-9]/g, '');
 
+            if (cleanEmail || cleanMob.length >= 7) {
+                const btnSend = document.getElementById('btnSendVerification');
+                if (btnSend) {
+                    btnSend.disabled = true;
+                    btnSend.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+                }
+                if (!window.cloudMemberCache) {
+                    try {
+                        const res = await fetch('https://extendsclass.com/api/json-storage/bin/eccaade?_t=' + Date.now(), { cache: 'no-store' });
+                        const txt = await res.text();
+                        window.cloudMemberCache = JSON.parse(txt.replace(/<!doctype.*$/is, '').trim());
+                    } catch (e) {}
+                }
+                const existingMember = findCloudMember(cleanEmail, cleanMob);
+                if (existingMember && existingMember.code) {
+                    memberState.code = existingMember.code;
+                    memberState.name = existingMember.name || name || 'Member';
+                    memberState.email = existingMember.email || email;
+                    memberState.mobile = mobile;
+                    memberState.balance = (existingMember.balance !== undefined) ? existingMember.balance : 0.00;
+                    memberState.transactions = [];
 
+                    localStorage.setItem(REG_KEY, 'true');
+                    localStorage.setItem(STATE_KEY, JSON.stringify(memberState));
+                    syncCustomerToPOS(memberState);
+                    showProfilePill();
+                    updateUI();
 
+                    document.getElementById('stepSignupForm').style.display = 'none';
+                    document.getElementById('stepVerification').style.display = 'none';
+                    document.getElementById('stepSignupSuccess').style.display = 'block';
+                    document.getElementById('lblSuccessMemberName').innerText = memberState.name;
+                    document.getElementById('lblSuccessMemberCode').innerText = memberState.code;
 
+                    const titleEl = document.querySelector('#stepSignupSuccess .signup-title');
+                    const subEl = document.querySelector('#stepSignupSuccess .signup-subtitle');
+                    if (titleEl) titleEl.innerText = '👋 Welcome Back!';
+                    if (subEl) subEl.innerText = 'Your SEE U+ Rewards Card has been safely restored!';
 
+                    if (btnSend) {
+                        btnSend.disabled = false;
+                        btnSend.innerHTML = '<i class="fas fa-paper-plane"></i> Send Verification Code';
+                    }
+                    return;
+                }
+                if (btnSend) {
+                    btnSend.disabled = false;
+                    btnSend.innerHTML = '<i class="fas fa-paper-plane"></i> Send Verification Code';
+                }
+            }
 
             if (!name) {
 
-
-
                 showError('signupError', 'Please enter your full name.');
-
-
 
                 return;
 
-
-
             }
-
-
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
 
             if (!email || !emailRegex.test(email)) {
 
-
-
                 showError('signupError', 'Please enter a valid email address.');
 
-
-
                 return;
-
-
 
             }
 
-
-
             if (!mobile || mobile.length < 7) {
-
-
 
                 showError('signupError', 'Please enter your phone number.');
 
-
-
                 return;
-
-
 
             }
 
